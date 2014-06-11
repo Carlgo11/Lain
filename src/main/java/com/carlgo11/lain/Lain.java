@@ -69,7 +69,6 @@ public class Lain extends JavaPlugin {
                 p.sendMessage(Messages.prefix + s2m);
             }
         }, delay);
-
     }
 
     public void sendMessageToSender(final CommandSender p, final String s)
@@ -83,7 +82,6 @@ public class Lain extends JavaPlugin {
                 p.sendMessage(Messages.prefix + s2m);
             }
         }, delay);
-
     }
 
     public void broadcastMessage(final String s)
@@ -97,7 +95,6 @@ public class Lain extends JavaPlugin {
                 Bukkit.broadcastMessage(Messages.prefix + s2m);
             }
         }, delay);
-
     }
 
     public void error(String s)
@@ -136,7 +133,6 @@ public class Lain extends JavaPlugin {
                 p.sendMessage(Messages.prefix + Messages.badPerms);
             }
         }, delay);
-
     }
 
     public void badpermsSender(final CommandSender p)
@@ -148,7 +144,6 @@ public class Lain extends JavaPlugin {
                 p.sendMessage(Messages.prefix + Messages.badPerms);
             }
         }, delay);
-
     }
 
     public void toCMDLog(Player p, String s)

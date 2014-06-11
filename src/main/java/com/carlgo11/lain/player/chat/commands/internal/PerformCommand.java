@@ -175,6 +175,5 @@ public class PerformCommand implements Listener {
             } catch (Exception ex) {
                 Logger.getLogger(PerformCommand.class.getName()).log(Level.SEVERE, null, ex);
             }
-             //if()
     }
 }
