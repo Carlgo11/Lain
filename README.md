@@ -1,4 +1,8 @@
 Lain
 ====
 
-Minecraft bot
+Minecraft server bot.
+
+### Lain controls The PortalCraft.Se Servers
+
+### Developing Lain
