@@ -1,0 +1,10 @@
+# Configuration file for Lain. Lain is a private plugin! 
+version: 0.1
+broadcast-attack: "The server is currently being attack. We're doing our very best to minimize the damage for normal players. Please bare with us as we try to solve this."
+broadcast-busy-staff: "The members of staff are currently very busy. Reply might take a bit longer than expected. Thank you for your understanding."
+broadcast-busy-server: "The server is currently taking a lot of heat. Lag might accure. Thank you for your understanding."
+broadcast-maintenance-awaiting: "The server is awaiting maintenance. This will happen when there's no players online."
+broadcast-currently-maintaining: "We are currently maintaining the server. We'd appriciate if you'd come back in 10-20 minutes. Thank you."
+admins:
+- carlgo11
+- anminecrafter

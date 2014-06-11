@@ -1,0 +1,20 @@
+main: com.carlgo11.lain.Lain
+name: Lain2
+version: 2.1.8
+author: Carlgo11
+commands:
+  lain:
+    description: Main command for Lain
+    usage: /lain
+  setcmd:
+    description: add/modify/delelete a lain command.
+    usage: /<command> [Command name] (message)
+  setalias:
+    description: add/delelete an alias for a lain command.
+    usage: /<command> [alias name] (command name)
+  tag:
+    description: Change your nickname and nametag
+    usage: /<command> (player) [nickname]
+  broadcast:
+    description: Broadcast a message to the server
+    usage: /<command> (message)
