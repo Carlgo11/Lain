@@ -25,7 +25,7 @@ public class Lain extends JavaPlugin {
     long delay = 20;
     public static boolean debugm = false;
     public static ArrayList<String> commands = new ArrayList<String>();
-    
+
     public void onEnable()
     {
         getServer().getPluginManager().registerEvents(new Checkfiles(this), this);
@@ -55,7 +55,6 @@ public class Lain extends JavaPlugin {
         getCommand("lain").setExecutor(new LainCommand(this));
         getCommand("setcmd").setExecutor(new SetcmdCommand(this));
         getCommand("setalias").setExecutor(new SetaliasCommand(this));
-
         getCommand("broadcast").setExecutor(new BroadcastCommand(this));
     }
 
@@ -164,38 +163,14 @@ public class Lain extends JavaPlugin {
         }
     }
 
-    static public void logchatp(String tme, String p, String s)
+    public void readcommandstxt()
     {
-        String s2 = ChatColor.stripColor(s);
         try {
-            FileWriter outfile = new FileWriter("log/chat.txt", true);
-            PrintWriter outi = new PrintWriter(outfile);
-            outi.println(tme + " " + p + ": " + s2);
-            outi.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    static public void logchat(String tme, String s)
-    {
-        String s2 = ChatColor.stripColor(s);
-        try {
-            FileWriter outfile = new FileWriter("log/chat.txt", true);
-            PrintWriter outi = new PrintWriter(outfile);
-            outi.println(tme + " " + ": " + s2);
-            outi.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    public void readcommandstxt(){
-         try {
             boolean p = new File(getDataFolder() + "/backup").mkdirs();
             File file = new File(getDataFolder() + "/names.txt");
             boolean newFile = file.createNewFile();
 
-            if (p){
+            if (p) {
                 getLogger().info("Created a backup folder");
             }
 
@@ -204,16 +179,16 @@ public class Lain extends JavaPlugin {
             }
 
             /*BufferedReader read = new BufferedReader(new FileReader(file));
-            String line;
-            while ((line = read.readLine()) != null) {
-                if (!names.contains(line)) {
-                    names.add(line);
-                }
-            }*/
+             String line;
+             while ((line = read.readLine()) != null) {
+             if (!names.contains(line)) {
+             names.add(line);
+             }
+             }*/
         } catch (IOException e) {
             e.printStackTrace();
         }
-         
+
     }
 
 }
