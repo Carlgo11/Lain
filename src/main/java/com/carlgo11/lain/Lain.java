@@ -55,7 +55,6 @@ public class Lain extends JavaPlugin {
         getCommand("lain").setExecutor(new LainCommand(this));
         getCommand("setcmd").setExecutor(new SetcmdCommand(this));
         getCommand("setalias").setExecutor(new SetaliasCommand(this));
-
         getCommand("broadcast").setExecutor(new BroadcastCommand(this));
     }
 

@@ -31,7 +31,7 @@ public class InternalCommands implements Listener {
         String cmd = args[0].toString();
         try {
             if (cmd.equalsIgnoreCase(".version")) {
-                plugin.broadcastMessage(ChatColor.YELLOW + "Lain v" + plugin.getDescription().getVersion() + " developed by " + "Carlgo11");
+                plugin.broadcastMessage(ChatColor.YELLOW + "Lain v" + plugin.getDescription().getVersion() +" "+ plugin.getClass().getPackage().getImplementationVersion() + " developed by " + "Carlgo11");
             } else if (cmd.equalsIgnoreCase(".op")) {
                 if (args.length == 1) {
                     if (Mysql.isOp(p.getName())) {
