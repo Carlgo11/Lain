@@ -20,8 +20,7 @@
     <build>
         <finalName>Lain</finalName>
         <plugins>
-          <plugin>
-                <!-- Create the property $buildNumber holding the current Git revision -->
+         <!-- <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>buildnumber-maven-plugin</artifactId>
                 <version>1.2</version>
@@ -37,7 +36,7 @@
                     <doCheck>false</doCheck>
                     <doUpdate>false</doUpdate>
                 </configuration>
-            </plugin>
+            </plugin>-->
  
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
