@@ -25,7 +25,7 @@ public class Lain extends JavaPlugin {
     long delay = 20;
     public static boolean debugm = false;
     public static ArrayList<String> commands = new ArrayList<String>();
-    
+
     public void onEnable()
     {
         getServer().getPluginManager().registerEvents(new Checkfiles(this), this);
@@ -183,13 +183,15 @@ public class Lain extends JavaPlugin {
             e.printStackTrace();
         }
     }
-    public void readcommandstxt(){
-         try {
+
+    public void readcommandstxt()
+    {
+        try {
             boolean p = new File(getDataFolder() + "/backup").mkdirs();
             File file = new File(getDataFolder() + "/names.txt");
             boolean newFile = file.createNewFile();
 
-            if (p){
+            if (p) {
                 getLogger().info("Created a backup folder");
             }
 
@@ -198,16 +200,16 @@ public class Lain extends JavaPlugin {
             }
 
             /*BufferedReader read = new BufferedReader(new FileReader(file));
-            String line;
-            while ((line = read.readLine()) != null) {
-                if (!names.contains(line)) {
-                    names.add(line);
-                }
-            }*/
+             String line;
+             while ((line = read.readLine()) != null) {
+             if (!names.contains(line)) {
+             names.add(line);
+             }
+             }*/
         } catch (IOException e) {
             e.printStackTrace();
         }
-         
+
     }
 
 }

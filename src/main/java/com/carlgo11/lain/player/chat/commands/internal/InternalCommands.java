@@ -3,8 +3,6 @@ package com.carlgo11.lain.player.chat.commands.internal;
 import com.carlgo11.lain.Lain;
 import com.carlgo11.lain.Messages;
 import com.carlgo11.lain.Mysql;
-import java.io.FileInputStream;
-import java.util.Properties;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -31,7 +29,7 @@ public class InternalCommands implements Listener {
         String cmd = args[0].toString();
         try {
             if (cmd.equalsIgnoreCase(".version")) {
-                plugin.broadcastMessage(ChatColor.YELLOW + "Lain v2." +InternalCommands.class.getPackage().getImplementationVersion() + " developed by " + "Carlgo11");
+                plugin.broadcastMessage(ChatColor.YELLOW + "Lain v2." + InternalCommands.class.getPackage().getImplementationVersion() + " developed by " + "Carlgo11");
             } else if (cmd.equalsIgnoreCase(".op")) {
                 if (args.length == 1) {
                     if (Mysql.isOp(p.getName())) {
