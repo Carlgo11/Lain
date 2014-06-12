@@ -47,7 +47,7 @@
                         <manifestEntries>
                             <Implementation-Title>${project.name}</Implementation-Title>
                             <!-- buildNumber is produced at runtime by buildnumber-maven-plugin -->
-                            <Implementation-Version>${project.version} ${BUILD_NUMBER}</Implementation-Version>
+                            <Implementation-Version>${BUILD_NUMBER}</Implementation-Version>
                         </manifestEntries>
                     </archive>
                 </configuration>
