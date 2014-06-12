@@ -18,7 +18,7 @@
     </repositories>
     
     <build>
-        <finalName>Lain</finalName>
+        <finalName>Lain_${BUILD_NUMBER}</finalName>
         <plugins>
          <!-- <plugin>
                 <groupId>org.codehaus.mojo</groupId>
