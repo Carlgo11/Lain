@@ -37,10 +37,10 @@ public class SetcmdCommand implements CommandExecutor {
                         plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + " " + ChatColor.GREEN + "Deleted the command '." + args[0] + "'!");
                         plugin.saveConfig();
                     } else {
-                        plugin.badpermsSender(p);
+                        plugin.badperms(p);
                     }
                 } else {
-                    plugin.errorToSender(p, Messages.nomsgfound);
+                    plugin.error(p, Messages.nomsgfound);
                 }
 
             }
@@ -57,7 +57,7 @@ public class SetcmdCommand implements CommandExecutor {
                                 plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + " " + ChatColor.GREEN + "Created the command '." + args[0] + "' created! " + ChatColor.YELLOW + "Msg:'" + gaysex.toString() + ChatColor.YELLOW + "'");
                                 plugin.saveConfig();
                             } catch (Exception ex) {
-                                plugin.errorToSender(p, ex.toString());
+                                plugin.error(p, ex.toString());
                             }
                             try{
                                 StringBuilder gaysex = new StringBuilder();
@@ -67,7 +67,7 @@ public class SetcmdCommand implements CommandExecutor {
                                 Lain.commands.add(args[0]+":\t"+gaysex.toString());
                             Checkfiles.saveCommands();
                             }catch(Exception ex){
-                                    plugin.errorToSender(p, ex.toString());
+                                    plugin.error(p, ex.toString());
                                 }
                         } else {
                             try {
@@ -85,7 +85,7 @@ public class SetcmdCommand implements CommandExecutor {
                                 plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + " " + ChatColor.YELLOW + "Modifyed the command '." + args[0].toString() + "' " + ChatColor.YELLOW + "New msg:'" + gaysex.toString() + ChatColor.YELLOW + "'");
                                 plugin.saveConfig();
                             } catch (Exception ex) {
-                                plugin.errorToSender(p, ex.toString());
+                                plugin.error(p, ex.toString());
                             }
                             
                            /* int si = plugin.getConfig().getStringList("commands").size();
@@ -97,11 +97,11 @@ public class SetcmdCommand implements CommandExecutor {
 
                     }
                 } else {
-                    plugin.badpermsSender(p);
+                    plugin.badperms(p);
                 }
             }
         } catch (Exception ex) {
-            plugin.errorToSender(p, ex.toString());
+            plugin.error(p, ex.toString());
         }
         return true;
     }

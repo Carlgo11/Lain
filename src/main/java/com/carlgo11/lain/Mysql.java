@@ -14,7 +14,8 @@ public class Mysql {
     public static String username = "Lain";
     public static String password = "JAMUPsBMB7mrZNzx";
 
-    public static String getMOTD(String Whitelist) {
+    public static String getMOTD(String Whitelist)
+    {
         Connection con = null;
         Statement st = null;
         ResultSet rs = null;
@@ -57,7 +58,8 @@ public class Mysql {
         return null;
     }
 
-    public static String getRank(String Player) {
+    public static String getRank(String Player)
+    {
         Connection con = null;
         Statement st = null;
         ResultSet rs = null;
@@ -100,7 +102,8 @@ public class Mysql {
         return null;
     }
 
-    public static Boolean isOp(String Player) {
+    public static Boolean isOp(String Player)
+    {
         Connection con = null;
         Statement st = null;
         ResultSet rs = null;
@@ -124,7 +127,6 @@ public class Mysql {
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(Mysql.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
-
         } finally {
             try {
                 if (rs != null) {

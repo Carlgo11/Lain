@@ -45,7 +45,7 @@ public class LainCommand implements CommandExecutor {
                 lain.broadcastMessage(ChatColor.LIGHT_PURPLE + knark.toString());
             }
         } else {
-            lain.badpermsSender(sender);
+            lain.badperms(sender);
         }
     }
 }

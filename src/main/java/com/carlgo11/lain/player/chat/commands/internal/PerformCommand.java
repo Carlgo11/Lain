@@ -41,11 +41,10 @@ public class PerformCommand implements Listener {
             if (API.isAdmin(p, plugin)) {
                 perform(msg, p, args, cmd);
             } else {
-                plugin.badpermsPlayer(p);
+                plugin.badperms(p);
                 e.setCancelled(true);
             }
         }
-
     }
 
     public void perform(String msg, Player p, String[] args, String cmd)
@@ -87,7 +86,7 @@ public class PerformCommand implements Listener {
                     if (broad) {
                         plugin.broadcastMessage(Messages.error + ex.toString());
                     } else {
-                        plugin.errorToPlayer(p, ex.toString());
+                        plugin.error(p, ex.toString());
                     }
                 }
             }
@@ -117,7 +116,6 @@ public class PerformCommand implements Listener {
                 broad = false;
             }
         }
-
     }
 
     void performSystem(String msg, Player p, String[] args, String cmd)
@@ -131,8 +129,8 @@ public class PerformCommand implements Listener {
                 plugin.sendMessage(p, "done");
             }
         } else if (args[2].equalsIgnoreCase("reboot")) {
-            plugin.broadcastMessage(""+ChatColor.GREEN+plugin.getConfig().getString("broadcast-maintenance-awaiting"));
-            PlayerDisconnect.reboot=true;
+            plugin.broadcastMessage("" + ChatColor.GREEN + plugin.getConfig().getString("broadcast-maintenance-awaiting"));
+            PlayerDisconnect.reboot = true;
         }
     }
 
@@ -157,23 +155,22 @@ public class PerformCommand implements Listener {
         }
 
         return output.toString();
-
     }
 
     private void performEmergency(String s)
     {
-            int count = plugin.getConfig().getInt("emtokenint");
-            ArrayList<String> ab = new ArrayList<String>();
-            try {
-                BufferedReader d = new BufferedReader(new FileReader(plugin.getDataFolder() + "/emtokens.txt"));
-                String line;
-                while ((line = d.readLine()) != null) {
-                    if (!ab.contains(line)) {
-                        ab.add(line);
-                    }
+        int count = plugin.getConfig().getInt("emtokenint");
+        ArrayList<String> ab = new ArrayList<String>();
+        try {
+            BufferedReader d = new BufferedReader(new FileReader(plugin.getDataFolder() + "/emtokens.txt"));
+            String line;
+            while ((line = d.readLine()) != null) {
+                if (!ab.contains(line)) {
+                    ab.add(line);
                 }
-            } catch (Exception ex) {
-                Logger.getLogger(PerformCommand.class.getName()).log(Level.SEVERE, null, ex);
             }
+        } catch (Exception ex) {
+            Logger.getLogger(PerformCommand.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

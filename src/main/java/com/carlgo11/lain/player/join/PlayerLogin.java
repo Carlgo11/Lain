@@ -9,22 +9,21 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 
 public class PlayerLogin implements Listener {
-    
+
     private Lain plugin;
 
     public PlayerLogin(Lain plug)
     {
         this.plugin = plug;
     }
-    
-     @EventHandler(priority = EventPriority.HIGHEST)
-    public void onPlayerLogin(PlayerLoginEvent e){
-        if(Bukkit.hasWhitelist()){
-            if(Mysql.getRank(e.getPlayer().getName()) != null){
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerLogin(PlayerLoginEvent e)
+    {
+        if (Bukkit.hasWhitelist()) {
+            if (Mysql.getRank(e.getPlayer().getName()) != null) {
                 e.allow();
             }
         }
     }
-    
-
 }

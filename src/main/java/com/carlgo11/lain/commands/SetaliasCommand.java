@@ -36,10 +36,10 @@ public class SetaliasCommand implements CommandExecutor {
                     plugin.broadcastMessage(ChatColor.YELLOW + sender.getName() + " " + ChatColor.GREEN + "Deleted the alias '." + args[0] + "'!");
                     plugin.saveConfig();
                 } else {
-                    plugin.badpermsSender(sender);
+                    plugin.badperms(sender);
                 }
             } else {
-                plugin.errorToSender(sender, Messages.nomsgfound);
+                plugin.error(sender, Messages.nomsgfound);
             }
 
         } else if (args.length == 2) {
@@ -51,13 +51,13 @@ public class SetaliasCommand implements CommandExecutor {
                         plugin.broadcastMessage(ChatColor.YELLOW + sender.getName() + " " + ChatColor.GREEN + "Created an alias named '." + args[0] + "' for '." + args[1] + "'.");
                         plugin.saveConfig();
                     } catch (Exception ex) {
-                        plugin.errorToSender(sender, ex.toString());
+                        plugin.error(sender, ex.toString());
                     }
                 } else {
-                    plugin.errorToSender(sender, "There's already a command/alias called that. You must remove the existing command/alias before you can create a new one!");
+                    plugin.error(sender, "There's already a command/alias called that. You must remove the existing command/alias before you can create a new one!");
                 }
             } else {
-                plugin.badpermsSender(sender);
+                plugin.badperms(sender);
             }
         } else {
             return false;

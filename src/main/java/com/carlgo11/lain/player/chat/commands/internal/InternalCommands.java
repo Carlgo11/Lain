@@ -28,108 +28,120 @@ public class InternalCommands implements Listener {
         final String[] args = msg.split(" ");
         String cmd = args[0].toString();
         try {
+
             if (cmd.equalsIgnoreCase(".version")) {
-                plugin.broadcastMessage(ChatColor.YELLOW + "Lain v2." + InternalCommands.class.getPackage().getImplementationVersion() + " developed by " + "Carlgo11");
+                versionCommand();
             } else if (cmd.equalsIgnoreCase(".op")) {
-                if (args.length == 1) {
-                    if (Mysql.isOp(p.getName())) {
-                        if (!p.isOp()) {
-                            p.setOp(true);
-                            plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + Messages.nowop);
-                        } else {
-                            p.setOp(false);
-                            plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + Messages.nolongerop);
-                        }
-                    } else {
-                        plugin.badpermsPlayer(p);
-                    }
-                } else if (args.length == 2) {
-
-                } else if (args.length > 2) {
-                    plugin.errorToPlayer(p, "Usage: .op [player]");
-                }
-            } else if (cmd.equalsIgnoreCase(".ping")) { //moar? 
-                plugin.broadcastMessage(ChatColor.GREEN + "Pong! ;)");
-
+                opCommand(p, cmd, args);
+            } else if (cmd.equalsIgnoreCase(".ping")) {
+                plugin.broadcastMessage(ChatColor.GREEN + "Pong! :)");
             } else if (cmd.equalsIgnoreCase(".mod")) {
-                this.checkOp(p);
-                if (p.hasPermission("lain.group.mod") && Mysql.getRank(p.getName()).equalsIgnoreCase("moderator")) {
-                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " builder");
-                    plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + Messages.nolongermod);
-                } else if (Mysql.getRank(p.getName()).equalsIgnoreCase("moderator")) {
-                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " moderator");
-                    plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + Messages.nowmod);
-                } else {
-                    plugin.badpermsPlayer(p);
-                }
-
+                modCommand(p, cmd, args);
             } else if (cmd.equalsIgnoreCase(".admin")) {
-                this.checkOp(p);
-                if (p.hasPermission("lain.group.admin") && Mysql.getRank(p.getName()).equalsIgnoreCase("admin")) {
-                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " builder");
-                    plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + Messages.nolongeradmin);
-                } else if (Mysql.getRank(p.getName()).equalsIgnoreCase("admin")) {
-                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " admin");
-                    plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + Messages.nowadmin);
-                } else {
-                    plugin.badpermsPlayer(p);
-                }
-
+                adminCommand(p, cmd, args);
             } else if (cmd.equalsIgnoreCase(".headadmin")) {
-                this.checkOp(p);
-                if (p.hasPermission("lain.group.headadmin") && Mysql.getRank(p.getName()).equalsIgnoreCase("headadmin")) {
-                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " builder");
-                    plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + Messages.nolongeradmin);
-                } else if (Mysql.getRank(p.getName()).equalsIgnoreCase("headadmin")) {
-                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " head-admin");
-                    plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + Messages.nowadmin);
-                } else {
-                    plugin.badpermsPlayer(p);
-                }
+                headadminCommand(p, cmd, args);
             } else if (cmd.equalsIgnoreCase(".owner")) {
-                this.checkOp(p);
-                if (p.hasPermission("lain.group.owner") && Mysql.getRank(p.getName()).equalsIgnoreCase("owner")) {
-                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " builder");
-                    plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + Messages.nolongerowner);
-                } else if (Mysql.getRank(p.getName()).equalsIgnoreCase("owner")) {
-                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " owner");
-                    plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + Messages.nowowner);
-                } else {
-                    plugin.badpermsPlayer(p);
-                }
-
-//            } else if (cmd.equalsIgnoreCase(".list")) {
-//                plugin.sendMessage(p, ChatColor.GREEN + "Available commands: " + ChatColor.RED + plugin.getConfig().getList("commands").toString());
-            } else {
-
-                String a = "Make it day Lain";
-                String[] b = a.split(" ");
-                int c = 0;
-                String d = "Lain make it day";
-                String[] f = d.split(" ");
-                int g = 0;
-                for (int i = 0; i < 4; i++) {
-                    if (args.length >= 4) {
-                        if (args[i].equalsIgnoreCase(b[i])) {
-                            c++;
-                        } else if (args[i].equalsIgnoreCase(f[i])) {
-                            g++;
-                        }
-                    }
-                }
-
-                if (c == 4 || g == 4) {
-                    if (p.getUniqueId().toString().equals("0c8198e0-77b6-4c7a-8319-5f3246c8dd31")) {
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "day day all");
-                        plugin.broadcastMessage(ChatColor.GREEN + "Okay! " + ChatColor.RED + "<3");
-                    } else {
-                        plugin.broadcastMessage(ChatColor.LIGHT_PURPLE + "You're not Heather! :'(");
-                    }
-                }
+                ownerCommand(p, cmd, args);
+            } else if (cmd.equalsIgnoreCase(".g") || cmd.equalsIgnoreCase(".google")) {
+                googleCommand(p, cmd, args);
             }
+
         } catch (Exception ex) {
-            plugin.errorToPlayer(p, ex.getMessage());
+            plugin.error(p, ex.getMessage());
         }
+    }
+
+    void versionCommand()
+    {
+        plugin.broadcastMessage(ChatColor.YELLOW + "Lain v2." + InternalCommands.class.getPackage().getImplementationVersion() + " developed by " + "Carlgo11");
+    }
+
+    void opCommand(Player p, String cmd, String[] args)
+    {
+        if (args.length == 1) {
+            if (Mysql.isOp(p.getName())) {
+                if (!p.isOp()) {
+                    p.setOp(true);
+                    plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + Messages.nowop);
+                } else {
+                    p.setOp(false);
+                    plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + Messages.nolongerop);
+                }
+            } else {
+                plugin.badperms(p);
+            }
+        } else if (args.length == 2) {
+
+        } else if (args.length > 2) {
+            plugin.error(p, "Usage: .op [player]");
+        }
+    }
+
+    void modCommand(Player p, String cmd, String[] args)
+    {
+        this.checkOp(p);
+        if (p.hasPermission("lain.group.mod") && Mysql.getRank(p.getName()).equalsIgnoreCase("moderator")) {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " builder");
+            plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + Messages.nolongermod);
+        } else if (Mysql.getRank(p.getName()).equalsIgnoreCase("moderator")) {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " moderator");
+            plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + Messages.nowmod);
+        } else {
+            plugin.badperms(p);
+        }
+    }
+
+    void adminCommand(Player p, String cmd, String[] args)
+    {
+        this.checkOp(p);
+        if (p.hasPermission("lain.group.admin") && Mysql.getRank(p.getName()).equalsIgnoreCase("admin")) {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " builder");
+            plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + Messages.nolongeradmin);
+        } else if (Mysql.getRank(p.getName()).equalsIgnoreCase("admin")) {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " admin");
+            plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + Messages.nowadmin);
+        } else {
+            plugin.badperms(p);
+        }
+    }
+
+    void headadminCommand(Player p, String cmd, String[] args)
+    {
+        this.checkOp(p);
+        if (p.hasPermission("lain.group.headadmin") && Mysql.getRank(p.getName()).equalsIgnoreCase("headadmin")) {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " builder");
+            plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + Messages.nolongeradmin);
+        } else if (Mysql.getRank(p.getName()).equalsIgnoreCase("headadmin")) {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " head-admin");
+            plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + Messages.nowadmin);
+        } else {
+            plugin.badperms(p);
+        }
+    }
+
+    void ownerCommand(Player p, String cmd, String[] args)
+    {
+        this.checkOp(p);
+        if (p.hasPermission("lain.group.owner") && Mysql.getRank(p.getName()).equalsIgnoreCase("owner")) {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " builder");
+            plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + Messages.nolongerowner);
+        } else if (Mysql.getRank(p.getName()).equalsIgnoreCase("owner")) {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " owner");
+            plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + Messages.nowowner);
+        } else {
+            plugin.badperms(p);
+        }
+    }
+
+    void googleCommand(Player p, String cmd, String[] args)
+    {
+        StringBuilder sq = new StringBuilder();
+        for (int i = 1; i < args.length; i++) {
+            sq.append(args[i]);
+            sq.append("+");
+        }
+        plugin.broadcastMessage(ChatColor.GREEN + "http://google.com/search?q=" + sq);
     }
 
     private void checkOp(final Player p)

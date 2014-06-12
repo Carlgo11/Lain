@@ -12,7 +12,6 @@ public class SpamChecker {
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent e)
     {
-
         lastmsg.add(null);
     }
 
@@ -21,7 +20,6 @@ public class SpamChecker {
         int out = 0;
         for (int i = 0; i < lastmsg.size(); i++) {
             if (msguser.get(i).equals("")) {
-
             }
         }
         return out;

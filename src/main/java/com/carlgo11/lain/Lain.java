@@ -18,6 +18,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Lain extends JavaPlugin {
@@ -28,18 +29,7 @@ public class Lain extends JavaPlugin {
 
     public void onEnable()
     {
-        getServer().getPluginManager().registerEvents(new Checkfiles(this), this);
-        getServer().getPluginManager().registerEvents(new InternalCommands(this), this);
-        getServer().getPluginManager().registerEvents(new PerformCommand(this), this);
-        getServer().getPluginManager().registerEvents(new GoogleCommand(this), this);
-        getServer().getPluginManager().registerEvents(new ExternalCommands(this), this);
-        getServer().getPluginManager().registerEvents(new PlayerJoin(this), this);
-        getServer().getPluginManager().registerEvents(new SpecialEffects(this), this);
-        getServer().getPluginManager().registerEvents(new PlayerDisconnect(this), this);
-        getServer().getPluginManager().registerEvents(new consoleCommand(this), this);
-        getServer().getPluginManager().registerEvents(new Phrases(this), this);
-        getServer().getPluginManager().registerEvents(new ServerListPing(this), this);
-        getServer().getPluginManager().registerEvents(new PlayerLogin(this), this);
+        registerListeners(getServer().getPluginManager());
         commands();
         this.getLogger().log(Level.INFO, "{0} {1} is enabled!", new Object[]{getDescription().getName(), getDescription().getVersion()});
     }
@@ -48,6 +38,21 @@ public class Lain extends JavaPlugin {
     {
         this.getLogger().log(Level.INFO, "{0} {1} is disabled!", new Object[]{getDescription().getName(), getDescription().getVersion()});
         this.saveConfig();
+    }
+
+    void registerListeners(PluginManager pm)
+    {
+        pm.registerEvents(new Checkfiles(this), this);
+        pm.registerEvents(new InternalCommands(this), this);
+        pm.registerEvents(new ExternalCommands(this), this);
+        pm.registerEvents(new PerformCommand(this), this);
+        pm.registerEvents(new PlayerJoin(this), this);
+        pm.registerEvents(new SpecialEffects(this), this);
+        pm.registerEvents(new PlayerDisconnect(this), this);
+        pm.registerEvents(new consoleCommand(this), this);
+        pm.registerEvents(new Phrases(this), this);
+        pm.registerEvents(new ServerListPing(this), this);
+        pm.registerEvents(new PlayerLogin(this), this);
     }
 
     public void commands()
@@ -102,7 +107,7 @@ public class Lain extends JavaPlugin {
         this.getLogger().log(Level.WARNING, Messages.error + "{0}", s);
     }
 
-    public void errorToPlayer(final Player p, final String s)
+    public void error(final Player p, final String s)
     {
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
@@ -113,7 +118,7 @@ public class Lain extends JavaPlugin {
         }, delay);
     }
 
-    public void errorToSender(final CommandSender p, final String s)
+    public void error(final CommandSender p, final String s)
     {
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
@@ -124,7 +129,7 @@ public class Lain extends JavaPlugin {
         }, delay);
     }
 
-    public void badpermsPlayer(final Player p)
+    public void badperms(final Player p)
     {
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
@@ -135,7 +140,7 @@ public class Lain extends JavaPlugin {
         }, delay);
     }
 
-    public void badpermsSender(final CommandSender p)
+    public void badperms(final CommandSender p)
     {
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
@@ -198,14 +203,6 @@ public class Lain extends JavaPlugin {
             if (newFile) {
                 getLogger().info("Created a file called names.txt");
             }
-
-            /*BufferedReader read = new BufferedReader(new FileReader(file));
-             String line;
-             while ((line = read.readLine()) != null) {
-             if (!names.contains(line)) {
-             names.add(line);
-             }
-             }*/
         } catch (IOException e) {
             e.printStackTrace();
         }

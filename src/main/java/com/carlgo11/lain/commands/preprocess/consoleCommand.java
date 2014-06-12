@@ -28,13 +28,13 @@ public class consoleCommand implements Listener {
                 Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), msg.toString().replaceFirst("/~ ", ""));
                 e.setCancelled(true);
             } else {
-                Lain.badpermsPlayer(player);
+                Lain.badperms(player);
             }
         }
         
         if (args[0].equalsIgnoreCase("/manuadd") || args[0].equalsIgnoreCase("/manudel") || args[0].equalsIgnoreCase("/manprmote") || args[0].equalsIgnoreCase("/mandemote")) {
             e.setCancelled(true);
-            Lain.errorToPlayer(e.getPlayer(), "We don't promote/demote people like that.");
+            Lain.error(e.getPlayer(), "We don't promote/demote people like that.");
 
         }
     }

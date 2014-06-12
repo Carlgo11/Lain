@@ -18,7 +18,7 @@ public class PlayerJoin implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event)
-    { //Note that ProxyListener is called from main class!
+    {
         if (plugin.getConfig().contains("owner-op1")) {
             int a = 0;
             int b = 1;
@@ -36,5 +36,4 @@ public class PlayerJoin implements Listener {
             plugin.error("owner-op1 now found");
         }
     }
-
 }

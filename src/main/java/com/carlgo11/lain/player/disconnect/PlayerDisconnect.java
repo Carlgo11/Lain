@@ -9,28 +9,27 @@ import org.bukkit.event.*;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerDisconnect implements Listener {
-    
+
     private Lain plugin;
 
-    public PlayerDisconnect(Lain plug) {
+    public PlayerDisconnect(Lain plug)
+    {
         this.plugin = plug;
     }
-    
+
     static public boolean reboot = false;
-    
+
     @EventHandler
-    public void onPlayerDisconnect(PlayerQuitEvent e){
+    public void onPlayerDisconnect(PlayerQuitEvent e)
+    {
         Player p = e.getPlayer();
-        
-        if(p.isOp()){
+
+        if (p.isOp()) {
             p.setOp(false);
-            plugin.broadcastMessage(ChatColor.YELLOW+p.getName()+Messages.nolongerop);
+            plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + Messages.nolongerop);
         }
-        if(plugin.getServer().getOnlinePlayers().length == 1 && reboot){
+        if (plugin.getServer().getOnlinePlayers().length == 1 && reboot) {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "stop");
         }
-        
-        
     }
-
 }

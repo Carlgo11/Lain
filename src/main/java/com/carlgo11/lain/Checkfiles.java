@@ -4,9 +4,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.bukkit.event.Listener;
 
 public class Checkfiles implements Listener {
@@ -37,31 +34,34 @@ public class Checkfiles implements Listener {
         }
 
     }
-    
-    public void loadCommands(){
-        try{
-        File dir = new File("/var/www/lain/");;
-        if (!dir.exists()) {
-            dir.mkdir();
-        }
-        File file = new File(dir + "/" + "commands.txt");
-        if (!file.exists()) {
-            file.createNewFile();
-        }
-        BufferedReader read = new BufferedReader(new FileReader(file));
-        String line;
-        while ((line = read.readLine()) != null) {
-            if (!plugin.commands.contains(line)) {
-                if (!line.isEmpty()) {
-                    plugin.commands.add(line);
+
+    public void loadCommands()
+    {
+        try {
+            File dir = new File("/var/www/lain/");;
+            if (!dir.exists()) {
+                dir.mkdir();
+            }
+            File file = new File(dir + "/" + "commands.txt");
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            BufferedReader read = new BufferedReader(new FileReader(file));
+            String line;
+            while ((line = read.readLine()) != null) {
+                if (!plugin.commands.contains(line)) {
+                    if (!line.isEmpty()) {
+                        plugin.commands.add(line);
+                    }
                 }
             }
-        }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex);
         }
     }
-    public static void saveCommands(){
+
+    public static void saveCommands()
+    {
         try {
             File file = new File("/var/www/lain/commands.txt");
             FileWriter d = new FileWriter(file);
@@ -76,6 +76,6 @@ public class Checkfiles implements Listener {
         } catch (Exception ex) {
             System.out.println("save-ignored error: " + ex);
         }
-    
+
     }
 }

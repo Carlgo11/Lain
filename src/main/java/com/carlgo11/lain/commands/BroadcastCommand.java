@@ -25,13 +25,13 @@ public class BroadcastCommand implements CommandExecutor {
                 if (lain.getConfig().contains(brbuild)) {
                     lain.broadcastMessage(ChatColor.GREEN + lain.getConfig().getString(brbuild));
                 } else {
-                    lain.errorToSender(sender, help);
+                    lain.error(sender, help);
                 }
             }else {
-                lain.errorToSender(sender, help);
+                lain.error(sender, help);
             }
         } else {
-            lain.badpermsSender(sender);
+            lain.badperms(sender);
         }
         
         return true;
