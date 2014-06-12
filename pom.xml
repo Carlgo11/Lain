@@ -27,7 +27,7 @@
                 <configuration>
                     <archive>
                         <manifestEntries>
-                            <Implementation-Title>${BUILD_ID}</Implementation-Title>
+                            <Implementation-Title>${project.name}</Implementation-Title>
                             <Implementation-Version>${BUILD_NUMBER}</Implementation-Version>
                         </manifestEntries>
                     </archive>

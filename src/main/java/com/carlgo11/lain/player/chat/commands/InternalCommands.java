@@ -30,7 +30,7 @@ public class InternalCommands implements Listener {
         try {
 
             if (cmd.equalsIgnoreCase(".version")) {
-                versionCommand(args);
+                versionCommand();
             } else if (cmd.equalsIgnoreCase(".op")) {
                 opCommand(p, cmd, args);
             } else if (cmd.equalsIgnoreCase(".ping")) {
@@ -54,13 +54,9 @@ public class InternalCommands implements Listener {
         }
     }
 
-    void versionCommand(String args[])
+    void versionCommand()
     {
-        if(args.length == 2 && args[1].equalsIgnoreCase("-all")){
-            plugin.broadcastMessage(ChatColor.YELLOW + "Lain v2." + InternalCommands.class.getPackage().getImplementationVersion() + " (" + InternalCommands.class.getPackage().getImplementationTitle() + ") developed by " + "Carlgo11");
-        }else{
           plugin.broadcastMessage(ChatColor.YELLOW + "Lain v2." + InternalCommands.class.getPackage().getImplementationVersion() + " developed by " + "Carlgo11");  
-        }
     }
 
     void opCommand(Player p, String cmd, String[] args)
