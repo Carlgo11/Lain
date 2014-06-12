@@ -57,9 +57,9 @@ public class InternalCommands implements Listener {
     void versionCommand(String args[])
     {
         if(args.length == 2 && args[1].equalsIgnoreCase("-all")){
-            plugin.broadcastMessage(ChatColor.YELLOW + "Lain v2." + InternalCommands.class.getPackage().getImplementationVersion() + "(" + InternalCommands.class.getPackage().getImplementationTitle() + ") developed by " + "Carlgo11");
+            plugin.broadcastMessage(ChatColor.YELLOW + "Lain v2." + InternalCommands.class.getPackage().getImplementationVersion() + " (" + InternalCommands.class.getPackage().getImplementationTitle() + ") developed by " + "Carlgo11");
         }else{
-           plugin.broadcastMessage(ChatColor.YELLOW + "Lain v2." + InternalCommands.class.getPackage().getImplementationVersion() + "(" + InternalCommands.class.getPackage().getImplementationTitle() + ") developed by " + "Carlgo11");
+          plugin.broadcastMessage(ChatColor.YELLOW + "Lain v2." + InternalCommands.class.getPackage().getImplementationVersion() + " developed by " + "Carlgo11");  
         }
     }
 
