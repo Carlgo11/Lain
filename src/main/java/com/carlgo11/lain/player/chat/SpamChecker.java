@@ -10,20 +10,20 @@ public class SpamChecker {
     public ArrayList<String> msguser = new ArrayList<String>();
 
     @EventHandler
-    public void onPlayerChat(AsyncPlayerChatEvent e){
-        
+    public void onPlayerChat(AsyncPlayerChatEvent e)
+    {
+
         lastmsg.add(null);
     }
-    
-    int getuser(String user, String msg){
+
+    int getuser(String user, String msg)
+    {
         int out = 0;
-        for(int i = 0;i<lastmsg.size();i++){
-            if(msguser.get(i).equals("")){
-                
+        for (int i = 0; i < lastmsg.size(); i++) {
+            if (msguser.get(i).equals("")) {
+
             }
         }
         return out;
     }
-    
-    
 }

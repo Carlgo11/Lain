@@ -1,6 +1,6 @@
 main: com.carlgo11.lain.Lain
 name: Lain2
-version: 2.1.8
+version: 2.0
 author: Carlgo11
 commands:
   lain:
