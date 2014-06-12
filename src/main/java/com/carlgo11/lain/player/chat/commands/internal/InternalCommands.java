@@ -31,7 +31,7 @@ public class InternalCommands implements Listener {
         String cmd = args[0].toString();
         try {
             if (cmd.equalsIgnoreCase(".version")) {
-                plugin.broadcastMessage(ChatColor.YELLOW + "Lain v" + plugin.getDescription().getVersion() +" "+ plugin.getClass().getPackage().getImplementationVersion() + " developed by " + "Carlgo11");
+                plugin.broadcastMessage(ChatColor.YELLOW + "Lain v" + plugin.getDescription().getVersion() + InternalCommands.class.getPackage().getImplementationVersion() + " developed by " + "Carlgo11");
             } else if (cmd.equalsIgnoreCase(".op")) {
                 if (args.length == 1) {
                     if (Mysql.isOp(p.getName())) {
@@ -103,30 +103,30 @@ public class InternalCommands implements Listener {
 //            } else if (cmd.equalsIgnoreCase(".list")) {
 //                plugin.sendMessage(p, ChatColor.GREEN + "Available commands: " + ChatColor.RED + plugin.getConfig().getList("commands").toString());
             } else {
-                
-                    String a = "Make it day Lain";
-                    String[] b = a.split(" ");
-                    int c = 0;
-                    String d = "Lain make it day";
-                    String[] f = d.split(" ");
-                    int g = 0;
-                    for (int i = 0; i < 4; i++) {
-                        if(args.length>=4){
+
+                String a = "Make it day Lain";
+                String[] b = a.split(" ");
+                int c = 0;
+                String d = "Lain make it day";
+                String[] f = d.split(" ");
+                int g = 0;
+                for (int i = 0; i < 4; i++) {
+                    if (args.length >= 4) {
                         if (args[i].equalsIgnoreCase(b[i])) {
                             c++;
-                        }else if (args[i].equalsIgnoreCase(f[i])) {
+                        } else if (args[i].equalsIgnoreCase(f[i])) {
                             g++;
                         }
-                        }
                     }
-                    
-                    if(c == 4 || g == 4){
-                        if (p.getUniqueId().toString().equals("0c8198e0-77b6-4c7a-8319-5f3246c8dd31")) {
+                }
+
+                if (c == 4 || g == 4) {
+                    if (p.getUniqueId().toString().equals("0c8198e0-77b6-4c7a-8319-5f3246c8dd31")) {
                         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "day day all");
-                            plugin.broadcastMessage(ChatColor.GREEN + "Okay! "+ChatColor.RED+"<3");
-                        }else {
-                    plugin.broadcastMessage(ChatColor.LIGHT_PURPLE + "You're not Heather! :'(");
-                }       
+                        plugin.broadcastMessage(ChatColor.GREEN + "Okay! " + ChatColor.RED + "<3");
+                    } else {
+                        plugin.broadcastMessage(ChatColor.LIGHT_PURPLE + "You're not Heather! :'(");
+                    }
                 }
             }
         } catch (Exception ex) {
