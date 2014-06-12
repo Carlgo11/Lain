@@ -28,11 +28,11 @@ public class SetcmdCommand implements CommandExecutor {
                 if (plugin.getConfig().contains(cmdbuild)) {
                     if (p.hasPermission("lain.cmd.delcmd")) {
                         plugin.getConfig().set(cmdbuild, null);
-                        for(int i = 0; i < Lain.commands.size(); i++){
-                                    if(Lain.commands.get(i).startsWith(args[0]+":")){
-                                        Lain.commands.remove(i);
-                                    }
-                                }
+                        for (int i = 0; i < Lain.commands.size(); i++) {
+                            if (Lain.commands.get(i).startsWith(args[0] + ":")) {
+                                Lain.commands.remove(i);
+                            }
+                        }
                         Checkfiles.saveCommands();
                         plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + " " + ChatColor.GREEN + "Deleted the command '." + args[0] + "'!");
                         plugin.saveConfig();
@@ -42,7 +42,6 @@ public class SetcmdCommand implements CommandExecutor {
                 } else {
                     plugin.error(p, Messages.nomsgfound);
                 }
-
             }
             if (args.length == 2 || args.length > 2) {
                 if (p.hasPermission("lain.cmd.setcmd")) {
@@ -59,25 +58,25 @@ public class SetcmdCommand implements CommandExecutor {
                             } catch (Exception ex) {
                                 plugin.error(p, ex.toString());
                             }
-                            try{
+                            try {
                                 StringBuilder gaysex = new StringBuilder();
                                 for (int i = 1; i < args.length; i++) {
                                     gaysex.append(args[i]).append(" ");
                                 }
-                                Lain.commands.add(args[0]+":\t"+gaysex.toString());
-                            Checkfiles.saveCommands();
-                            }catch(Exception ex){
-                                    plugin.error(p, ex.toString());
-                                }
+                                Lain.commands.add(args[0] + ":\t" + gaysex.toString());
+                                Checkfiles.saveCommands();
+                            } catch (Exception ex) {
+                                plugin.error(p, ex.toString());
+                            }
                         } else {
                             try {
                                 StringBuilder gaysex = new StringBuilder();
                                 for (int i = 1; i < args.length; i++) {
                                     gaysex.append(args[i]).append(" ");
                                 }
-                                for(int i = 0; i < Lain.commands.size(); i++){
-                                    if(Lain.commands.get(i).startsWith(args[0]+":")){
-                                        Lain.commands.set(i, args[0]+":\t"+gaysex.toString());
+                                for (int i = 0; i < Lain.commands.size(); i++) {
+                                    if (Lain.commands.get(i).startsWith(args[0] + ":")) {
+                                        Lain.commands.set(i, args[0] + ":\t" + gaysex.toString());
                                     }
                                 }
                                 Checkfiles.saveCommands();
@@ -87,14 +86,7 @@ public class SetcmdCommand implements CommandExecutor {
                             } catch (Exception ex) {
                                 plugin.error(p, ex.toString());
                             }
-                            
-                           /* int si = plugin.getConfig().getStringList("commands").size();
-                            si++;
-                            plugin.getConfig().getStringList("commands").set(si, args[0].toString());
-                                   */
                         }
-                    } else {
-
                     }
                 } else {
                     plugin.badperms(p);

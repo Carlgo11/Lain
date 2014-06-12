@@ -1,9 +1,8 @@
-package com.carlgo11.lain.player.chat.commands.internal;
+package com.carlgo11.lain.player.chat.commands;
 
 import com.carlgo11.lain.Lain;
 import com.carlgo11.lain.Messages;
 import com.carlgo11.lain.Mysql;
-import com.carlgo11.lain.player.chat.commands.external.ExternalCommands;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -31,7 +30,7 @@ public class InternalCommands implements Listener {
         try {
 
             if (cmd.equalsIgnoreCase(".version")) {
-                versionCommand();
+                versionCommand(args);
             } else if (cmd.equalsIgnoreCase(".op")) {
                 opCommand(p, cmd, args);
             } else if (cmd.equalsIgnoreCase(".ping")) {
@@ -55,9 +54,13 @@ public class InternalCommands implements Listener {
         }
     }
 
-    void versionCommand()
+    void versionCommand(String args[])
     {
-        plugin.broadcastMessage(ChatColor.YELLOW + "Lain v2." + InternalCommands.class.getPackage().getImplementationVersion() + " developed by " + "Carlgo11");
+        if(args.length == 1 && args[0].equalsIgnoreCase("-all")){
+            plugin.broadcastMessage(ChatColor.YELLOW + "Lain v2." + InternalCommands.class.getPackage().getImplementationVersion() + " built " + InternalCommands.class.getPackage().getImplementationTitle() + " developed by " + "Carlgo11");
+        }else{
+          plugin.broadcastMessage(ChatColor.YELLOW + "Lain v2." + InternalCommands.class.getPackage().getImplementationVersion() + " developed by " + "Carlgo11");  
+        }
     }
 
     void opCommand(Player p, String cmd, String[] args)

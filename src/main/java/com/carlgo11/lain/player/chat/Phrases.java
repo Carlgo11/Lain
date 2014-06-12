@@ -1,4 +1,4 @@
-package com.carlgo11.lain.player.chat.automessage;
+package com.carlgo11.lain.player.chat;
 
 import com.carlgo11.lain.Lain;
 import java.util.Random;

@@ -1,4 +1,4 @@
-package com.carlgo11.lain.player.chat.commands.internal;
+package com.carlgo11.lain.player.chat.commands;
 
 import com.carlgo11.lain.API;
 import com.carlgo11.lain.Lain;
