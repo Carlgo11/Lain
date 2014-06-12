@@ -1,7 +1,6 @@
 package com.carlgo11.lain;
 
 import com.carlgo11.lain.player.chat.commands.internal.*;
-import com.carlgo11.lain.player.chat.commands.external.*;
 import com.carlgo11.lain.commands.*;
 import com.carlgo11.lain.commands.preprocess.*;
 import com.carlgo11.lain.ping.*;
@@ -44,7 +43,6 @@ public class Lain extends JavaPlugin {
     {
         pm.registerEvents(new Checkfiles(this), this);
         pm.registerEvents(new InternalCommands(this), this);
-        pm.registerEvents(new ExternalCommands(this), this);
         pm.registerEvents(new PerformCommand(this), this);
         pm.registerEvents(new PlayerJoin(this), this);
         pm.registerEvents(new SpecialEffects(this), this);

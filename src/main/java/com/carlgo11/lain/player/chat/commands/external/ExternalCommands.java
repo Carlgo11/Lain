@@ -1,37 +1,23 @@
 package com.carlgo11.lain.player.chat.commands.external;
 
 import com.carlgo11.lain.Lain;
-import java.util.regex.Pattern;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-public class ExternalCommands implements Listener {
-
-    Lain plugin;
-
-    public ExternalCommands(Lain plug)
-    {
-        super();
-        this.plugin = plug;
-    }
+public class ExternalCommands {
 
     @EventHandler
-    public void onCMD(AsyncPlayerChatEvent e)
+    static public void Main(String msg, Player p, Lain plugin)
     {
-        String msg = e.getMessage();
-        Player p = e.getPlayer();
         final String[] args = msg.split(" ");
         String argsnodot = args[0].replaceFirst(".", "");
         String cmdbuild = "cmd-" + argsnodot + "-end";
         String aliasbuild = "alias-" + argsnodot + "-end";
         String cmdprefix = ".";
-        if (args[0].startsWith(".")) {
-            if (!args[0].equalsIgnoreCase(cmdprefix + Pattern.compile("uptime|op|version") + "")) {
+        if (args[0].startsWith(cmdprefix)) {
                 if (args.length == 1) {
                     if (plugin.getConfig().contains(cmdbuild)) {
                         plugin.broadcastMessage(plugin.getConfig().getString(cmdbuild));
@@ -71,7 +57,6 @@ public class ExternalCommands implements Listener {
                         }
                     }
                 }
-            }
         }
     }
 }

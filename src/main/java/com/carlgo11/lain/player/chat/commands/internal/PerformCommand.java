@@ -5,12 +5,8 @@ import com.carlgo11.lain.Lain;
 import com.carlgo11.lain.Messages;
 import com.carlgo11.lain.player.disconnect.PlayerDisconnect;
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -155,22 +151,5 @@ public class PerformCommand implements Listener {
         }
 
         return output.toString();
-    }
-
-    private void performEmergency(String s)
-    {
-        int count = plugin.getConfig().getInt("emtokenint");
-        ArrayList<String> ab = new ArrayList<String>();
-        try {
-            BufferedReader d = new BufferedReader(new FileReader(plugin.getDataFolder() + "/emtokens.txt"));
-            String line;
-            while ((line = d.readLine()) != null) {
-                if (!ab.contains(line)) {
-                    ab.add(line);
-                }
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(PerformCommand.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 }

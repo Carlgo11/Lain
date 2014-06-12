@@ -3,6 +3,7 @@ package com.carlgo11.lain.player.chat.commands.internal;
 import com.carlgo11.lain.Lain;
 import com.carlgo11.lain.Messages;
 import com.carlgo11.lain.Mysql;
+import com.carlgo11.lain.player.chat.commands.external.ExternalCommands;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -45,6 +46,8 @@ public class InternalCommands implements Listener {
                 ownerCommand(p, cmd, args);
             } else if (cmd.equalsIgnoreCase(".g") || cmd.equalsIgnoreCase(".google")) {
                 googleCommand(p, cmd, args);
+            }else{
+                ExternalCommands.Main(msg, p, plugin);
             }
 
         } catch (Exception ex) {
