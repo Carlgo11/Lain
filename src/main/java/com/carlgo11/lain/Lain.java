@@ -204,7 +204,5 @@ public class Lain extends JavaPlugin {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-
 }

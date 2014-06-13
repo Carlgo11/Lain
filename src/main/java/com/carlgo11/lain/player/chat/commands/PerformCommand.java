@@ -3,10 +3,14 @@ package com.carlgo11.lain.player.chat.commands;
 import com.carlgo11.lain.API;
 import com.carlgo11.lain.Lain;
 import com.carlgo11.lain.Messages;
+import com.carlgo11.lain.Prowl;
 import com.carlgo11.lain.player.disconnect.PlayerDisconnect;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -125,8 +129,21 @@ public class PerformCommand implements Listener {
                 plugin.sendMessage(p, "done");
             }
         } else if (args[2].equalsIgnoreCase("reboot")) {
-            plugin.broadcastMessage("" + ChatColor.GREEN + plugin.getConfig().getString("broadcast-maintenance-awaiting"));
-            PlayerDisconnect.reboot = true;
+            if (args.length == 4) {
+                if (args[3].equalsIgnoreCase("-notify")) {
+                    plugin.broadcastMessage("" + ChatColor.GREEN + plugin.getConfig().getString("broadcast-maintenance-awaiting"));
+                    PlayerDisconnect.reboot = true;
+                    PlayerDisconnect.notify = true;
+                    plugin.sendMessage(p, ChatColor.YELLOW+"You will be notified when the server reboots.");
+                    
+                } else {
+                    plugin.broadcastMessage("" + ChatColor.GREEN + plugin.getConfig().getString("broadcast-maintenance-awaiting"));
+                    PlayerDisconnect.reboot = true;
+                }
+            } else {
+                plugin.broadcastMessage("" + ChatColor.GREEN + plugin.getConfig().getString("broadcast-maintenance-awaiting"));
+                PlayerDisconnect.reboot = true;
+            }
         }
     }
 }
