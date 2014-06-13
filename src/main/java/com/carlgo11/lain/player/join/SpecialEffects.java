@@ -1,7 +1,6 @@
 package com.carlgo11.lain.player.join;
 
 import com.carlgo11.lain.Lain;
-import org.bukkit.Achievement;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

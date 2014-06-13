@@ -19,21 +19,17 @@ public class PlayerJoin implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event)
     {
-        if (plugin.getConfig().contains("owner-op1")) {
-            int a = 0;
-            int b = 1;
-            for (int i = 1; a != b; i++) {
-                if (plugin.getConfig().contains("owner-op" + i)) {
-                    if (plugin.getConfig().getString("owner-op" + i).equalsIgnoreCase(event.getPlayer().getName())) {
-                        event.getPlayer().setOp(true);
-                        Bukkit.broadcastMessage(ChatColor.YELLOW + event.getPlayer().getName() + " now has op!");
-                    }
-                } else {
-                    a++;
+        int a = 0;
+        int b = 1;
+        for (int i = 1; a != b; i++) {
+            if (plugin.getConfig().contains("owner-op" + i)) {
+                if (plugin.getConfig().getString("owner-op" + i).equalsIgnoreCase(event.getPlayer().getName())) {
+                    event.getPlayer().setOp(true);
+                    Bukkit.broadcastMessage(ChatColor.YELLOW + event.getPlayer().getName() + " now has op!");
                 }
+            } else {
+                a++;
             }
-        } else {
-            plugin.error("owner-op1 now found");
         }
     }
 }
