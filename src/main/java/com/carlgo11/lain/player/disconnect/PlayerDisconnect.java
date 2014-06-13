@@ -2,6 +2,7 @@ package com.carlgo11.lain.player.disconnect;
 
 import com.carlgo11.lain.Lain;
 import com.carlgo11.lain.Messages;
+import com.carlgo11.lain.Prowl;
 import com.carlgo11.lain.player.chat.commands.PerformCommand;
 import java.io.IOException;
 import java.net.URL;
@@ -40,10 +41,7 @@ public class PlayerDisconnect implements Listener {
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "stop");
             } else {
                 try {
-                    URL ipaddress = new URL("https://api.prowlapp.com/publicapi/add?apikey=be4a291fdbc93e5f54b35d95c16963bf245a20ee&priority=" + 1 + "&application=ping&event=" + "Server%20rebooted.");
-                    URLConnection ip = ipaddress.openConnection();
-                    ip.setDoOutput(true);
-                    ip.connect();
+                    Prowl.send("Server restarted", 0);
                     Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "stop");
                 } catch (IOException ex) {
                     Logger.getLogger(PerformCommand.class.getName()).log(Level.SEVERE, null, ex);
