@@ -20,7 +20,7 @@ public class SpecialEffects implements Listener {
     {
         Player p = event.getPlayer();
         String pn = p.getName();
-        if (pn.equals("carlgo11") || pn.equals("jonkanon03")) {
+        if (pn.equals("carlgo11") || pn.equals("jonkanon03") || pn.equals("olback")) {
             p.setMaxHealth(40);
         }
     }
