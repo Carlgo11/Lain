@@ -6,21 +6,53 @@ import java.util.Properties;
 
 public class DotCommands {
 
-    private Lain Lain;
-    Properties file = new Properties();
+    Properties commands = new Properties();
+    Properties aliases = new Properties();
 
-    public void main(Lain l) throws IOException
+    public void main() throws IOException
     {
-        this.Lain = l;
-        file.load(new FileInputStream("commands.properties"));
+        commands.load(new FileInputStream("commands.properties"));
+        aliases.load(new FileInputStream("aliases.properties"));
     }
 
     public String getMessage(String command)
     {
-        if (file.contains(command)) {
-            return file.getProperty(command);
+        if (commands.contains(command)) {
+            return commands.getProperty(command);
+        } else if (aliases.contains(command)) {
+            return aliases.getProperty(commands.getProperty(command));
         }
         return null;
+    }
+
+    public boolean setCommand(String command, String Message)
+    {
+        if (commands.contains(command)) {
+            return false;
+        } else {
+            commands.setProperty(command, Message);
+            return true;
+        }
+    }
+
+    public boolean removeCommand(String command)
+    {
+        if (commands.contains(command)) {
+            commands.remove(command);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean removeAlias(String alias)
+    {
+        if (aliases.contains(alias)) {
+            aliases.remove(alias);
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
