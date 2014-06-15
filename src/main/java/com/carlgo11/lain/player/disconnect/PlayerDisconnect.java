@@ -5,8 +5,6 @@ import com.carlgo11.lain.Messages;
 import com.carlgo11.lain.Prowl;
 import com.carlgo11.lain.player.chat.commands.PerformCommand;
 import java.io.IOException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.bukkit.Bukkit;

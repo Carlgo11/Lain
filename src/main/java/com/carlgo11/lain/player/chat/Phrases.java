@@ -75,19 +75,20 @@ public class Phrases implements Listener {
     {
         int ra = random();
         String name = player.getName();
-        if (name.equals("carlgo11") || name.equals("anminecrafter")) {
+        String uuid = player.getUniqueId().toString();
+        if ( uuid.equals("634ee008-e2a1-4b6f-bce0-78e6f38b67b5")|| uuid.equals("01964c49-2a88-47c3-8781-90aa6d693f08")) {
             name = "Carl";
         }
-        if (name.equals("olback")) {
+        if (uuid.equals("2307d8fc-dbbf-4598-a17c-c00de089381d")) {
             name = "Edwin";
         }
-        if (name.equals("8404Heather")) {
+        if (uuid.equals("0c8198e0-77b6-4c7a-8319-5f3246c8dd31")) {
             name = "Heather";
         }
-        if (name.equals("101sierra101")) {
+        if (uuid.equals("c990d756-1d22-4c1b-9e0d-8dc34f856027")) {
             name = "Sierra";
         }
-        if (name.equals("jonkanon03")) {
+        if (uuid.equals("5105cc92-0c0f-4503-8820-af2bb62c7600")) {
             name = "Jonk!";
         }
         String outp = null;

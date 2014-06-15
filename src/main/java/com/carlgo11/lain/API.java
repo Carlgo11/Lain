@@ -7,7 +7,7 @@ public class API {
     public static boolean isAdmin(Player p, Lain Lain)
     {
         boolean outp = false;
-        if (Lain.getConfig().getList("admins").contains(p.getName())) {
+        if (Lain.getConfig().getList("admins").contains(p.getUniqueId().toString())) {
             outp = true;
         } else {
             outp = false;
