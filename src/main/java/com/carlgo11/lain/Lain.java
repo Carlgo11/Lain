@@ -30,6 +30,8 @@ public class Lain extends JavaPlugin {
     {
         registerListeners(getServer().getPluginManager());
         commands();
+        DotCommands dc = new DotCommands();
+        dc.main(this);
         this.getLogger().log(Level.INFO, "{0} {1} is enabled!", new Object[]{getDescription().getName(), getDescription().getVersion()});
     }
 

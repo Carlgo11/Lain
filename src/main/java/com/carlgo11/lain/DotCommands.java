@@ -1,18 +1,46 @@
 package com.carlgo11.lain;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DotCommands {
 
+    private Lain Lain;
     Properties commands = new Properties();
     Properties aliases = new Properties();
+    String commandsfilename = "commands.properties";
+    String aliasesfilename = "aliases.properties";
 
-    public void main() throws IOException
+    public void main(Lain l)
     {
-        commands.load(new FileInputStream("commands.properties"));
-        aliases.load(new FileInputStream("aliases.properties"));
+        this.Lain = l;
+        createFiles();
+        try {
+            commands.load(new FileInputStream(Lain.getDataFolder() + commandsfilename));
+            aliases.load(new FileInputStream(Lain.getDataFolder() + aliasesfilename));
+        } catch (IOException ex) {
+            Logger.getLogger(DotCommands.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void createFiles()
+    {
+        File commands = new File(Lain.getDataFolder(), "config.yml");
+        File aliases = new File(Lain.getDataFolder(), "config.yml");
+
+        try {
+            if (!commands.exists()) {
+                commands.createNewFile();
+            } else if (!aliases.exists()) {
+                aliases.createNewFile();
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(DotCommands.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public String getMessage(String command)
