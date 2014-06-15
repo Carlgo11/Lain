@@ -88,7 +88,7 @@ public class Phrases implements Listener {
             name = "Sierra";
         }
         if (name.equals("jonkanon03")) {
-            name = "Jönk!";
+            name = "Jonk!";
         }
         String outp = null;
         if (ra == 0) {
