@@ -29,6 +29,7 @@ public class consoleCommand implements Listener {
                 e.setCancelled(true);
             } else {
                 Lain.badperms(player);
+                e.setChancelled(true);
             }
         }
 
