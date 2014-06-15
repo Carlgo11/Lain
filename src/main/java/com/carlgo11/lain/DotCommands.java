@@ -12,7 +12,7 @@ public class DotCommands {
     public void main(Lain l) throws IOException
     {
         this.Lain = l;
-        file.load(new FileInputStream("messages.properties"));
+        file.load(new FileInputStream("commands.properties"));
     }
 
     public String getMessage(String command)
@@ -20,7 +20,6 @@ public class DotCommands {
         if (file.contains(command)) {
             return file.getProperty(command);
         }
-
         return null;
     }
 
