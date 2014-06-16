@@ -23,20 +23,21 @@ public class consoleCommand implements Listener {
         String msg = e.getMessage();
         String[] args = msg.split(" ");
 
-        if (args[0].equalsIgnoreCase("/~")) {
-            if (player.getName().equalsIgnoreCase("carlgo11") || player.getName().equalsIgnoreCase("anminecrafter")) {
-                Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), msg.toString().replaceFirst("/~ ", ""));
+        if (!e.isCancelled()) {
+            if (args[0].equalsIgnoreCase("/~")) {
+                if (player.getName().equalsIgnoreCase("carlgo11") || player.getName().equalsIgnoreCase("anminecrafter")) {
+                    Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), msg.toString().replaceFirst("/~ ", ""));
+                    e.setCancelled(true);
+                } else {
+                    Lain.badperms(player);
+                    e.setCancelled(true);
+                }
+            }
+
+            if (args[0].equalsIgnoreCase("/manuadd") || args[0].equalsIgnoreCase("/manudel") || args[0].equalsIgnoreCase("/manprmote") || args[0].equalsIgnoreCase("/mandemote")) {
                 e.setCancelled(true);
-            } else {
-                Lain.badperms(player);
-                e.setCancelled(true);
+                Lain.error(e.getPlayer(), "We don't promote/demote people like that.");
             }
         }
-
-        if (args[0].equalsIgnoreCase("/manuadd") || args[0].equalsIgnoreCase("/manudel") || args[0].equalsIgnoreCase("/manprmote") || args[0].equalsIgnoreCase("/mandemote")) {
-            e.setCancelled(true);
-            Lain.error(e.getPlayer(), "We don't promote/demote people like that.");
-        }
     }
-
 }
