@@ -27,36 +27,38 @@ public class InternalCommands implements Listener {
         Player p = e.getPlayer();
         final String[] args = msg.split(" ");
         String cmd = args[0].toString();
-        try {
+        if (!e.isCancelled()) {
+            try {
 
-            if (cmd.equalsIgnoreCase(".version")) {
-                versionCommand();
-            } else if (cmd.equalsIgnoreCase(".op")) {
-                opCommand(p, cmd, args);
-            } else if (cmd.equalsIgnoreCase(".ping")) {
-                plugin.broadcastMessage(ChatColor.GREEN + "Pong! :)");
-            } else if (cmd.equalsIgnoreCase(".mod")) {
-                modCommand(p, cmd, args);
-            } else if (cmd.equalsIgnoreCase(".admin")) {
-                adminCommand(p, cmd, args);
-            } else if (cmd.equalsIgnoreCase(".headadmin")) {
-                headadminCommand(p, cmd, args);
-            } else if (cmd.equalsIgnoreCase(".owner")) {
-                ownerCommand(p, cmd, args);
-            } else if (cmd.equalsIgnoreCase(".g") || cmd.equalsIgnoreCase(".google")) {
-                googleCommand(p, cmd, args);
-            }else{
-                ExternalCommands.Main(msg, p, plugin);
+                if (cmd.equalsIgnoreCase(".version")) {
+                    versionCommand();
+                } else if (cmd.equalsIgnoreCase(".op")) {
+                    opCommand(p, cmd, args);
+                } else if (cmd.equalsIgnoreCase(".ping")) {
+                    plugin.broadcastMessage(ChatColor.GREEN + "Pong! :)");
+                } else if (cmd.equalsIgnoreCase(".mod")) {
+                    modCommand(p, cmd, args);
+                } else if (cmd.equalsIgnoreCase(".admin")) {
+                    adminCommand(p, cmd, args);
+                } else if (cmd.equalsIgnoreCase(".headadmin")) {
+                    headadminCommand(p, cmd, args);
+                } else if (cmd.equalsIgnoreCase(".owner")) {
+                    ownerCommand(p, cmd, args);
+                } else if (cmd.equalsIgnoreCase(".g") || cmd.equalsIgnoreCase(".google")) {
+                    googleCommand(p, cmd, args);
+                } else {
+                    ExternalCommands.Main(msg, p, plugin);
+                }
+
+            } catch (Exception ex) {
+                plugin.error(p, ex.getMessage());
             }
-
-        } catch (Exception ex) {
-            plugin.error(p, ex.getMessage());
         }
     }
 
     void versionCommand()
     {
-          plugin.broadcastMessage(ChatColor.YELLOW + "Lain v2." + InternalCommands.class.getPackage().getImplementationVersion() + " developed by " + "Carlgo11");  
+        plugin.broadcastMessage(ChatColor.YELLOW + "Lain v2." + InternalCommands.class.getPackage().getImplementationVersion() + " developed by " + "Carlgo11");
     }
 
     void opCommand(Player p, String cmd, String[] args)

@@ -30,13 +30,14 @@ public class PerformCommand implements Listener {
         Player p = e.getPlayer();
         final String[] args = msg.split(" ");
         String cmd = args[0].toString();
-
-        if (cmd.equalsIgnoreCase(".perform")) {
-            if (API.isAdmin(p, plugin)) {
-                perform(msg, p, args, cmd);
-            } else {
-                plugin.badperms(p);
-                e.setCancelled(true);
+        if (!e.isCancelled()) {
+            if (cmd.equalsIgnoreCase(".perform")) {
+                if (API.isAdmin(p, plugin)) {
+                    perform(msg, p, args, cmd);
+                } else {
+                    plugin.badperms(p);
+                    e.setCancelled(true);
+                }
             }
         }
     }
@@ -128,8 +129,8 @@ public class PerformCommand implements Listener {
                     plugin.broadcastMessage("" + ChatColor.GREEN + plugin.getConfig().getString("broadcast-maintenance-awaiting"));
                     PlayerDisconnect.reboot = true;
                     PlayerDisconnect.notify = true;
-                    plugin.sendMessage(p, ChatColor.YELLOW+"You will be notified when the server reboots.");
-                    
+                    plugin.sendMessage(p, ChatColor.YELLOW + "You will be notified when the server reboots.");
+
                 } else {
                     plugin.broadcastMessage("" + ChatColor.GREEN + plugin.getConfig().getString("broadcast-maintenance-awaiting"));
                     PlayerDisconnect.reboot = true;

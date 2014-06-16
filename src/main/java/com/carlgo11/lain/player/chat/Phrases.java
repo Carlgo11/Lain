@@ -24,10 +24,12 @@ public class Phrases implements Listener {
         String msg = e.getMessage();
         Player p = e.getPlayer();
         final String[] args = msg.split(" ");
-        if (equalsHi(msg)) {
-            lain.broadcastMessage(ChatColor.GREEN + returnGreeting(p));
-        } else {
-            heatherCommand(p, args);
+        if (!e.isCancelled()) {
+            if (equalsHi(msg)) {
+                lain.broadcastMessage(ChatColor.GREEN + returnGreeting(p));
+            } else {
+                heatherCommand(p, args);
+            }
         }
     }
 
