@@ -14,12 +14,16 @@ public class GoogleCommand implements ChatCommands{
 
     public void onMessage(Lain Lain, Player p, String msg, String cmd, String[] args)
     {
+        if(args.length > 1){
         StringBuilder sq = new StringBuilder();
         for (int i = 1; i < args.length; i++) {
             sq.append(args[i]);
             sq.append("+");
         }
         Lain.broadcastMessage(ChatColor.GREEN + "http://google.com/search?q=" + sq);
+    }else{
+            Lain.error(p, "Usage: .g [search query]");
+        }
     }
 
 }

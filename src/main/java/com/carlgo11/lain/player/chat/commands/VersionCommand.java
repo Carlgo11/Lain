@@ -12,9 +12,9 @@ public class VersionCommand implements ChatCommands{
         return "version";
     }
 
-    public void onMessage(Lain lain, Player p, String msg, String cmd, String[] args)
+    public void onMessage(Lain Lain, Player p, String msg, String cmd, String[] args)
     {
-         lain.broadcastMessage(ChatColor.YELLOW + "Lain v2." + VersionCommand.class.getPackage().getImplementationVersion() + " developed by " + "Carlgo11");
+         Lain.broadcastMessage(ChatColor.YELLOW + "Lain v2." + VersionCommand.class.getPackage().getImplementationVersion() + " developed by " + "Carlgo11");
     }
 
 }

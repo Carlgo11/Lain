@@ -12,9 +12,9 @@ public class PingCommand implements ChatCommands{
         return "ping";
     }
 
-    public void onMessage(Lain lain, Player p, String message, String cmd, String[] args)
+    public void onMessage(Lain Lain, Player p, String message, String cmd, String[] args)
     {
-        lain.broadcastMessage(ChatColor.GREEN+"pong!");
+        Lain.broadcastMessage(ChatColor.GREEN+"pong!");
     }
 
 
