@@ -33,8 +33,9 @@ private Lain lain;
         cmds.add(new VersionCommand());
         
         
-        
+        if(!e.isCancelled()){
         giveOutCommand(cmds, e.getMessage(), e.getPlayer());
+        }
     }
     
     
