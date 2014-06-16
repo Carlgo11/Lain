@@ -14,24 +14,24 @@ public class OpCommand implements ChatCommands {
         return "op";
     }
 
-    public void onMessage(Lain lain, Player p, String msg, String cmd, String[] args)
+    public void onMessage(Lain Lain, Player p, String msg, String cmd, String[] args)
     {
         if (args.length == 1) {
             if (Mysql.isOp(p.getName())) {
                 if (!p.isOp()) {
                     p.setOp(true);
-                    lain.broadcastMessage(ChatColor.YELLOW + p.getName() + Messages.nowop);
+                    Lain.broadcastMessage(ChatColor.YELLOW + p.getName() + Messages.nowop);
                 } else {
                     p.setOp(false);
-                    lain.broadcastMessage(ChatColor.YELLOW + p.getName() + Messages.nolongerop);
+                    Lain.broadcastMessage(ChatColor.YELLOW + p.getName() + Messages.nolongerop);
                 }
             } else {
-                lain.badperms(p);
+                Lain.badperms(p);
             }
         } else if (args.length == 2) {
 
         } else if (args.length > 2) {
-            lain.error(p, "Usage: .op [player]");
+            Lain.error(p, "Usage: .op [player]");
         }
     }
 }

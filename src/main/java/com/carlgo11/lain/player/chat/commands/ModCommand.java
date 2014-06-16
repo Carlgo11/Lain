@@ -28,5 +28,4 @@ public class ModCommand implements ChatCommands{
             Lain.badperms(p);
         }
     }
-
 }
