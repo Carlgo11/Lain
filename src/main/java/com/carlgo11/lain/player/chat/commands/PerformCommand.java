@@ -1,6 +1,7 @@
 package com.carlgo11.lain.player.chat.commands;
 
 import com.carlgo11.lain.API;
+import com.carlgo11.lain.ChatCommands;
 import com.carlgo11.lain.Lain;
 import com.carlgo11.lain.Messages;
 import com.carlgo11.lain.player.disconnect.PlayerDisconnect;
@@ -8,36 +9,26 @@ import java.io.InputStream;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-public class PerformCommand implements Listener {
+public class PerformCommand implements ChatCommands {
 
     Lain plugin;
 
-    public PerformCommand(Lain plug)
+    public String getCommandName()
     {
-        super();
-        this.plugin = plug;
+        return "perform";
     }
+
     public boolean broad = true;
 
-    @EventHandler
-    public void onCMD(AsyncPlayerChatEvent e)
+    public void onMessage(Lain lain, Player p, String msg, String cmd, String[] args)
     {
-        String msg = e.getMessage();
-        Player p = e.getPlayer();
-        final String[] args = msg.split(" ");
-        String cmd = args[0].toString();
-        if (!e.isCancelled()) {
-            if (cmd.equalsIgnoreCase(".perform")) {
-                if (API.isAdmin(p, plugin)) {
-                    perform(msg, p, args, cmd);
-                } else {
-                    plugin.badperms(p);
-                    e.setCancelled(true);
-                }
+        plugin = lain;
+        if (cmd.equalsIgnoreCase(".perform")) {
+            if (API.isAdmin(p, plugin)) {
+                perform(msg, p, args, cmd);
+            } else {
+                plugin.badperms(p);
             }
         }
     }
@@ -141,4 +132,5 @@ public class PerformCommand implements Listener {
             }
         }
     }
+
 }

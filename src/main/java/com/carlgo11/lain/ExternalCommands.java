@@ -1,4 +1,4 @@
-package com.carlgo11.lain.player.chat.commands;
+package com.carlgo11.lain;
 
 import com.carlgo11.lain.Lain;
 import org.bukkit.Bukkit;
