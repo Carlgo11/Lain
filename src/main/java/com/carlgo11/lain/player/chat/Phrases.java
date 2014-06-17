@@ -91,7 +91,7 @@ public class Phrases implements Listener {
             name = "Sierra";
         }
         if (uuid.equals("5105cc92-0c0f-4503-8820-af2bb62c7600")) {
-            name = "Jonk!";
+            name = "Jonk";
         }
         String outp = null;
         if (ra == 0) {

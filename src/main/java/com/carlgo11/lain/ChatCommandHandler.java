@@ -31,6 +31,7 @@ private Lain lain;
         cmds.add(new PerformCommand());
         cmds.add(new PingCommand());
         cmds.add(new VersionCommand());
+        cmds.add(new JonkCommand());
         
         
         if(!e.isCancelled()){
