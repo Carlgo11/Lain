@@ -101,7 +101,7 @@ public class JonkCommand implements ChatCommands{
         } catch (Exception ex) {
             System.out.println(ex);
         }
-        int r = random.getInt(a.size());
+        int r = random.getInt(b.size());
         return b.get(r-1).toString();
         
 //        if(r == 1){
