@@ -5,11 +5,11 @@ import com.carlgo11.lain.Lain;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-public class GoogleCommand implements ChatCommands{
+public class GCommand implements ChatCommands{
 
     public String getCommandName()
     {
-        return "google";
+        return "g";
     }
 
     public void onMessage(Lain Lain, Player p, String msg, String cmd, String[] args)
