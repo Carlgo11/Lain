@@ -45,7 +45,7 @@ private Lain lain;
     boolean giveOutCommand(List<ChatCommands> cmds, String msg, Player p){
         String [] args = msg.split(" ");
         for(ChatCommands cmd: cmds){
-            if(args[0].toLowerCase().equalsIgnoreCase("."+cmd.getCommandName())){
+            if(args[0].equalsIgnoreCase("."+cmd.getCommandName())){
                 cmd.onMessage(lain, p , msg, args[0], args);
                 return true;
             }
