@@ -24,6 +24,7 @@ private Lain lain;
         cmds = new ArrayList<ChatCommands>();
         cmds.add(new AdminCommand());
         cmds.add(new GoogleCommand());
+        cmds.add(new GCommand());
         cmds.add(new HeadadminCommand());
         cmds.add(new ModCommand());
         cmds.add(new OpCommand());
