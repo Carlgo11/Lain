@@ -1,6 +1,5 @@
 package com.carlgo11.lain;
 
-import com.carlgo11.lain.Lain;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -13,7 +12,7 @@ public class ExternalCommands {
     static public void Main(String msg, Player p, Lain plugin)
     {
         final String[] args = msg.split(" ");
-        String argsnodot = args[0].replaceFirst(".", "");
+        String argsnodot = args[0].toLowerCase().replaceFirst(".", "");
         String cmdbuild = "cmd-" + argsnodot + "-end";
         String aliasbuild = "alias-" + argsnodot + "-end";
         String cmdprefix = ".";

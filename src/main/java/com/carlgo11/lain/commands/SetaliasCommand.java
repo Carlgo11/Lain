@@ -26,8 +26,8 @@ public class SetaliasCommand implements CommandExecutor {
         }
         Player p = Bukkit.getPlayer(sender.getName());
 
-        String aliasbuild = "alias-" + args[0] + "-end";
-        String cmdbuild = "cmd-" + args[0] + "-end";
+        String aliasbuild = "alias-" + args[0].toLowerCase() + "-end";
+        String cmdbuild = "cmd-" + args[0].toLowerCase() + "-end";
 
         if (args.length == 1) {
             if (plugin.getConfig().contains(aliasbuild)) {
