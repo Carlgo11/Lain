@@ -84,7 +84,6 @@ public class PerformCommand implements ChatCommands {
         if (args[2].equalsIgnoreCase("reboot")) {
             plugin.getServer().getPluginManager().disablePlugin(plugin);
             plugin.getServer().getPluginManager().enablePlugin(plugin);
-            plugin.sendMessage(p, "done");
         } else if (args[2].equalsIgnoreCase("shutdown")) {
             plugin.getServer().getPluginManager().disablePlugin(plugin);
         } else if (args[2].equalsIgnoreCase("debug")) {
@@ -112,7 +111,6 @@ public class PerformCommand implements ChatCommands {
             for (Player pl : Bukkit.getOnlinePlayers()) {
                 pl.setOp(false);
                 plugin.broadcastMessage("" + Messages.deoped + pl.getName());
-                plugin.sendMessage(p, "done");
             }
         } else if (args[2].equalsIgnoreCase("reboot")) {
             if (args.length == 4) {
