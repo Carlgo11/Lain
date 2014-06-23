@@ -1,7 +1,6 @@
 package com.carlgo11.lain;
 
 import com.carlgo11.lain.player.chat.Phrases;
-import com.carlgo11.lain.player.chat.commands.*;
 import com.carlgo11.lain.commands.*;
 import com.carlgo11.lain.commands.preprocess.*;
 import com.carlgo11.lain.ping.*;

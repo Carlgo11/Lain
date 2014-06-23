@@ -2,7 +2,10 @@ package com.carlgo11.lain;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,9 +18,9 @@ public class DotCommands {
     String commandsfilename = "commands.properties";
     String aliasesfilename = "aliases.properties";
 
-    public void main(Lain l)
+    public void main(Lain plugin)
     {
-        this.Lain = l;
+        this.Lain = plugin;
         createFiles();
         try {
             commands.load(new FileInputStream(Lain.getDataFolder() + commandsfilename));
@@ -29,8 +32,8 @@ public class DotCommands {
 
     public void createFiles()
     {
-        File commands = new File(Lain.getDataFolder(), "config.yml");
-        File aliases = new File(Lain.getDataFolder(), "config.yml");
+        File commands = new File(Lain.getDataFolder(), "\\commands.properties");
+        File aliases = new File(Lain.getDataFolder(), "\\aliases.properties");
 
         try {
             if (!commands.exists()) {
@@ -53,13 +56,19 @@ public class DotCommands {
         return null;
     }
 
-    public boolean setCommand(String command, String Message)
+    public void setCommand(String command, String Message)
     {
-        if (commands.contains(command)) {
-            return false;
-        } else {
+        if (!containsCommand(command)) {
             commands.setProperty(command, Message);
-            return true;
+            this.saveProperties();
+        }
+    }
+
+    public void setAlias(String alias, String command)
+    {
+        if (!containsAlias(alias)) {
+            aliases.setProperty(alias, command);
+            this.saveProperties();
         }
     }
 
@@ -67,6 +76,7 @@ public class DotCommands {
     {
         if (commands.contains(command)) {
             commands.remove(command);
+            this.saveProperties();
             return true;
         } else {
             return false;
@@ -77,10 +87,37 @@ public class DotCommands {
     {
         if (aliases.contains(alias)) {
             aliases.remove(alias);
+            this.saveProperties();
             return true;
         } else {
             return false;
         }
     }
 
+    public boolean containsCommand(String command)
+    {
+        if (commands.contains(command)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean containsAlias(String alias)
+    {
+        if (aliases.contains(alias)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public void saveProperties(){
+        try {
+            OutputStream outp = new FileOutputStream("commands.properties");
+            commands.store(outp, null);
+            outp.close();
+        } catch (Exception ex) {
+            Logger.getLogger(DotCommands.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
