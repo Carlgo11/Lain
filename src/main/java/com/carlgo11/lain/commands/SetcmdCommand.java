@@ -59,12 +59,12 @@ public class SetcmdCommand implements CommandExecutor {
                         d.append(args[i]);
                         d.append(" ");
                     }
-                    dc.setCommand(args[0], d.toString());
-                    if (!dc.containsCommand(args[0])) {
-                        plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + " " + ChatColor.GREEN + "Created the command '." + args[0] + "' created! " + ChatColor.YELLOW + "Msg:'" + d.toString() + ChatColor.YELLOW + "'");
+                    dc.setCommand(args[0].toLowerCase(), d.toString());
+                    if (!dc.containsCommand(args[0].toLowerCase())) {
+                        plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + " " + ChatColor.GREEN + "Created the command '." + args[0].toLowerCase() + "' created! " + ChatColor.YELLOW + "Msg:'" + d.toString() + ChatColor.YELLOW + "'");
                         
                     } else {
-                        plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + " " + ChatColor.YELLOW + "Modifyed the command '." + args[0].toString() + "' " + ChatColor.YELLOW + "New msg:'" + d.toString() + ChatColor.YELLOW + "'");
+                        plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + " " + ChatColor.YELLOW + "Modifyed the command '." + args[0].toLowerCase() + "' " + ChatColor.YELLOW + "New msg:'" + d.toString() + ChatColor.YELLOW + "'");
                     }
 
 //                    if (!plugin.getConfig().contains(aliasbuild)) {
