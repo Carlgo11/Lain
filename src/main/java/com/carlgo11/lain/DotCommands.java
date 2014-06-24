@@ -80,7 +80,7 @@ public class DotCommands {
             if (!containsCommand(command)) {
                 st.execute("INSERT INTO `commands` (`command`, `aliases`, `message`) VALUES ('" + command + "', '', '" + message + "');");
             } else {
-                st.execute("UPDATE `commands` SET `command` = '" + command + "', `aliases` = '', `message` = '" + message + "' WHERE `command`.`commands` = '" + command + "';");
+                st.execute("UPDATE `commands` SET `command` = '" + command + "', `aliases` = '', `message` = '" + message + "' WHERE `command` = '" + command + "';");
             }
 
         } catch (SQLException ex) {
@@ -112,7 +112,7 @@ public class DotCommands {
             con = DriverManager.getConnection(Mysql.url + database, Mysql.username, Mysql.password);
             st = con.createStatement();
             if (!containsCommand(command)) {
-                st.executeQuery("UPDATE `command`.`commands` SET `aliases` '', `message` = '" + command + "' WHERE `command`.`commands` = '" + command + "';");
+                st.executeQuery("UPDATE `commands` SET `aliases` '', `message` = '" + command + "' WHERE `command`.`commands` = '" + command + "';");
             }
 
         } catch (SQLException ex) {
@@ -144,7 +144,7 @@ public class DotCommands {
             con = DriverManager.getConnection(Mysql.url + database, Mysql.username, Mysql.password);
             st = con.createStatement();
             if (!containsCommand(command)) {
-                st.executeQuery("DELETE FROM `command`.`commands` WHERE `command`.`commands` = '" + command + "';");
+                st.executeQuery("DELETE FROM `commands` WHERE `command`.`commands` = '" + command + "';");
 
             }
 
@@ -168,48 +168,45 @@ public class DotCommands {
         }
     }
 
-    public void removeAlias(String alias)
+    public void removeAlias(String alias, String command)
     {
 
-//        StringBuilder d = new StringBuilder();
-//        String a = getAliases(alias);
-//        String[] b = a.split(" ");
-//       for(int i = 0; i < b.length; i++ ){
-//        if(!b[i].equalsIgnoreCase(alias)){
-//           d.append(b[i]);
-//           d.append(" ");
-//        }
-//       }
-//        
-//        Connection con = null;
-//        Statement st = null;
-//
-//        try {
-//            con = DriverManager.getConnection(Mysql.url, Mysql.username, Mysql.password);
-//            st = con.createStatement();
-//            if (!containsCommand(command)) {
-//               st.executeQuery("UPDATE `command`.`commands` SET `aliases` '', `message` = '" + command + "' WHERE `command`.`commands` = '" + command + "';");
-//                
-//            }
-//
-//        } catch (SQLException ex) {
-//            Logger lgr = Logger.getLogger(Mysql.class.getName());
-//            lgr.log(Level.SEVERE, ex.getMessage(), ex);
-//
-//        } finally {
-//            try {
-//                if (st != null) {
-//                    st.close();
-//                }
-//                if (con != null) {
-//                    con.close();
-//                }
-//
-//            } catch (SQLException ex) {
-//                Logger lgr = Logger.getLogger(Mysql.class.getName());
-//                lgr.log(Level.WARNING, ex.getMessage(), ex);
-//            }
-//        }
+        StringBuilder d = new StringBuilder();
+        String a = getAliases(alias);
+        String[] b = a.split(" ");
+        for (int i = 0; i < b.length; i++) {
+            if (!b[i].equalsIgnoreCase(alias)) {
+                d.append(b[i]);
+                d.append(" ");
+            }
+        }
+
+        Connection con = null;
+        Statement st = null;
+
+        try {
+            con = DriverManager.getConnection(Mysql.url, Mysql.username, Mysql.password);
+            st = con.createStatement();
+            st.executeQuery("UPDATE `commands` SET `aliases` '"+d.toString()+"' WHERE `command` = '" + command + "';");
+
+        } catch (SQLException ex) {
+            Logger lgr = Logger.getLogger(Mysql.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+
+        } finally {
+            try {
+                if (st != null) {
+                    st.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+
+            } catch (SQLException ex) {
+                Logger lgr = Logger.getLogger(Mysql.class.getName());
+                lgr.log(Level.WARNING, ex.getMessage(), ex);
+            }
+        }
     }
 
     public String getAliases(String alias)
@@ -268,13 +265,10 @@ public class DotCommands {
             rs = st.executeQuery("SELECT command from commands");
             while (true) {
                 if (rs.next()) {
-                    System.out.println(rs.getString(1) + "\t" + command);
                     if (rs.getString(1).equals(command)) {
-                        System.out.println("true");
                         return true;
                     }
                 } else {
-                    System.out.println("false");
                     break;
                 }
             }
@@ -315,12 +309,10 @@ public class DotCommands {
             rs = st.executeQuery("SELECT aliases from commands");
             while (true) {
                 if (rs.next()) {
-                    if (rs.getString(2).equals(alias)) {
-                        System.out.println("true");
+                    if (rs.getString(1).equals(alias)) {
                         return true;
                     }
                 } else {
-                    System.out.println("false");
                     break;
                 }
             }
