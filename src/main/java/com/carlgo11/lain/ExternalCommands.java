@@ -22,19 +22,40 @@ public class ExternalCommands {
             if (args.length > 1) {
                 if (Bukkit.getOfflinePlayer(args[1]).isOnline()) {
                     if (dc.containsCommand(cmd) || dc.containsAlias(cmd)) {
-                        plugin.broadcastMessage(ChatColor.DARK_AQUA + args[1] + ": " + dc.getMessage(cmd));
+                        broadcast(cmd, args, p, plugin, ChatColor.DARK_AQUA + args[1] + ": " + dc.getMessage(cmd));
                         Bukkit.getPlayer(args[1]).getWorld().playSound(Bukkit.getPlayer(args[1]).getLocation(), Sound.ORB_PICKUP, 1, 0);
                     }
                 } else {
                     if (dc.containsCommand(cmd) || dc.containsAlias(cmd)) {
-                        plugin.broadcastMessage(dc.getMessage(cmd));
+                        broadcast(cmd, args, p, plugin, dc.getMessage(cmd));
                     }
                 }
             } else {
                 if (dc.containsCommand(cmd) || dc.containsAlias(cmd)) {
-                    plugin.broadcastMessage(dc.getMessage(cmd));
+                    broadcast(cmd, args, p, plugin, dc.getMessage(cmd));
                 }
             }
         }
+    }
+    
+   static void broadcast(String cmd, String[] args, Player p, Lain plugin, String message){
+        DotCommands dc = new DotCommands();
+        String[] msg = message.split(" ");
+        StringBuilder d = new StringBuilder();
+        for(int i = 0; i < msg.length; i++){
+            if(msg[i].equalsIgnoreCase("{player}")){
+             d.append(p.getName());
+            }else if(msg[i].equalsIgnoreCase("{build}")){
+                d.append(ExternalCommands.class.getPackage().getImplementationVersion());
+            }else if(msg[i].equalsIgnoreCase("\n")){
+                d.append(System.getProperty("line.separator"));
+            }else{
+                d.append(msg[i]);
+            }
+            d.append(" ");
+            
+            
+        }
+        plugin.broadcastMessage(d.toString());
     }
 }

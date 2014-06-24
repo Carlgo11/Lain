@@ -2,6 +2,7 @@ package com.carlgo11.lain.player.disconnect;
 
 import com.carlgo11.lain.Lain;
 import com.carlgo11.lain.Messages;
+import com.carlgo11.lain.Mysql;
 import com.carlgo11.lain.Prowl;
 import com.carlgo11.lain.player.chat.commands.PerformCommand;
 import java.io.IOException;
@@ -34,6 +35,8 @@ public class PlayerDisconnect implements Listener {
             p.setOp(false);
             plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + Messages.nolongerop);
         }
+        
+        if(Mysql.getRank(p.getName()).equalsIgnoreCase("moderator") || Mysql.getRank(p.getName()))
         if (plugin.getServer().getOnlinePlayers().length == 1 && reboot) {
             if (!notify) {
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "stop");
