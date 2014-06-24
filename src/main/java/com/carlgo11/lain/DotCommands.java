@@ -15,7 +15,8 @@ public class DotCommands {
     public static String url = "jdbc:mysql://localhost:3306/";
     public static String username = "Lain";
     public static String password = "JAMUPsBMB7mrZNzx";
-    public static String database = "commands";
+    public static String table = "commands";
+    public static String database = "portalcraft";
 
     public void main(Lain plugin)
     {
@@ -31,7 +32,7 @@ public class DotCommands {
         try {
             con = DriverManager.getConnection(Mysql.url + "portalcraft", Mysql.username, Mysql.password);
             st = con.createStatement();
-            rs = st.executeQuery("SELECT * from " + database);
+            rs = st.executeQuery("SELECT * from " + table);
             while (true) {
                 if (rs.next()) {
                     if (rs.getString(1).equalsIgnoreCase(command)) {
