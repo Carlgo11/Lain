@@ -80,7 +80,7 @@ public class DotCommands {
             if (!containsCommand(command)) {
                 st.execute("INSERT INTO `commands` (`command`, `aliases`, `message`) VALUES ('" + command + "', '', '" + message + "');");
             } else {
-                st.execute("UPDATE `commands` SET `command` = '" + command + "', `aliases` '', `message` = '" + message + "' WHERE `command`.`commands` = '" + command + "';");
+                st.execute("UPDATE `commands` SET `command` = '" + command + "', `aliases` = '', `message` = '" + message + "' WHERE `command`.`commands` = '" + command + "';");
             }
 
         } catch (SQLException ex) {
@@ -315,7 +315,6 @@ public class DotCommands {
             rs = st.executeQuery("SELECT aliases from commands");
             while (true) {
                 if (rs.next()) {
-                    System.out.println(rs.getString(2) + "\t" + alias);
                     if (rs.getString(2).equals(alias)) {
                         System.out.println("true");
                         return true;
