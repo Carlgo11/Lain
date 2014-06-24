@@ -219,10 +219,12 @@ public class Lain extends JavaPlugin {
             }, 20L);
         }
     }
-    public void isStaff(String p){
+    public boolean isStaff(String p){
         String rank = Mysql.getRank(p);
         if(rank.equalsIgnoreCase("owner") || rank.equalsIgnoreCase("co-owner") || rank.equalsIgnoreCase("headadmin") || rank.equalsIgnoreCase("admin") || rank.equalsIgnoreCase("moderator")){
-            
+            return true;
+        }else{
+            return false;
         }
     }
 }
