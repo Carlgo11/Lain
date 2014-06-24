@@ -6,7 +6,7 @@ public class Messages {
 
     public static String prefix = ChatColor.LIGHT_PURPLE + "[Lain] " + ChatColor.RESET;
     public static String error = ChatColor.RED + "[Error] " + ChatColor.RESET;
-    public static String badPerms = Messages.error + ChatColor.RED + " You don't have to permissions to do that" + ChatColor.RESET;
+    public static String badPerms = Messages.error + ChatColor.RED + " You don't have permission to do that" + ChatColor.RESET;
     public static String nomsgfound = ChatColor.RED + "Could not find any messages called that. Did you misspell it?";
     public static String nowop = " now has op!";
     public static String nolongerop = " no longer has op!";
