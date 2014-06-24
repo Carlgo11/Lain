@@ -35,9 +35,13 @@ public class DotCommands {
             rs = st.executeQuery("SELECT * from " + table);
             while (true) {
                 if (rs.next()) {
+                    String a = rs.getString(2);
+                    String[] b = a.split(" ");
+
                     if (rs.getString(1).equalsIgnoreCase(command)) {
                         return rs.getString(3).toString();
-                    } else if (rs.getString(2).equalsIgnoreCase(command)) {
+                    } else if (namegoeshere(command, b)) {
+                        
                         return rs.getString(3).toString();
                     }
                 } else {
@@ -68,6 +72,14 @@ public class DotCommands {
         }
         return null;
     }
+    boolean namegoeshere(String alias, String[] b){
+    for(int i = 0; i < b.length; i++){
+        if(b[i].equalsIgnoreCase(alias)){
+            return true;
+        }
+    }
+    return false;
+}
 
     public void setCommand(String command, String message)
     {
@@ -108,12 +120,18 @@ public class DotCommands {
         Connection con = null;
         Statement st = null;
 
+        String a = this.getAliases(command);
+        String[] b = a.split(" ");
+        StringBuilder d = new StringBuilder();
+        for (int i = 0; i < b.length; i++) {
+            d.append(b[i]);
+            d.append(" ");
+        }
+        d.append(alias);
         try {
             con = DriverManager.getConnection(Mysql.url + database, Mysql.username, Mysql.password);
             st = con.createStatement();
-            if (!containsCommand(command)) {
-                st.executeQuery("UPDATE `commands` SET `aliases` '', `message` = '" + command + "' WHERE `command`.`commands` = '" + command + "';");
-            }
+            st.execute("UPDATE `commands` SET `aliases` = '" + d.toString() + "', `message` = '" + command + "' WHERE `command` = '" + command + "';");
 
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(Mysql.class.getName());
@@ -144,7 +162,7 @@ public class DotCommands {
             con = DriverManager.getConnection(Mysql.url + database, Mysql.username, Mysql.password);
             st = con.createStatement();
             if (!containsCommand(command)) {
-                st.executeQuery("DELETE FROM `commands` WHERE `command`.`commands` = '" + command + "';");
+                st.execute("DELETE FROM `commands` WHERE `command`.`commands` = '" + command + "';");
 
             }
 
@@ -187,7 +205,7 @@ public class DotCommands {
         try {
             con = DriverManager.getConnection(Mysql.url, Mysql.username, Mysql.password);
             st = con.createStatement();
-            st.executeQuery("UPDATE `commands` SET `aliases` '"+d.toString()+"' WHERE `command` = '" + command + "';");
+            st.execute("UPDATE `commands` SET `aliases` '" + d.toString() + "' WHERE `command` = '" + command + "';");
 
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(Mysql.class.getName());
@@ -209,19 +227,21 @@ public class DotCommands {
         }
     }
 
-    public String getAliases(String alias)
+    public String getAliases(String command)
     {
         Connection con = null;
         Statement st = null;
         ResultSet rs = null;
 
+        StringBuilder d = new StringBuilder();
+
         try {
             con = DriverManager.getConnection(Mysql.url + database, Mysql.username, Mysql.password);
             st = con.createStatement();
-            rs = st.executeQuery("SELECT * from " + database);
+            rs = st.executeQuery("SELECT * from " + table);
             while (true) {
                 if (rs.next()) {
-                    if (rs.getString(2).contains(alias)) {
+                    if (rs.getString(1).contains(command)) {
                         return rs.getString(2);
                     }
                 } else {
@@ -250,7 +270,7 @@ public class DotCommands {
                 lgr.log(Level.WARNING, ex.getMessage(), ex);
             }
         }
-        return null;
+        return "";
     }
 
     public boolean containsCommand(String command)
@@ -309,7 +329,7 @@ public class DotCommands {
             rs = st.executeQuery("SELECT aliases from commands");
             while (true) {
                 if (rs.next()) {
-                    if (rs.getString(1).equals(alias)) {
+                    if (rs.getString(1).contains(alias)) {
                         return true;
                     }
                 } else {

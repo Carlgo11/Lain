@@ -1,5 +1,6 @@
 package com.carlgo11.lain.commands;
 
+import com.carlgo11.lain.DotCommands;
 import com.carlgo11.lain.Lain;
 import com.carlgo11.lain.Messages;
 import org.bukkit.Bukkit;
@@ -26,15 +27,15 @@ public class SetaliasCommand implements CommandExecutor {
         }
         Player p = Bukkit.getPlayer(sender.getName());
 
-        String aliasbuild = "alias-" + args[0].toLowerCase() + "-end";
-        String cmdbuild = "cmd-" + args[0].toLowerCase() + "-end";
 
+
+        DotCommands dc = new DotCommands();
+        
         if (args.length == 1) {
-            if (plugin.getConfig().contains(aliasbuild)) {
+            if (dc.containsAlias(args[0])) {
                 if (sender.hasPermission("lain.cmd.delalias")) {
-                    plugin.getConfig().set(aliasbuild, null);
+                    dc.removeAlias(args[0], "");
                     plugin.broadcastMessage(ChatColor.YELLOW + sender.getName() + " " + ChatColor.GREEN + "Deleted the alias '." + args[0] + "'!");
-                    plugin.saveConfig();
                 } else {
                     plugin.badperms(sender);
                 }
@@ -43,15 +44,18 @@ public class SetaliasCommand implements CommandExecutor {
             }
 
         } else if (args.length == 2) {
-            String cmdbuild2 = "cmd-" + args[1] + "-end";
             if (sender.hasPermission("lain.cmd.addalias")) {
-                if (!plugin.getConfig().contains(aliasbuild) && !plugin.getConfig().contains(cmdbuild)) {
+                if (!dc.containsAlias(args[0])) {
+                    if(dc.containsCommand(args[1])){
                     try {
-                        plugin.getConfig().set(aliasbuild, cmdbuild2);
+                        dc.setAlias(args[0], args[1]);
                         plugin.broadcastMessage(ChatColor.YELLOW + sender.getName() + " " + ChatColor.GREEN + "Created an alias named '." + args[0] + "' for '." + args[1] + "'.");
-                        plugin.saveConfig();
+                        
                     } catch (Exception ex) {
                         plugin.error(sender, ex.toString());
+                    }
+                    }else{
+                     plugin.error(sender, "No commanded named "+args[1]+" found.");
                     }
                 } else {
                     plugin.error(sender, "There's already a command/alias called that. You must remove the existing command/alias before you can create a new one!");
