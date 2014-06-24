@@ -164,7 +164,7 @@ public class DotCommands {
             con = DriverManager.getConnection(Mysql.url + database, Mysql.username, Mysql.password);
             st = con.createStatement();
             if (!containsCommand(command)) {
-                st.execute("DELETE FROM `commands` WHERE `command`.`commands` = '" + command + "';");
+                st.execute("DELETE FROM `commands` WHERE `command` = '" + command + "';");
 
             }
 
