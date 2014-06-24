@@ -41,7 +41,7 @@ public class DotCommands {
                     if (rs.getString(1).equalsIgnoreCase(command)) {
                         return rs.getString(3).toString();
                     } else if (namegoeshere(command, b)) {
-                        
+
                         return rs.getString(3).toString();
                     }
                 } else {
@@ -72,14 +72,16 @@ public class DotCommands {
         }
         return null;
     }
-    boolean namegoeshere(String alias, String[] b){
-    for(int i = 0; i < b.length; i++){
-        if(b[i].equalsIgnoreCase(alias)){
-            return true;
+
+    boolean namegoeshere(String alias, String[] b)
+    {
+        for (int i = 0; i < b.length; i++) {
+            if (b[i].equalsIgnoreCase(alias)) {
+                return true;
+            }
         }
+        return false;
     }
-    return false;
-}
 
     public void setCommand(String command, String message)
     {
@@ -203,7 +205,7 @@ public class DotCommands {
         Statement st = null;
 
         try {
-            con = DriverManager.getConnection(Mysql.url, Mysql.username, Mysql.password);
+            con = DriverManager.getConnection(Mysql.url + database, Mysql.username, Mysql.password);
             st = con.createStatement();
             st.execute("UPDATE `commands` SET `aliases` '" + d.toString() + "' WHERE `command` = '" + command + "';");
 
