@@ -78,9 +78,9 @@ public class DotCommands {
             con = DriverManager.getConnection(Mysql.url + database, Mysql.username, Mysql.password);
             st = con.createStatement();
             if (!containsCommand(command)) {
-                st.execute("INSERT INTO `command`.`commands` (`command`, `aliases`, `message`) VALUES ('" + command + "', '', '" + message + "');");
+                st.execute("INSERT INTO `commands` (`command`, `aliases`, `message`) VALUES ('" + command + "', '', '" + message + "');");
             } else {
-                st.executeQuery("UPDATE `command`.`commands` SET `command` = '" + command + "', `aliases` '', `message` = '" + message + "' WHERE `command`.`commands` = '" + command + "';");
+                st.execute("UPDATE `commands` SET `command` = '" + command + "', `aliases` '', `message` = '" + message + "' WHERE `command`.`commands` = '" + command + "';");
             }
 
         } catch (SQLException ex) {
