@@ -36,7 +36,7 @@ public class PlayerDisconnect implements Listener {
             plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + Messages.nolongerop);
         }
         
-        if(Mysql.getRank(p.getName()).equalsIgnoreCase("moderator") || Mysql.getRank(p.getName()))
+       // if(Mysql.getRank(p.getName()).equalsIgnoreCase("moderator") || Mysql.getRank(p.getName()))
         if (plugin.getServer().getOnlinePlayers().length == 1 && reboot) {
             if (!notify) {
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "stop");
