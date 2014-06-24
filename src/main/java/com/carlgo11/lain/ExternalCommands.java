@@ -43,19 +43,15 @@ public class ExternalCommands {
         String[] msg = message.split(" ");
         StringBuilder d = new StringBuilder();
         for(int i = 0; i < msg.length; i++){
-            if(msg[i].equalsIgnoreCase("{player}")){
-             d.append(p.getName());
-            }else if(msg[i].equalsIgnoreCase("{build}")){
-                d.append(ExternalCommands.class.getPackage().getImplementationVersion());
-            }else if(msg[i].equalsIgnoreCase("\n")){
-                d.append(System.getProperty("line.separator"));
-            }else{
-                d.append(msg[i]);
-            }
+            msg[i].replaceAll("{player}", p.getName());
+            msg[i].replaceAll("{build}", ExternalCommands.class.getPackage().getImplementationVersion());
+            msg[i].replaceAll("\n", System.getProperty("line.separator"));
+            d.append(msg[i]);
             d.append(" ");
             
             
         }
+        
         plugin.broadcastMessage(d.toString());
     }
 }
