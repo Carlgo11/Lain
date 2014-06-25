@@ -11,6 +11,7 @@ public class ExternalCommands {
     public static String url = "jdbc:mysql://localhost:3306/";
     public static String username = "Lain";
     public static String password = "JAMUPsBMB7mrZNzx";
+    
     @EventHandler
     static public void Main(String msg, Player p, Lain plugin)
     {
@@ -43,13 +44,12 @@ public class ExternalCommands {
         String[] msg = message.split(" ");
         StringBuilder d = new StringBuilder();
         for(int i = 0; i < msg.length; i++){
-            if(msg[i].contains("{player}")){msg[i].replaceAll("{player}", p.getName());}
-            if(msg[i].contains("{build}")){msg[i].replaceAll("{build}", ExternalCommands.class.getPackage().getImplementationVersion());}
-            if(msg[i].contains("\n")){msg[i].replaceAll("\n", System.getProperty("line.separator"));}
+//            if(msg[i].contains("{player}")){msg[i].replaceAll("{player}", p.getName());}
+//            if(msg[i].contains("{build}")){msg[i].replaceAll("{build}", ExternalCommands.class.getPackage().getImplementationVersion());}
+//            if(msg[i].contains("\n")){msg[i].replaceAll("\n", System.getProperty("line.separator"));}
             
             d.append(msg[i]);
             d.append(" ");
-            
             
         }
         
