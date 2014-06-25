@@ -44,11 +44,12 @@ public class ExternalCommands {
         String[] msg = message.split(" ");
         StringBuilder d = new StringBuilder();
         for(int i = 0; i < msg.length; i++){
-            if(msg[i].contains("{player}")){msg[i].replace("{player}", p.getName());}
-//            if(msg[i].contains("{build}")){msg[i].replaceAll("{build}", ExternalCommands.class.getPackage().getImplementationVersion());}
-//            if(msg[i].contains("\n")){msg[i].replaceAll("\n", System.getProperty("line.separator"));}
+            String m = msg[i];
+            if(msg[i].contains("<player>")){m = m.replaceAll("<player>", p.getName());}
+            if(msg[i].contains("<build>")){m=m.replaceAll("<build>", ExternalCommands.class.getPackage().getImplementationVersion());}
+            if(msg[i].contains("\n")){m=m.replaceAll("\n", System.getProperty("line.separator"));}
             
-            d.append(msg[i]);
+            d.append(m);
             d.append(" ");
             
         }
