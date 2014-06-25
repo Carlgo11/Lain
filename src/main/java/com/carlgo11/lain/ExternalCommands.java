@@ -44,7 +44,7 @@ public class ExternalCommands {
         String[] msg = message.split(" ");
         StringBuilder d = new StringBuilder();
         for(int i = 0; i < msg.length; i++){
-//            if(msg[i].contains("{player}")){msg[i].replaceAll("{player}", p.getName());}
+            if(msg[i].contains("{player}")){msg[i].replace("{player}", p.getName());}
 //            if(msg[i].contains("{build}")){msg[i].replaceAll("{build}", ExternalCommands.class.getPackage().getImplementationVersion());}
 //            if(msg[i].contains("\n")){msg[i].replaceAll("\n", System.getProperty("line.separator"));}
             
