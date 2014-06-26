@@ -20,7 +20,7 @@ public class MotdCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
         if(sender.hasPermission("Lain.motd")){
-            if(args.length > 1){
+            if(args.length >= 1){
                 StringBuilder d = new StringBuilder();
                 for(int i = 0; i < args.length; i++){
                     d.append(args[i]);
