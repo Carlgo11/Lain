@@ -36,7 +36,7 @@ public class LainCommand implements CommandExecutor {
     {
         if (sender.hasPermission("lain.cmd.lain.say")) {
             if (args.length == 1) {
-                lain.sendMessageToSender(sender, Messages.usagelainsay);
+                lain.sendMessage(sender, Messages.usagelainsay);
             } else {
                 StringBuilder knark = new StringBuilder();
                 for (int i = 1; i < args.length; i++) {

@@ -59,6 +59,8 @@ public class Lain extends JavaPlugin {
         getCommand("setcmd").setExecutor(new SetcmdCommand(this));
         getCommand("setalias").setExecutor(new SetaliasCommand(this));
         getCommand("broadcast").setExecutor(new BroadcastCommand(this));
+        getCommand("motd").setExecutor(new MotdCommand(this));
+        
     }
 
     public void sendMessage(final Player p, final String s)
@@ -74,7 +76,7 @@ public class Lain extends JavaPlugin {
         }, delay);
     }
 
-    public void sendMessageToSender(final CommandSender p, final String s)
+    public void sendMessage(final CommandSender p, final String s)
     {
         String s2s = s;
         final String s2m = ChatColor.translateAlternateColorCodes('&', s2s);

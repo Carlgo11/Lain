@@ -1,5 +1,6 @@
 package com.carlgo11.lain;
 
+import static com.carlgo11.lain.DotCommands.database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -145,6 +146,36 @@ public class Mysql {
             }
         }
         return false;
+    }
+    
+    public static void setMOTD(String motd)
+    {
+        Connection con = null;
+        Statement st = null;
+        
+        try {
+            con = DriverManager.getConnection(Mysql.url + database, Mysql.username, Mysql.password);
+            st = con.createStatement();
+            st.execute("UPDATE `motd` SET `MOTD` = '" + motd + "' WHERE `only on whitelist` = 'false';");
+
+        } catch (SQLException ex) {
+            Logger lgr = Logger.getLogger(Mysql.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+
+        } finally {
+            try {
+                if (st != null) {
+                    st.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+
+            } catch (SQLException ex) {
+                Logger lgr = Logger.getLogger(Mysql.class.getName());
+                lgr.log(Level.WARNING, ex.getMessage(), ex);
+            }
+        }
     }
 
 }
