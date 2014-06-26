@@ -27,7 +27,7 @@ public class MotdCommand implements CommandExecutor {
                     d.append(" ");
                 }
                 Mysql.setMOTD(d.toString());
-                plugin.sendMessage(sender,  ChatColor.GREEN+"MOTD changed to \""+ChatColor.RESET+d.toString()+ChatColor.GREEN+"\"");
+                plugin.broadcastMessage(ChatColor.GREEN+sender.getName()+" changed the MOTD to \""+ChatColor.RESET+d.toString()+ChatColor.GREEN+"\"");
             }else{
                 return false;
             }
