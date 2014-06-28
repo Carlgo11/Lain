@@ -11,7 +11,7 @@ public class ExternalCommands {
     public static String url = "jdbc:mysql://localhost:3306/";
     public static String username = "Lain";
     public static String password = "JAMUPsBMB7mrZNzx";
-    
+
     @EventHandler
     static public void Main(String msg, Player p, Lain plugin)
     {
@@ -38,22 +38,26 @@ public class ExternalCommands {
             }
         }
     }
-    
-   static void broadcast(String cmd, String[] args, Player p, Lain plugin, String message){
-        DotCommands dc = new DotCommands();
+
+    static void broadcast(String cmd, String[] args, Player p, Lain plugin, String message)
+    {
         String[] msg = message.split(" ");
         StringBuilder d = new StringBuilder();
-        for(int i = 0; i < msg.length; i++){
+        for (int i = 0; i < msg.length; i++) {
             String m = msg[i];
-            if(msg[i].contains("<player>")){m = m.replaceAll("<player>", p.getName());}
-            if(msg[i].contains("<build>")){m=m.replaceAll("<build>", ExternalCommands.class.getPackage().getImplementationVersion());}
-            if(msg[i].contains("\n")){m=m.replaceAll("\n", System.getProperty("line.separator"));}
-            
+            if (msg[i].contains("<player>")) {
+                m = m.replaceAll("<player>", p.getName());
+            }
+            if (msg[i].contains("<build>")) {
+                m = m.replaceAll("<build>", ExternalCommands.class.getPackage().getImplementationVersion());
+            }
+            if (msg[i].contains("\n")) {
+                m = m.replaceAll("\n", System.getProperty("line.separator"));
+            }
+
             d.append(m);
             d.append(" ");
-            
         }
-        
         plugin.broadcastMessage(d.toString());
     }
 }

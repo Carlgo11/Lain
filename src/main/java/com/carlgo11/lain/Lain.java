@@ -60,7 +60,7 @@ public class Lain extends JavaPlugin {
         getCommand("setalias").setExecutor(new SetaliasCommand(this));
         getCommand("broadcast").setExecutor(new BroadcastCommand(this));
         getCommand("motd").setExecutor(new MotdCommand(this));
-        
+
     }
 
     public void sendMessage(final Player p, final String s)
@@ -221,11 +221,13 @@ public class Lain extends JavaPlugin {
             }, 20L);
         }
     }
-    public boolean isStaff(String p){
+
+    public boolean isStaff(String p)
+    {
         String rank = Mysql.getRank(p);
-        if(rank.equalsIgnoreCase("owner") || rank.equalsIgnoreCase("co-owner") || rank.equalsIgnoreCase("headadmin") || rank.equalsIgnoreCase("admin") || rank.equalsIgnoreCase("moderator")){
+        if (rank.equalsIgnoreCase("owner") || rank.equalsIgnoreCase("co-owner") || rank.equalsIgnoreCase("headadmin") || rank.equalsIgnoreCase("admin") || rank.equalsIgnoreCase("moderator")) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
