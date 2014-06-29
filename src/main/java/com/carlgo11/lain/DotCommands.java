@@ -12,15 +12,20 @@ public class DotCommands {
 
     private Lain Lain;
 
-    public static String url = "jdbc:mysql://localhost:3306/";
-    public static String username = "Lain";
-    public static String password = "JAMUPsBMB7mrZNzx";
-    public static String table = "commands";
-    public static String database = "portalcraft";
+    public static String url ="";
+    public static String username="";
+    public static String password="";
+    public static String table="";
+    public static String database="";
 
-    public void main(Lain plugin)
+    public void main(Lain plugin, String curl, String cusername, String cpassword, String ctable, String cdatabase)
     {
         this.Lain = plugin;
+        DotCommands.url = curl;
+        DotCommands.username = cusername;
+        DotCommands.password = cpassword;
+        DotCommands.table = ctable;
+        DotCommands.database = cdatabase;
     }
 
     public String getMessage(String command)
@@ -30,7 +35,7 @@ public class DotCommands {
         ResultSet rs = null;
 
         try {
-            con = DriverManager.getConnection(Mysql.url + "portalcraft", Mysql.username, Mysql.password);
+            con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
             st = con.createStatement();
             rs = st.executeQuery("SELECT * from " + table);
             while (true) {
@@ -50,7 +55,7 @@ public class DotCommands {
             }
 
         } catch (SQLException ex) {
-            Logger lgr = Logger.getLogger(Mysql.class.getName());
+            Logger lgr = Logger.getLogger(DotCommands.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
 
         } finally {
@@ -66,7 +71,7 @@ public class DotCommands {
                 }
 
             } catch (SQLException ex) {
-                Logger lgr = Logger.getLogger(Mysql.class.getName());
+                Logger lgr = Logger.getLogger(DotCommands.class.getName());
                 lgr.log(Level.WARNING, ex.getMessage(), ex);
             }
         }
@@ -89,7 +94,7 @@ public class DotCommands {
         Statement st = null;
 
         try {
-            con = DriverManager.getConnection(Mysql.url + database, Mysql.username, Mysql.password);
+            con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
             st = con.createStatement();
             if (!containsCommand(command)) {
                 st.execute("INSERT INTO `commands` (`command`, `aliases`, `message`) VALUES ('" + command + "', '', '" + message + "');");
@@ -131,12 +136,12 @@ public class DotCommands {
         }
         d.append(alias);
         try {
-            con = DriverManager.getConnection(Mysql.url + database, Mysql.username, Mysql.password);
+            con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
             st = con.createStatement();
             st.execute("UPDATE `commands` SET `aliases` = '" + d.toString() + "', `message` = '" + command + "' WHERE `command` = '" + command + "';");
 
         } catch (SQLException ex) {
-            Logger lgr = Logger.getLogger(Mysql.class.getName());
+            Logger lgr = Logger.getLogger(DotCommands.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
 
         } finally {
@@ -149,7 +154,7 @@ public class DotCommands {
                 }
 
             } catch (SQLException ex) {
-                Logger lgr = Logger.getLogger(Mysql.class.getName());
+                Logger lgr = Logger.getLogger(DotCommands.class.getName());
                 lgr.log(Level.WARNING, ex.getMessage(), ex);
             }
         }
@@ -161,7 +166,7 @@ public class DotCommands {
         Statement st = null;
 
         try {
-            con = DriverManager.getConnection(Mysql.url + database, Mysql.username, Mysql.password);
+            con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
             st = con.createStatement();
             if (!containsCommand(command)) {
                 st.execute("DELETE FROM `commands` WHERE `command` = '" + command + "';");
@@ -169,7 +174,7 @@ public class DotCommands {
             }
 
         } catch (SQLException ex) {
-            Logger lgr = Logger.getLogger(Mysql.class.getName());
+            Logger lgr = Logger.getLogger(DotCommands.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
 
         } finally {
@@ -182,7 +187,7 @@ public class DotCommands {
                 }
 
             } catch (SQLException ex) {
-                Logger lgr = Logger.getLogger(Mysql.class.getName());
+                Logger lgr = Logger.getLogger(DotCommands.class.getName());
                 lgr.log(Level.WARNING, ex.getMessage(), ex);
             }
         }
@@ -205,12 +210,12 @@ public class DotCommands {
         Statement st = null;
 
         try {
-            con = DriverManager.getConnection(Mysql.url + database, Mysql.username, Mysql.password);
+            con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
             st = con.createStatement();
             st.execute("UPDATE `commands` SET `aliases` '" + d.toString() + "' WHERE `command` = '" + command + "';");
 
         } catch (SQLException ex) {
-            Logger lgr = Logger.getLogger(Mysql.class.getName());
+            Logger lgr = Logger.getLogger(DotCommands.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
 
         } finally {
@@ -223,7 +228,7 @@ public class DotCommands {
                 }
 
             } catch (SQLException ex) {
-                Logger lgr = Logger.getLogger(Mysql.class.getName());
+                Logger lgr = Logger.getLogger(DotCommands.class.getName());
                 lgr.log(Level.WARNING, ex.getMessage(), ex);
             }
         }
@@ -235,10 +240,8 @@ public class DotCommands {
         Statement st = null;
         ResultSet rs = null;
 
-        StringBuilder d = new StringBuilder();
-
         try {
-            con = DriverManager.getConnection(Mysql.url + database, Mysql.username, Mysql.password);
+            con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
             st = con.createStatement();
             rs = st.executeQuery("SELECT * from " + table);
             while (true) {
@@ -252,7 +255,7 @@ public class DotCommands {
             }
 
         } catch (SQLException ex) {
-            Logger lgr = Logger.getLogger(Mysql.class.getName());
+            Logger lgr = Logger.getLogger(DotCommands.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
 
         } finally {
@@ -268,7 +271,7 @@ public class DotCommands {
                 }
 
             } catch (SQLException ex) {
-                Logger lgr = Logger.getLogger(Mysql.class.getName());
+                Logger lgr = Logger.getLogger(DotCommands.class.getName());
                 lgr.log(Level.WARNING, ex.getMessage(), ex);
             }
         }
@@ -282,7 +285,7 @@ public class DotCommands {
         ResultSet rs = null;
 
         try {
-            con = DriverManager.getConnection(Mysql.url + database, Mysql.username, Mysql.password);
+            con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
             st = con.createStatement();
             rs = st.executeQuery("SELECT command from commands");
             while (true) {
@@ -296,7 +299,7 @@ public class DotCommands {
             }
 
         } catch (SQLException ex) {
-            Logger lgr = Logger.getLogger(Mysql.class.getName());
+            Logger lgr = Logger.getLogger(DotCommands.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
 
         } finally {
@@ -312,7 +315,7 @@ public class DotCommands {
                 }
 
             } catch (SQLException ex) {
-                Logger lgr = Logger.getLogger(Mysql.class.getName());
+                Logger lgr = Logger.getLogger(DotCommands.class.getName());
                 lgr.log(Level.WARNING, ex.getMessage(), ex);
             }
         }
@@ -326,7 +329,7 @@ public class DotCommands {
         ResultSet rs = null;
 
         try {
-            con = DriverManager.getConnection(Mysql.url + database, Mysql.username, Mysql.password);
+            con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
             st = con.createStatement();
             rs = st.executeQuery("SELECT aliases from commands");
             while (true) {
@@ -340,7 +343,7 @@ public class DotCommands {
             }
 
         } catch (SQLException ex) {
-            Logger lgr = Logger.getLogger(Mysql.class.getName());
+            Logger lgr = Logger.getLogger(DotCommands.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
 
         } finally {
@@ -356,7 +359,7 @@ public class DotCommands {
                 }
 
             } catch (SQLException ex) {
-                Logger lgr = Logger.getLogger(Mysql.class.getName());
+                Logger lgr = Logger.getLogger(DotCommands.class.getName());
                 lgr.log(Level.WARNING, ex.getMessage(), ex);
             }
         }

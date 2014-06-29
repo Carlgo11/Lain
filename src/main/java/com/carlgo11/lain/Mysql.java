@@ -1,6 +1,5 @@
 package com.carlgo11.lain;
 
-import static com.carlgo11.lain.DotCommands.database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -11,9 +10,22 @@ import java.util.logging.Logger;
 
 public class Mysql {
 
-    public static String url = "jdbc:mysql://localhost:3306/";
-    public static String username = "Lain";
-    public static String password = "JAMUPsBMB7mrZNzx";
+    public static String url = "";
+    public static String username = "";
+    public static String password = "";
+    public static String database = "";
+    public static String rankstable = "";
+    public static String motdtable = "";
+    
+    public static void updateStrings(String url, String username, String password, String database, String rankstable, String motdtable)
+    {
+        Mysql.url = url;
+        Mysql.username = username;
+        Mysql.password = password;
+        Mysql.database = database;
+        Mysql.rankstable = rankstable;
+        Mysql.motdtable = motdtable;
+    }
 
     public static String getMOTD(String Whitelist)
     {
@@ -22,9 +34,9 @@ public class Mysql {
         ResultSet rs = null;
 
         try {
-            con = DriverManager.getConnection(Mysql.url + "portalcraft", Mysql.username, Mysql.password);
+            con = DriverManager.getConnection(Mysql.url + Mysql.database, Mysql.username, Mysql.password);
             st = con.createStatement();
-            rs = st.executeQuery("SELECT * from motd");
+            rs = st.executeQuery("SELECT * from "+Mysql.motdtable);
             while (true) {
                 if (rs.next()) {
                     if (rs.getString(2).equalsIgnoreCase(Whitelist)) {
@@ -66,9 +78,9 @@ public class Mysql {
         ResultSet rs = null;
 
         try {
-            con = DriverManager.getConnection(Mysql.url + "ranks", Mysql.username, Mysql.password);
+            con = DriverManager.getConnection(Mysql.url + Mysql.database, Mysql.username, Mysql.password);
             st = con.createStatement();
-            rs = st.executeQuery("SELECT * from ranks");
+            rs = st.executeQuery("SELECT * from "+Mysql.rankstable);
             while (true) {
                 if (rs.next()) {
                     if (rs.getString(2).equalsIgnoreCase(Player)) {
@@ -110,9 +122,9 @@ public class Mysql {
         ResultSet rs = null;
 
         try {
-            con = DriverManager.getConnection(Mysql.url + "ranks", Mysql.username, Mysql.password);
+            con = DriverManager.getConnection(Mysql.url + Mysql.database ,Mysql.username, Mysql.password);
             st = con.createStatement();
-            rs = st.executeQuery("SELECT * from ranks");
+            rs = st.executeQuery("SELECT * from "+Mysql.rankstable);
             while (true) {
                 if (rs.next()) {
                     if (rs.getString(2).equalsIgnoreCase(Player)) {
@@ -147,16 +159,16 @@ public class Mysql {
         }
         return false;
     }
-    
+
     public static void setMOTD(String motd)
     {
         Connection con = null;
         Statement st = null;
-        
+
         try {
-            con = DriverManager.getConnection(Mysql.url + database, Mysql.username, Mysql.password);
+            con = DriverManager.getConnection(url + database, Mysql.username, Mysql.password);
             st = con.createStatement();
-            st.execute("UPDATE `motd` SET `MOTD` = '" + motd + "' WHERE `only on whitelist` = 'false';");
+            st.execute("UPDATE `"+Mysql.motdtable+"` SET `MOTD` = '" + motd + "' WHERE `only on whitelist` = 'false';");
 
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(Mysql.class.getName());

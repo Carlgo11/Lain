@@ -23,10 +23,6 @@ public class LainCommand implements CommandExecutor {
         } else {
             if (args[0].equalsIgnoreCase("say")) {
                 say(sender, cmd, commandLabel, args);
-            } else if (args[0].equalsIgnoreCase("moo")) {
-
-            } else {
-
             }
         }
         return true;

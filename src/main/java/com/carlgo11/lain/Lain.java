@@ -30,7 +30,8 @@ public class Lain extends JavaPlugin {
         registerListeners(getServer().getPluginManager());
         commands();
         DotCommands dc = new DotCommands();
-        dc.main(this);
+        dc.main(this, getConfig().getString("externalcommands.url"), getConfig().getString("externalcommands.username"), getConfig().getString("externalcommands.password"), getConfig().getString("externalcommands.table"), getConfig().getString("externalcommands.database"));
+        Mysql.updateStrings(getConfig().getString("mysql.url"),getConfig().getString("mysql.username") , getConfig().getString("mysql.password"), getConfig().getString("mysql.database"), getConfig().getString("mysql.rank-table"), getConfig().getString("mysql.motd-table"));
         this.getLogger().log(Level.INFO, "{0} {1} is enabled!", new Object[]{getDescription().getName(), getDescription().getVersion()});
     }
 
