@@ -37,7 +37,7 @@ public class DotCommands {
         try {
             con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
             st = con.createStatement();
-            rs = st.executeQuery("SELECT * from " + table);
+            rs = st.executeQuery("SELECT * from " + DotCommands.table);
             while (true) {
                 if (rs.next()) {
                     String a = rs.getString(2);
@@ -97,9 +97,9 @@ public class DotCommands {
             con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
             st = con.createStatement();
             if (!containsCommand(command)) {
-                st.execute("INSERT INTO `commands` (`command`, `aliases`, `message`) VALUES ('" + command + "', '', '" + message + "');");
+                st.execute("INSERT INTO `"+DotCommands.table+"` (`command`, `aliases`, `message`) VALUES ('" + command + "', '', '" + message + "');");
             } else {
-                st.execute("UPDATE `commands` SET `command` = '" + command + "', `aliases` = '', `message` = '" + message + "' WHERE `command` = '" + command + "';");
+                st.execute("UPDATE `"+DotCommands.table+"` SET `command` = '" + command + "', `aliases` = '', `message` = '" + message + "' WHERE `command` = '" + command + "';");
             }
 
         } catch (SQLException ex) {
@@ -138,7 +138,7 @@ public class DotCommands {
         try {
             con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
             st = con.createStatement();
-            st.execute("UPDATE `commands` SET `aliases` = '" + d.toString() + "', `message` = '" + command + "' WHERE `command` = '" + command + "';");
+            st.execute("UPDATE `"+DotCommands.table+"` SET `aliases` = '" + d.toString() + "', `message` = '" + command + "' WHERE `command` = '" + command + "';");
 
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(DotCommands.class.getName());
@@ -169,7 +169,7 @@ public class DotCommands {
             con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
             st = con.createStatement();
             if (!containsCommand(command)) {
-                st.execute("DELETE FROM `commands` WHERE `command` = '" + command + "';");
+                st.execute("DELETE FROM `"+DotCommands.table+"` WHERE `command` = '" + command + "';");
 
             }
 
@@ -212,7 +212,7 @@ public class DotCommands {
         try {
             con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
             st = con.createStatement();
-            st.execute("UPDATE `commands` SET `aliases` '" + d.toString() + "' WHERE `command` = '" + command + "';");
+            st.execute("UPDATE `"+DotCommands.table+"` SET `aliases` '" + d.toString() + "' WHERE `command` = '" + command + "';");
 
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(DotCommands.class.getName());
@@ -243,7 +243,7 @@ public class DotCommands {
         try {
             con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
             st = con.createStatement();
-            rs = st.executeQuery("SELECT * from " + table);
+            rs = st.executeQuery("SELECT * from " + DotCommands.table);
             while (true) {
                 if (rs.next()) {
                     if (rs.getString(1).contains(command)) {
@@ -287,7 +287,7 @@ public class DotCommands {
         try {
             con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
             st = con.createStatement();
-            rs = st.executeQuery("SELECT command from commands");
+            rs = st.executeQuery("SELECT command from "+DotCommands.table);
             while (true) {
                 if (rs.next()) {
                     if (rs.getString(1).equals(command)) {
@@ -331,7 +331,7 @@ public class DotCommands {
         try {
             con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
             st = con.createStatement();
-            rs = st.executeQuery("SELECT aliases from commands");
+            rs = st.executeQuery("SELECT aliases from "+DotCommands.table);
             while (true) {
                 if (rs.next()) {
                     if (rs.getString(1).contains(alias)) {
