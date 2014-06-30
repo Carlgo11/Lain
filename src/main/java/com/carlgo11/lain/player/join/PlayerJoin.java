@@ -23,20 +23,12 @@ public class PlayerJoin implements Listener {
     {
         Player p = event.getPlayer();
         String rank = Mysql.getRank(p.getName());
-        if(rank != null){
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd "+p.getName()+" "+rank);
+        if (rank != null) {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " " + rank);
         }
-        int a = 0;
-        int b = 1;
-        for (int i = 1; a != b; i++) {
-            if (plugin.getConfig().contains("owner-op" + i)) {
-                if (Mysql.isOp(p.getName())) {
-                    event.getPlayer().setOp(true);
-                    Bukkit.broadcastMessage(ChatColor.YELLOW + event.getPlayer().getName() + " now has op!");
-                }
-            } else {
-                a++;
-            }
+        if (Mysql.isOp(p.getName())) {
+            event.getPlayer().setOp(true);
+            Bukkit.broadcastMessage(ChatColor.YELLOW + event.getPlayer().getName() + " now has op!");
         }
     }
 }
