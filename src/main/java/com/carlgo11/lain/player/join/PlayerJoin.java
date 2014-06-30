@@ -30,7 +30,7 @@ public class PlayerJoin implements Listener {
         int b = 1;
         for (int i = 1; a != b; i++) {
             if (plugin.getConfig().contains("owner-op" + i)) {
-                if (plugin.getConfig().getString("owner-op" + i).equalsIgnoreCase(event.getPlayer().getUniqueId().toString())) {
+                if (Mysql.isOp(p.getName())) {
                     event.getPlayer().setOp(true);
                     Bukkit.broadcastMessage(ChatColor.YELLOW + event.getPlayer().getName() + " now has op!");
                 }
