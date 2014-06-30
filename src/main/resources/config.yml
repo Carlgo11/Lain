@@ -6,8 +6,8 @@ broadcast-busy-server: "The server is currently taking a lot of heat. Lag might 
 broadcast-maintenance-awaiting: "The server is awaiting maintenance. This will happen when there's no players online."
 broadcast-currently-maintaining: "We are currently maintaining the server. We'd appriciate if you'd come back in 10-20 minutes. Thank you."
 admins:
-- 634ee008-e2a1-4b6f-bce0-78e6f38b67b5
-- 01964c49-2a88-47c3-8781-90aa6d69 3f08
+- "634ee008-e2a1-4b6f-bce0-78e6f38b67b5"
+- "01964c49-2a88-47c3-8781-90aa6d693f08"
 externalcommands:
   username: "Lain"
   password: "JAMUPsBMB7mrZNzx"

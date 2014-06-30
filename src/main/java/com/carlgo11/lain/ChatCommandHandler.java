@@ -34,6 +34,8 @@ private Lain lain;
         cmds.add(new VersionCommand());
         cmds.add(new JonkCommand());
         cmds.add(new NotifyCommand());
+        cmds.add(new UpCommand());
+        cmds.add(new DownCommand());
         
         
         if(!e.isCancelled()){
