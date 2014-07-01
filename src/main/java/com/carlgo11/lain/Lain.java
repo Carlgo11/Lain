@@ -232,4 +232,15 @@ public class Lain extends JavaPlugin {
             return false;
         }
     }
+    
+    public static boolean isAdmin(Player p, Lain Lain)
+    {
+        boolean outp = false;
+        if (Lain.getConfig().getList("admins").contains(p.getUniqueId().toString())) {
+            outp = true;
+        } else {
+            outp = false;
+        }
+        return outp;
+    }
 }

@@ -1,6 +1,5 @@
 package com.carlgo11.lain.player.chat.commands;
 
-import com.carlgo11.lain.API;
 import com.carlgo11.lain.ChatCommands;
 import com.carlgo11.lain.Lain;
 import com.carlgo11.lain.Messages;
@@ -25,7 +24,7 @@ public class PerformCommand implements ChatCommands {
     {
         plugin = lain;
         if (cmd.equalsIgnoreCase(".perform")) {
-            if (API.isAdmin(p, plugin)) {
+            if (Lain.isAdmin(p, plugin)) {
                 perform(msg, p, args, cmd);
             } else {
                 plugin.badperms(p);
