@@ -10,21 +10,25 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Level;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.w3c.dom.Document;
 
 public class Lain extends JavaPlugin {
-    
+
     long delay = 20;
     public static boolean debugm = false;
     public static ArrayList<String> commands = new ArrayList<String>();
-    
+
     public void onEnable()
     {
         registerListeners(getServer().getPluginManager());
@@ -35,12 +39,12 @@ public class Lain extends JavaPlugin {
         this.getLogger().log(Level.INFO, "{0} {1} is enabled!", new Object[]{getDescription().getName(), getDescription().getVersion()});
         CheckUpdates.runXMLCheck(this);
     }
-    
+
     public void onDisable()
     {
         this.getLogger().log(Level.INFO, "{0} {1} is disabled!", new Object[]{getDescription().getName(), getDescription().getVersion()});
     }
-    
+
     void registerListeners(PluginManager pm)
     {
         pm.registerEvents(new Checkfiles(this), this);
@@ -53,7 +57,7 @@ public class Lain extends JavaPlugin {
         pm.registerEvents(new ServerListPing(this), this);
         pm.registerEvents(new PlayerLogin(this), this);
     }
-    
+
     public void commands()
     {
         getCommand("lain").setExecutor(new LainCommand(this));
@@ -61,9 +65,9 @@ public class Lain extends JavaPlugin {
         getCommand("setalias").setExecutor(new SetaliasCommand(this));
         getCommand("broadcast").setExecutor(new BroadcastCommand(this));
         getCommand("motd").setExecutor(new MotdCommand(this));
-        
+
     }
-    
+
     public void sendMessage(final Player p, final String s)
     {
         String s2s = s;
@@ -76,7 +80,7 @@ public class Lain extends JavaPlugin {
             }
         }, delay);
     }
-    
+
     public void sendMessage(final CommandSender p, final String s)
     {
         String s2s = s;
@@ -89,7 +93,7 @@ public class Lain extends JavaPlugin {
             }
         }, delay);
     }
-    
+
     public void broadcastMessage(final String s)
     {
         String s2s = s;
@@ -102,12 +106,12 @@ public class Lain extends JavaPlugin {
             }
         }, delay);
     }
-    
+
     public void error(String s)
     {
         this.getLogger().log(Level.WARNING, Messages.error + "{0}", s);
     }
-    
+
     public void error(final Player p, final String s)
     {
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
@@ -118,7 +122,7 @@ public class Lain extends JavaPlugin {
             }
         }, delay);
     }
-    
+
     public void error(final CommandSender p, final String s)
     {
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
@@ -129,7 +133,7 @@ public class Lain extends JavaPlugin {
             }
         }, delay);
     }
-    
+
     public void badperms(final Player p)
     {
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
@@ -140,7 +144,7 @@ public class Lain extends JavaPlugin {
             }
         }, delay);
     }
-    
+
     public void badperms(final CommandSender p)
     {
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
@@ -151,7 +155,7 @@ public class Lain extends JavaPlugin {
             }
         }, delay);
     }
-    
+
     public void toCMDLog(Player p, String s)
     {
         try {
@@ -163,7 +167,7 @@ public class Lain extends JavaPlugin {
             e.printStackTrace();
         }
     }
-    
+
     static public void logchatp(String tme, String p, String s)
     {
         String s2 = ChatColor.stripColor(s);
@@ -176,7 +180,7 @@ public class Lain extends JavaPlugin {
             e.printStackTrace();
         }
     }
-    
+
     static public void logchat(String tme, String s)
     {
         String s2 = ChatColor.stripColor(s);
@@ -189,18 +193,18 @@ public class Lain extends JavaPlugin {
             e.printStackTrace();
         }
     }
-    
+
     public void readcommandstxt()
     {
         try {
             boolean p = new File(getDataFolder() + "/backup").mkdirs();
             File file = new File(getDataFolder() + "/names.txt");
             boolean newFile = file.createNewFile();
-            
+
             if (p) {
                 getLogger().info("Created a backup folder");
             }
-            
+
             if (newFile) {
                 getLogger().info("Created a file called names.txt");
             }
@@ -208,7 +212,7 @@ public class Lain extends JavaPlugin {
             e.printStackTrace();
         }
     }
-    
+
     public void checkOp(final Player p)
     {
         if (p.isOp()) {
@@ -222,7 +226,7 @@ public class Lain extends JavaPlugin {
             }, 20L);
         }
     }
-    
+
     public boolean isStaff(String p)
     {
         String rank = Mysql.getRank(p);
@@ -232,7 +236,7 @@ public class Lain extends JavaPlugin {
             return false;
         }
     }
-    
+
     public static boolean isAdmin(Player p, Lain Lain)
     {
         boolean outp = false;
@@ -242,5 +246,30 @@ public class Lain extends JavaPlugin {
             outp = false;
         }
         return outp;
+    }
+
+    public void checkUpdates()
+    {
+        try {
+            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+            Document document = documentBuilder.parse(new URL("http://ci.carlgo11.com/rssLatest").openStream());
+            String v = document.getElementsByTagName("title").item(1).getTextContent();
+            String[] a = v.split(" ");
+            String xv = a[1].toString().replace("#", "");
+            String version = Lain.class.getPackage().getImplementationVersion();
+            if (!version.equals("")) {
+                if (Integer.parseInt(xv) > Integer.parseInt(version)) {
+                    broadcastMessage(ChatColor.GREEN + "New update found! Server restart scheduled. (Current version: 2." + version + " New version: 2." + xv + ")");
+                    if (Bukkit.getOfflinePlayers().length <= 1) {
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "stop");
+                    } else {
+                        PlayerDisconnect.reboot = true;
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }
