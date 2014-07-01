@@ -33,11 +33,6 @@ public class consoleCommand implements Listener {
                     e.setCancelled(true);
                 }
             }
-
-            if (args[0].equalsIgnoreCase("/manuadd") || args[0].equalsIgnoreCase("/manudel") || args[0].equalsIgnoreCase("/manprmote") || args[0].equalsIgnoreCase("/mandemote")) {
-                e.setCancelled(true);
-                Lain.error(e.getPlayer(), "We don't promote/demote people like that.");
-            }
         }
     }
 }
