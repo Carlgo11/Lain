@@ -264,6 +264,7 @@ public class Lain extends JavaPlugin {
                     if (Bukkit.getOfflinePlayers().length <= 1) {
                         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "stop");
                     } else {
+                        System.out.println(Bukkit.getOfflinePlayers().length);
                         PlayerDisconnect.reboot = true;
                     }
                 }
