@@ -23,7 +23,7 @@ public class PlayerDamage implements Listener {
                     } else {
                         attacker.setHealth(0);
                     }
-                    attacker.playSound(player.getLocation(), Sound.ENDERDRAGON_DEATH, 1, 1);
+                    attacker.playSound(player.getLocation(), Sound.ENDERMAN_DEATH, 1, 1);
                 }
             }
         }
