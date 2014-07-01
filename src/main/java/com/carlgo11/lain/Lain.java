@@ -39,7 +39,6 @@ public class Lain extends JavaPlugin {
     public void onDisable()
     {
         this.getLogger().log(Level.INFO, "{0} {1} is disabled!", new Object[]{getDescription().getName(), getDescription().getVersion()});
-        this.saveConfig();
     }
     
     void registerListeners(PluginManager pm)
