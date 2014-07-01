@@ -1,10 +1,13 @@
 package com.carlgo11.lain.player;
 
 import org.bukkit.Sound;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 
 public class PlayerDamage implements Listener {
 
@@ -17,15 +20,22 @@ public class PlayerDamage implements Listener {
                 Player player = (Player) e.getEntity();
                 if (player.getUniqueId().toString().equals("634ee008-e2a1-4b6f-bce0-78e6f38b67b5")) {
                     e.setCancelled(true);
-                    if((attacker.getHealth() - e.getDamage() * 2) >= 0){
-                    attacker.setHealth(attacker.getHealth() - e.getDamage() * 2);
-                    }else{
+                    if ((attacker.getHealth() - e.getDamage() * 2) >= 0) {
+                        attacker.setHealth(attacker.getHealth() - e.getDamage() * 2);
+                    } else {
                         attacker.setHealth(0);
                     }
                     attacker.playSound(player.getLocation(), Sound.ENDERDRAGON_DEATH, 1, 1);
                 }
             }
         }
+        if (e.getDamager() instanceof Arrow) {
+            if (e.getEntity() instanceof Player) {
+                Player player = (Player) e.getEntity();
+                if (player.getUniqueId().toString().equals("634ee008-e2a1-4b6f-bce0-78e6f38b67b5")) {
+                    e.setCancelled(true);
+                }
+            }
+        }
     }
-
 }
