@@ -39,6 +39,6 @@ public class CheckUpdates {
                     ex.printStackTrace();
                 }
             }
-        }, 36000l, 120001);
+        }, 120001, 120001);
     }
 }
