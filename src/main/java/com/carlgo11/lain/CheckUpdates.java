@@ -16,27 +16,29 @@ public class CheckUpdates {
 
             public void run()
             {
-                try {
-                    DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
-                            .newInstance();
-                    DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-                    Document document = documentBuilder.parse(new URL("http://ci.carlgo11.com/rssLatest").openStream());
-                    String v = document.getElementsByTagName("title").item(1).getTextContent();
-                    String[] a = v.split(" ");
-                    String xv = a[1].toString().replace("#", "");
-                    String version = CheckUpdates.class.getPackage().getImplementationVersion();
-                    if (version != "") {
-                        if (Integer.parseInt(xv) > Integer.parseInt(version)) {
-                            Lain.broadcastMessage(ChatColor.GREEN + "New update found! Server restart scheduled.");
-                            if (Bukkit.getOfflinePlayers().length == 1) {
-                                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "stop");
-                            } else {
-                                PlayerDisconnect.reboot = true;
+                if (!PlayerDisconnect.reboot) {
+                    try {
+                        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
+                                .newInstance();
+                        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+                        Document document = documentBuilder.parse(new URL("http://ci.carlgo11.com/rssLatest").openStream());
+                        String v = document.getElementsByTagName("title").item(1).getTextContent();
+                        String[] a = v.split(" ");
+                        String xv = a[1].toString().replace("#", "");
+                        String version = CheckUpdates.class.getPackage().getImplementationVersion();
+                        if (version != "") {
+                            if (Integer.parseInt(xv) > Integer.parseInt(version)) {
+                                Lain.broadcastMessage(ChatColor.GREEN + "New update found! Server restart scheduled.");
+                                if (Bukkit.getOfflinePlayers().length == 1) {
+                                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "stop");
+                                } else {
+                                    PlayerDisconnect.reboot = true;
+                                }
                             }
                         }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
                     }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
                 }
             }
         }, 120001, 120001);
