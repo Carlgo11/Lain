@@ -2,6 +2,7 @@ package com.carlgo11.lain;
 
 import com.carlgo11.lain.player.disconnect.PlayerDisconnect;
 import java.io.File;
+import java.net.URL;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.bukkit.Bukkit;
@@ -18,11 +19,10 @@ public class CheckUpdates {
             public void run()
             {
                 try{
-                File file = new File("rssLatest.xml");
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
                 .newInstance();
         DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-        Document document = documentBuilder.parse(file);
+        Document document = documentBuilder.parse(new URL("http://ci.carlgo11.com/rssLatest").openStream());
         String v = document.getElementsByTagName("title").item(1).getTextContent();
         String[] a = v.split(" ");
         String xv = a[1].toString().replace("#", "");
