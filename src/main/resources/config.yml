@@ -8,12 +8,6 @@ broadcast-currently-maintaining: "We are currently maintaining the server. We'd 
 admins:
 - "634ee008-e2a1-4b6f-bce0-78e6f38b67b5"
 - "01964c49-2a88-47c3-8781-90aa6d693f08"
-externalcommands:
-  username: "Lain"
-  password: "JAMUPsBMB7mrZNzx"
-  url: "jdbc:mysql://localhost:3306/"
-  database: "portalcraft"
-  table: "commands"
 mysql:
   username: "Lain"
   password: "JAMUPsBMB7mrZNzx"
@@ -21,3 +15,4 @@ mysql:
   database: "portalcraft"
   motd-table: "motd"
   rank-table: "ranks"
+  ext-table: "commands"
