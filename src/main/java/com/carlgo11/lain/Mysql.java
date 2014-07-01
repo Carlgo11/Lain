@@ -10,12 +10,12 @@ import java.util.logging.Logger;
 
 public class Mysql {
 
-    public static String url = "";
-    public static String username = "";
-    public static String password = "";
-    public static String database = "";
-    public static String rankstable = "";
-    public static String motdtable = "";
+    public static String url;
+    public static String username;
+    public static String password;
+    public static String database;
+    public static String rankstable;
+    public static String motdtable;
     
     public static void updateStrings(String url, String username, String password, String database, String rankstable, String motdtable)
     {

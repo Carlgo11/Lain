@@ -12,11 +12,11 @@ public class DotCommands {
 
     private Lain Lain;
 
-    public static String url ="";
-    public static String username="";
-    public static String password="";
-    public static String table="";
-    public static String database="";
+    public static String url;
+    public static String username;
+    public static String password;
+    public static String table;
+    public static String database;
 
     public void main(Lain plugin, String curl, String cusername, String cpassword, String ctable, String cdatabase)
     {
