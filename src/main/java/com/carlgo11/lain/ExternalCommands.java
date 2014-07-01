@@ -8,10 +8,6 @@ import org.bukkit.event.EventHandler;
 
 public class ExternalCommands {
 
-    public static String url = "jdbc:mysql://localhost:3306/";
-    public static String username = "Lain";
-    public static String password = "JAMUPsBMB7mrZNzx";
-
     @EventHandler
     static public void Main(String msg, Player p, Lain plugin)
     {
