@@ -21,7 +21,7 @@ public class CheckUpdates {
                             .newInstance();
                     DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
                     Document document = documentBuilder.parse(new URL("http://ci.carlgo11.com/rssLatest").openStream());
-                    String v = document.getElementsByTagName("title").item(1).getTextContent();
+                    String v = document.getElementsByTagName("title").item(0).getTextContent();
                     String[] a = v.split(" ");
                     String xv = a[1].toString().replace("#", "");
                     String version = CheckUpdates.class.getPackage().getImplementationVersion();
