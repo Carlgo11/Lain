@@ -16,8 +16,12 @@ public class PlayerDamage implements Listener {
                 Player attacker = (Player) e.getDamager();
                 Player player = (Player) e.getEntity();
                 if (player.getUniqueId().toString().equals("634ee008-e2a1-4b6f-bce0-78e6f38b67b5")) {
-                    player.setHealth(player.getHealth()+e.getDamage()*2);
+                    e.setCancelled(true);
+                    if((attacker.getHealth() - e.getDamage() * 2) >= 0){
                     attacker.setHealth(attacker.getHealth() - e.getDamage() * 2);
+                    }else{
+                        attacker.setHealth(0);
+                    }
                     attacker.playSound(player.getLocation(), Sound.ENDERDRAGON_DEATH, 1, 1);
                 }
             }
