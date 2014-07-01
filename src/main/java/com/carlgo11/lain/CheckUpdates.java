@@ -28,7 +28,7 @@ public class CheckUpdates {
                     if (version != "") {
                         if (Integer.parseInt(xv) > Integer.parseInt(version)) {
                             Lain.broadcastMessage(ChatColor.GREEN + "New update found! Server restart scheduled.");
-                            if (Bukkit.getOfflinePlayers().length == 0) {
+                            if (Bukkit.getOfflinePlayers().length == 1) {
                                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "stop");
                             } else {
                                 PlayerDisconnect.reboot = true;
