@@ -4,6 +4,7 @@ import com.carlgo11.lain.player.chat.Phrases;
 import com.carlgo11.lain.commands.*;
 import com.carlgo11.lain.commands.preprocess.*;
 import com.carlgo11.lain.ping.*;
+import com.carlgo11.lain.player.*;
 import com.carlgo11.lain.player.disconnect.*;
 import com.carlgo11.lain.player.join.*;
 import java.io.File;
@@ -56,6 +57,7 @@ public class Lain extends JavaPlugin {
         pm.registerEvents(new Phrases(this), this);
         pm.registerEvents(new ServerListPing(this), this);
         pm.registerEvents(new PlayerLogin(this), this);
+        pm.registerEvents(new PlayerDamage(), this);
     }
 
     public void commands()
