@@ -40,7 +40,7 @@ public class CheckUpdates {
                     ex.printStackTrace();
                 }
             }
-        }, 20l, 401);
+        }, 36000l, 360001);
 
     }
 }
