@@ -41,6 +41,6 @@ public class CheckUpdates {
                     }
                 }
             }
-        }, 120001, 120001);
+        }, 12000l, 12000l);
     }
 }
