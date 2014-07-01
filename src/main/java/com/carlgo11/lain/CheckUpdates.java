@@ -27,7 +27,8 @@ public class CheckUpdates {
         String[] a = v.split(" ");
         String xv = a[1].toString().replace("#", "");
         String version = CheckUpdates.class.getPackage().getImplementationVersion();
-        if (version != null) {
+        if (version != "") {
+            System.out.println(xv+"\t"+version);
             if (Integer.parseInt(xv) > Integer.parseInt(version)) {
                 Lain.broadcastMessage(ChatColor.GREEN + "New update found! Server restart scheduled.");
                 PlayerDisconnect.reboot = true;
