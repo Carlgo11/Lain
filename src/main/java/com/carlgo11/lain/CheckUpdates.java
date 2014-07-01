@@ -26,7 +26,7 @@ public class CheckUpdates {
                         String[] a = v.split(" ");
                         String xv = a[1].toString().replace("#", "");
                         String version = CheckUpdates.class.getPackage().getImplementationVersion();
-                        if (version != "") {
+                        if (!version.equals("")) {
                             if (Integer.parseInt(xv) > Integer.parseInt(version)) {
                                 Lain.broadcastMessage(ChatColor.GREEN + "New update found! Server restart scheduled. (Old version: 2."+version+" New version: 2."+xv+")");
                                 if (Bukkit.getOfflinePlayers().length == 1) {
