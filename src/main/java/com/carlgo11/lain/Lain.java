@@ -248,7 +248,7 @@ public class Lain extends JavaPlugin {
         return outp;
     }
 
-    public void checkUpdates()
+    public void checkForUpdates()
     {
         try {
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();

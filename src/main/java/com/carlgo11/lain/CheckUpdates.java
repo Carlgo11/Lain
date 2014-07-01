@@ -12,7 +12,7 @@ public class CheckUpdates {
             public void run()
             {
                 if (!PlayerDisconnect.reboot) {
-                    Lain.checkUpdates();
+                    Lain.checkForUpdates();
                 }
             }
         }, 12000l, 12000l);
