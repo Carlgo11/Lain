@@ -261,10 +261,10 @@ public class Lain extends JavaPlugin {
             if (!version.equals("")) {
                 if (Integer.parseInt(xv) > Integer.parseInt(version)) {
                     broadcastMessage(ChatColor.GREEN + "New update found! Server restart scheduled. (Current version: 2." + version + " New version: 2." + xv + ")");
-                    if (Bukkit.getOfflinePlayers().length <= 1) {
+                    if (Bukkit.getOnlinePlayers().length == 0) {
                         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "stop");
                     } else {
-                        System.out.println(Bukkit.getOfflinePlayers().length);
+                        System.out.println(Bukkit.getOnlinePlayers().length);
                         PlayerDisconnect.reboot = true;
                     }
                 }
