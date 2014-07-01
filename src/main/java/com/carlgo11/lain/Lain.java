@@ -33,6 +33,7 @@ public class Lain extends JavaPlugin {
         dc.main(this, getConfig().getString("mysql.url"), getConfig().getString("mysql.username"), getConfig().getString("mysql.password"), getConfig().getString("mysql.ext-table"), getConfig().getString("mysql.database"));
         Mysql.updateStrings(getConfig().getString("mysql.url"),getConfig().getString("mysql.username") , getConfig().getString("mysql.password"), getConfig().getString("mysql.database"), getConfig().getString("mysql.rank-table"), getConfig().getString("mysql.motd-table"));
         this.getLogger().log(Level.INFO, "{0} {1} is enabled!", new Object[]{getDescription().getName(), getDescription().getVersion()});
+        CheckUpdates.runXMLCheck(this);
     }
 
     public void onDisable()
