@@ -20,28 +20,28 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Lain extends JavaPlugin {
-
+    
     long delay = 20;
     public static boolean debugm = false;
     public static ArrayList<String> commands = new ArrayList<String>();
-
+    
     public void onEnable()
     {
         registerListeners(getServer().getPluginManager());
         commands();
         DotCommands dc = new DotCommands();
         dc.main(this, getConfig().getString("mysql.url"), getConfig().getString("mysql.username"), getConfig().getString("mysql.password"), getConfig().getString("mysql.ext-table"), getConfig().getString("mysql.database"));
-        Mysql.updateStrings(getConfig().getString("mysql.url"),getConfig().getString("mysql.username") , getConfig().getString("mysql.password"), getConfig().getString("mysql.database"), getConfig().getString("mysql.rank-table"), getConfig().getString("mysql.motd-table"));
+        Mysql.updateStrings(getConfig().getString("mysql.url"), getConfig().getString("mysql.username"), getConfig().getString("mysql.password"), getConfig().getString("mysql.database"), getConfig().getString("mysql.rank-table"), getConfig().getString("mysql.motd-table"));
         this.getLogger().log(Level.INFO, "{0} {1} is enabled!", new Object[]{getDescription().getName(), getDescription().getVersion()});
         CheckUpdates.runXMLCheck(this);
     }
-
+    
     public void onDisable()
     {
         this.getLogger().log(Level.INFO, "{0} {1} is disabled!", new Object[]{getDescription().getName(), getDescription().getVersion()});
         this.saveConfig();
     }
-
+    
     void registerListeners(PluginManager pm)
     {
         pm.registerEvents(new Checkfiles(this), this);
@@ -54,7 +54,7 @@ public class Lain extends JavaPlugin {
         pm.registerEvents(new ServerListPing(this), this);
         pm.registerEvents(new PlayerLogin(this), this);
     }
-
+    
     public void commands()
     {
         getCommand("lain").setExecutor(new LainCommand(this));
@@ -62,9 +62,9 @@ public class Lain extends JavaPlugin {
         getCommand("setalias").setExecutor(new SetaliasCommand(this));
         getCommand("broadcast").setExecutor(new BroadcastCommand(this));
         getCommand("motd").setExecutor(new MotdCommand(this));
-
+        
     }
-
+    
     public void sendMessage(final Player p, final String s)
     {
         String s2s = s;
@@ -77,7 +77,7 @@ public class Lain extends JavaPlugin {
             }
         }, delay);
     }
-
+    
     public void sendMessage(final CommandSender p, final String s)
     {
         String s2s = s;
@@ -90,7 +90,7 @@ public class Lain extends JavaPlugin {
             }
         }, delay);
     }
-
+    
     public void broadcastMessage(final String s)
     {
         String s2s = s;
@@ -103,12 +103,12 @@ public class Lain extends JavaPlugin {
             }
         }, delay);
     }
-
+    
     public void error(String s)
     {
         this.getLogger().log(Level.WARNING, Messages.error + "{0}", s);
     }
-
+    
     public void error(final Player p, final String s)
     {
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
@@ -119,7 +119,7 @@ public class Lain extends JavaPlugin {
             }
         }, delay);
     }
-
+    
     public void error(final CommandSender p, final String s)
     {
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
@@ -130,7 +130,7 @@ public class Lain extends JavaPlugin {
             }
         }, delay);
     }
-
+    
     public void badperms(final Player p)
     {
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
@@ -141,7 +141,7 @@ public class Lain extends JavaPlugin {
             }
         }, delay);
     }
-
+    
     public void badperms(final CommandSender p)
     {
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
@@ -152,7 +152,7 @@ public class Lain extends JavaPlugin {
             }
         }, delay);
     }
-
+    
     public void toCMDLog(Player p, String s)
     {
         try {
@@ -164,7 +164,7 @@ public class Lain extends JavaPlugin {
             e.printStackTrace();
         }
     }
-
+    
     static public void logchatp(String tme, String p, String s)
     {
         String s2 = ChatColor.stripColor(s);
@@ -177,7 +177,7 @@ public class Lain extends JavaPlugin {
             e.printStackTrace();
         }
     }
-
+    
     static public void logchat(String tme, String s)
     {
         String s2 = ChatColor.stripColor(s);
@@ -190,18 +190,18 @@ public class Lain extends JavaPlugin {
             e.printStackTrace();
         }
     }
-
+    
     public void readcommandstxt()
     {
         try {
             boolean p = new File(getDataFolder() + "/backup").mkdirs();
             File file = new File(getDataFolder() + "/names.txt");
             boolean newFile = file.createNewFile();
-
+            
             if (p) {
                 getLogger().info("Created a backup folder");
             }
-
+            
             if (newFile) {
                 getLogger().info("Created a file called names.txt");
             }
@@ -209,7 +209,7 @@ public class Lain extends JavaPlugin {
             e.printStackTrace();
         }
     }
-
+    
     public void checkOp(final Player p)
     {
         if (p.isOp()) {
@@ -223,7 +223,7 @@ public class Lain extends JavaPlugin {
             }, 20L);
         }
     }
-
+    
     public boolean isStaff(String p)
     {
         String rank = Mysql.getRank(p);

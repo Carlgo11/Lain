@@ -26,7 +26,6 @@ public class CheckUpdates {
                     String xv = a[1].toString().replace("#", "");
                     String version = CheckUpdates.class.getPackage().getImplementationVersion();
                     if (version != "") {
-                        System.out.println(xv + "\t" + version);
                         if (Integer.parseInt(xv) > Integer.parseInt(version)) {
                             Lain.broadcastMessage(ChatColor.GREEN + "New update found! Server restart scheduled.");
                             if (Bukkit.getOfflinePlayers().length == 0) {
@@ -41,6 +40,5 @@ public class CheckUpdates {
                 }
             }
         }, 36000l, 360001);
-
     }
 }
