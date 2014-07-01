@@ -29,7 +29,7 @@ public class CheckUpdates {
                         if (!version.equals("")) {
                             if (Integer.parseInt(xv) > Integer.parseInt(version)) {
                                 Lain.broadcastMessage(ChatColor.GREEN + "New update found! Server restart scheduled. (Old version: 2."+version+" New version: 2."+xv+")");
-                                if (Bukkit.getOfflinePlayers().length == 1) {
+                                if (Bukkit.getOfflinePlayers().length == 0) {
                                     Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "stop");
                                 } else {
                                     PlayerDisconnect.reboot = true;
