@@ -7,8 +7,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 public class BanAllCommand implements CommandExecutor {
-    
- private Lain lain;
+
+    private Lain lain;
 
     public BanAllCommand(Lain plug)
     {
@@ -18,17 +18,20 @@ public class BanAllCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
         if (sender.hasPermission("lain.banall")) {
-            if(args.length == 0){
-                for(int i = 0; i < Bukkit.getOfflinePlayers().length; i++){
-                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "ban "+Bukkit.getOfflinePlayers()[i].getName());
-                }
-            }else{
-                return false;
+
+            StringBuilder d = new StringBuilder();
+            for (int i = 0; i < args.length; i++) {
+                d.append(args[i]);
+                d.append(" ");
             }
+            for (int i = 0; i < Bukkit.getOfflinePlayers().length; i++) {
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "ban " + Bukkit.getOfflinePlayers()[i].getName() + " " + d.toString());
+            }
+
         } else {
             lain.badperms(sender);
         }
-        
+
         return true;
     }
 }
