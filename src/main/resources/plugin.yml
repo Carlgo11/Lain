@@ -21,3 +21,6 @@ commands:
   motd:
     description: Changed the servers motd
     usage: /<command> (motd)
+  banall:
+    description: Ban all players
+    usage: /<command>
