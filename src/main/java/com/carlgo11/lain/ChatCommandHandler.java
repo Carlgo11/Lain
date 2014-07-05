@@ -16,11 +16,14 @@ private Lain lain;
     {
         this.lain = plug;
     }
+    
 
+    public static List<ChatCommands> cmds;
+    
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent e)
     {
-        final List<ChatCommands> cmds;
+        
         cmds = new ArrayList<ChatCommands>();
         cmds.add(new AdminCommand());
         cmds.add(new GoogleCommand());
@@ -52,6 +55,15 @@ private Lain lain;
             }
         }
         ExternalCommands.Main(msg, p, lain);
+        return false;
+    }
+    
+    public static boolean containsCommand(String command){
+        for(ChatCommands cmd: cmds){
+            if(command.equalsIgnoreCase(cmd.getCommandName())){
+                return true;
+            }
+        }
         return false;
     }
 

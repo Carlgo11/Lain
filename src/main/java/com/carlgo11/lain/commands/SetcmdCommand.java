@@ -20,6 +20,7 @@ public class SetcmdCommand implements CommandExecutor {
             return false;
         }
 
+        if(!ChatCommandHandler.containsCommand(args[0])){
         try {
             if (args.length == 1) {
                 if (p.hasPermission("lain.cmd.delcmd")) {
@@ -59,6 +60,9 @@ public class SetcmdCommand implements CommandExecutor {
             }
         } catch (Exception ex) {
             plugin.error(p, ex.toString());
+        }
+        }else{
+          plugin.error(p, "There's already a internal command named that.");
         }
         return true;
     }
