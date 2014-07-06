@@ -16,7 +16,7 @@ public class Mysql {
     public static String database;
     public static String rankstable;
     public static String motdtable;
-    
+
     public static void updateStrings(String url, String username, String password, String database, String rankstable, String motdtable)
     {
         Mysql.url = url;
@@ -36,7 +36,7 @@ public class Mysql {
         try {
             con = DriverManager.getConnection(Mysql.url + Mysql.database, Mysql.username, Mysql.password);
             st = con.createStatement();
-            rs = st.executeQuery("SELECT * from "+Mysql.motdtable);
+            rs = st.executeQuery("SELECT * from " + Mysql.motdtable);
             while (true) {
                 if (rs.next()) {
                     if (rs.getString(2).equalsIgnoreCase(Whitelist)) {
@@ -80,7 +80,7 @@ public class Mysql {
         try {
             con = DriverManager.getConnection(Mysql.url + Mysql.database, Mysql.username, Mysql.password);
             st = con.createStatement();
-            rs = st.executeQuery("SELECT * from "+Mysql.rankstable);
+            rs = st.executeQuery("SELECT * from " + Mysql.rankstable);
             while (true) {
                 if (rs.next()) {
                     if (rs.getString(2).equalsIgnoreCase(Player)) {
@@ -122,9 +122,9 @@ public class Mysql {
         ResultSet rs = null;
 
         try {
-            con = DriverManager.getConnection(Mysql.url + Mysql.database ,Mysql.username, Mysql.password);
+            con = DriverManager.getConnection(Mysql.url + Mysql.database, Mysql.username, Mysql.password);
             st = con.createStatement();
-            rs = st.executeQuery("SELECT * from "+Mysql.rankstable);
+            rs = st.executeQuery("SELECT * from " + Mysql.rankstable);
             while (true) {
                 if (rs.next()) {
                     if (rs.getString(2).equalsIgnoreCase(Player)) {
@@ -168,7 +168,7 @@ public class Mysql {
         try {
             con = DriverManager.getConnection(url + database, Mysql.username, Mysql.password);
             st = con.createStatement();
-            st.execute("UPDATE `"+Mysql.motdtable+"` SET `MOTD` = '" + motd + "' WHERE `only on whitelist` = 'false';");
+            st.execute("UPDATE `" + Mysql.motdtable + "` SET `MOTD` = '" + motd + "' WHERE `only on whitelist` = 'false';");
 
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(Mysql.class.getName());
@@ -189,5 +189,4 @@ public class Mysql {
             }
         }
     }
-
 }
