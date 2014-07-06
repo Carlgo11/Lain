@@ -1,5 +1,6 @@
 package com.carlgo11.lain.commands;
 
+import com.carlgo11.lain.ChatCommandHandler;
 import com.carlgo11.lain.DotCommands;
 import com.carlgo11.lain.Lain;
 import com.carlgo11.lain.Messages;
@@ -30,7 +31,7 @@ public class SetaliasCommand implements CommandExecutor {
 
 
         DotCommands dc = new DotCommands();
-        
+        if(ChatCommandHandler.containsCommand(args[0])){
         if (args.length == 1) {
             if (dc.containsAlias(args[0])) {
                 if (sender.hasPermission("lain.cmd.delalias")) {
@@ -65,6 +66,9 @@ public class SetaliasCommand implements CommandExecutor {
             }
         } else {
             return false;
+        }
+        }else{
+            plugin.error(sender, "There's already a internal command named that.");
         }
         return true;
     }
