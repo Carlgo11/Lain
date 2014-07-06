@@ -20,49 +20,49 @@ public class SetcmdCommand implements CommandExecutor {
             return false;
         }
 
-        if(!ChatCommandHandler.containsCommand(args[0])){
-        try {
-            if (args.length == 1) {
-                if (p.hasPermission("lain.cmd.delcmd")) {
+        if (!ChatCommandHandler.containsCommand(args[0])) {
+            try {
+                if (args.length == 1) {
+                    if (p.hasPermission("lain.cmd.delcmd")) {
 
-                    DotCommands dc = new DotCommands();
-                    if (dc.containsCommand(args[0])) {
-                        dc.removeCommand(args[0]);
-                        plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + " " + ChatColor.GREEN + "Removed '" + ChatColor.RESET + "." + args[0] + ChatColor.GREEN + "'!");
+                        DotCommands dc = new DotCommands();
+                        if (dc.containsCommand(args[0])) {
+                            dc.removeCommand(args[0]);
+                            plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + " " + ChatColor.GREEN + "Removed '" + ChatColor.RESET + "." + args[0] + ChatColor.GREEN + "'!");
+                        } else {
+                            plugin.error(p, Messages.nomsgfound);
+                        }
                     } else {
-                        plugin.error(p, Messages.nomsgfound);
+                        plugin.badperms(p);
                     }
-                } else {
-                    plugin.badperms(p);
                 }
-            }
-            if (args.length == 2 || args.length > 2) {
-                if (p.hasPermission("lain.cmd.setcmd")) {
+                if (args.length == 2 || args.length > 2) {
+                    if (p.hasPermission("lain.cmd.setcmd")) {
 
-                    DotCommands dc = new DotCommands();
+                        DotCommands dc = new DotCommands();
 
-                    StringBuilder d = new StringBuilder();
-                    for (int i = 1; i < args.length; i++) {
-                        d.append(args[i]);
-                        d.append(" ");
-                    }
-                    dc.setCommand(args[0].toLowerCase(), d.toString());
-                    if (!dc.containsCommand(args[0].toLowerCase())) {
-                        plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + " " + ChatColor.GREEN + "Created the command '" + ChatColor.RESET + "." + args[0].toLowerCase() + ChatColor.YELLOW + "' created! Msg:'" + ChatColor.RESET + d.toString() + ChatColor.YELLOW + "'");
+                        StringBuilder d = new StringBuilder();
+                        for (int i = 1; i < args.length; i++) {
+                            d.append(args[i]);
+                            d.append(" ");
+                        }
+                        dc.setCommand(args[0].toLowerCase(), d.toString());
+                        if (!dc.containsCommand(args[0].toLowerCase())) {
+                            plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + " " + ChatColor.GREEN + "Created the command '" + ChatColor.RESET + "." + args[0].toLowerCase() + ChatColor.YELLOW + "' created! Msg:'" + ChatColor.RESET + d.toString() + ChatColor.YELLOW + "'");
+
+                        } else {
+                            plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + " " + ChatColor.YELLOW + "Modifyed the command '" + ChatColor.RESET + "." + args[0].toLowerCase() + ChatColor.YELLOW + "' New msg:'" + ChatColor.RESET + d.toString() + ChatColor.YELLOW + "'");
+                        }
 
                     } else {
-                        plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + " " + ChatColor.YELLOW + "Modifyed the command '" + ChatColor.RESET + "." + args[0].toLowerCase() + ChatColor.YELLOW + "' New msg:'" + ChatColor.RESET + d.toString() + ChatColor.YELLOW + "'");
+                        plugin.badperms(p);
                     }
-
-                } else {
-                    plugin.badperms(p);
                 }
+            } catch (Exception ex) {
+                plugin.error(p, ex.toString());
             }
-        } catch (Exception ex) {
-            plugin.error(p, ex.toString());
-        }
-        }else{
-          plugin.error(p, "There's already a internal command named that.");
+        } else {
+            plugin.error(p, "There's already a internal command named that.");
         }
         return true;
     }

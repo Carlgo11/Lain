@@ -21,19 +21,19 @@ public class BroadcastCommand implements CommandExecutor {
             String help = ChatColor.RED + "Available messages: " + "attack, " + "busy-staff, " + "busy-server, " + "maintenance-awaiting, " + "currently-maintaining";
             if (args.length == 1) {
                 String brbuild = "broadcast-" + args[0].toString();
-                
+
                 if (lain.getConfig().contains(brbuild)) {
                     lain.broadcastMessage(ChatColor.GREEN + lain.getConfig().getString(brbuild));
                 } else {
                     lain.error(sender, help);
                 }
-            }else {
+            } else {
                 lain.error(sender, help);
             }
         } else {
             lain.badperms(sender);
         }
-        
+
         return true;
     }
 }
