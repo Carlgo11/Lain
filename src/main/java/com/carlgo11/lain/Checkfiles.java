@@ -32,7 +32,6 @@ public class Checkfiles implements Listener {
 
             System.out.println("[Lain] No config.yml detected, config.yml created");
         }
-
     }
 
     public void loadCommands()
@@ -76,6 +75,5 @@ public class Checkfiles implements Listener {
         } catch (Exception ex) {
             System.out.println("save-ignored error: " + ex);
         }
-
     }
 }

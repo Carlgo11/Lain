@@ -8,7 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-public class AdminCommand implements ChatCommands{
+public class AdminCommand implements ChatCommands {
 
     public String getCommandName()
     {
@@ -17,7 +17,7 @@ public class AdminCommand implements ChatCommands{
 
     public void onMessage(Lain Lain, Player p, String msg, String cmd, String[] args)
     {
-         Lain.checkOp(p);
+        Lain.checkOp(p);
         if (p.hasPermission("lain.group.admin") && Mysql.getRank(p.getName()).equalsIgnoreCase("admin")) {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " builder");
             Lain.broadcastMessage(ChatColor.YELLOW + p.getName() + Messages.nolongeradmin);
@@ -28,5 +28,4 @@ public class AdminCommand implements ChatCommands{
             Lain.badperms(p);
         }
     }
-
 }

@@ -7,7 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-public class DownCommand implements ChatCommands{
+public class DownCommand implements ChatCommands {
 
     public String getCommandName()
     {
@@ -17,12 +17,11 @@ public class DownCommand implements ChatCommands{
     public void onMessage(Lain Lain, Player p, String msg, String cmd, String[] args)
     {
         String rank = Mysql.getRank(p.getName());
-        if(rank != null){
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd "+p.getName()+" builder");
-            Lain.broadcastMessage(ChatColor.YELLOW+p.getName()+" is no longer "+rank+"!");
-        }else{
+        if (rank != null) {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " builder");
+            Lain.broadcastMessage(ChatColor.YELLOW + p.getName() + " is no longer " + rank + "!");
+        } else {
             Lain.badperms(p);
         }
     }
-
 }

@@ -8,7 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-public class OwnerCommand implements ChatCommands{
+public class OwnerCommand implements ChatCommands {
 
     public String getCommandName()
     {
@@ -28,5 +28,4 @@ public class OwnerCommand implements ChatCommands{
             Lain.badperms(p);
         }
     }
-
 }

@@ -19,22 +19,21 @@ public class MotdCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
-        if(sender.hasPermission("Lain.motd")){
-            if(args.length >= 1){
+        if (sender.hasPermission("Lain.motd")) {
+            if (args.length >= 1) {
                 StringBuilder d = new StringBuilder();
-                for(int i = 0; i < args.length; i++){
+                for (int i = 0; i < args.length; i++) {
                     d.append(args[i]);
                     d.append(" ");
                 }
                 Mysql.setMOTD(d.toString());
-                plugin.broadcastMessage(ChatColor.GREEN+sender.getName()+" changed the MOTD to \""+ChatColor.RESET+d.toString()+ChatColor.GREEN+"\"");
-            }else{
+                plugin.broadcastMessage(ChatColor.GREEN + sender.getName() + " changed the MOTD to \"" + ChatColor.RESET + d.toString() + ChatColor.GREEN + "\"");
+            } else {
                 return false;
             }
-        }else{
+        } else {
             plugin.badperms(sender);
         }
         return true;
     }
-
 }

@@ -8,7 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-public class ModCommand implements ChatCommands{
+public class ModCommand implements ChatCommands {
 
     public String getCommandName()
     {
@@ -17,7 +17,7 @@ public class ModCommand implements ChatCommands{
 
     public void onMessage(Lain Lain, Player p, String msg, String cmd, String[] args)
     {
-       Lain.checkOp(p);
+        Lain.checkOp(p);
         if (p.hasPermission("Lain.group.mod") && Mysql.getRank(p.getName()).equalsIgnoreCase("moderator")) {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " builder");
             Lain.broadcastMessage(ChatColor.YELLOW + p.getName() + Messages.nolongermod);

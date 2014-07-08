@@ -3,8 +3,9 @@ package com.carlgo11.lain;
 import java.util.Random;
 
 public class random {
-    
-    public static int getInt(int i){
+
+    public static int getInt(int i)
+    {
         int qwe = 0;
         int a = 0;
         if (i < 3 || qwe == 0) {

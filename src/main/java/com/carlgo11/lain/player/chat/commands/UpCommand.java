@@ -17,14 +17,11 @@ public class UpCommand implements ChatCommands {
     public void onMessage(Lain Lain, Player p, String msg, String cmd, String[] args)
     {
         String rank = Mysql.getRank(p.getName());
-        if(rank != null){
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd "+p.getName()+" "+rank);
-            Lain.broadcastMessage(ChatColor.YELLOW+p.getName()+" now has "+rank+"!");
-        }else{
+        if (rank != null) {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " " + rank);
+            Lain.broadcastMessage(ChatColor.YELLOW + p.getName() + " now has " + rank + "!");
+        } else {
             Lain.badperms(p);
         }
     }
-    
-    
-
 }

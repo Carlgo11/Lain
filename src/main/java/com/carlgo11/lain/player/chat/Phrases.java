@@ -113,7 +113,7 @@ public class Phrases implements Listener {
             outp = "Do I know you?";
         }
         if (ra == 6) {
-            outp = "Haaaaaaaaai "+name+"! :D";
+            outp = "Haaaaaaaaai " + name + "! :D";
         }
         if (ra == 7) {
             outp = "Oh hello " + name + " :)";
@@ -157,5 +157,4 @@ public class Phrases implements Listener {
             }
         }
     }
-
 }
