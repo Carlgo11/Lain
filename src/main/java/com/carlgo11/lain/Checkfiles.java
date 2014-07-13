@@ -37,7 +37,7 @@ public class Checkfiles implements Listener {
     public void loadCommands()
     {
         try {
-            File dir = new File("/var/www/lain/");;
+            File dir = new File("/var/www/lain/");
             if (!dir.exists()) {
                 dir.mkdir();
             }
