@@ -24,10 +24,7 @@ public class DefineCommand implements ChatCommands {
                 ArrayList<String> a = WASearch.search(d.toString());
                 
                 for(int i = 0; i < a.size(); i++){
-                    if(a.get(i).equals("")){
                      Bukkit.broadcastMessage("");
-                }
-                
                 }
     }
 
