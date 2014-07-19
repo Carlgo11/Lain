@@ -22,13 +22,12 @@ public class DefineCommand implements ChatCommands {
                 }
                 ArrayList<String> a = WASearch.search(d.toString());
                 
-                StringBuilder f = new StringBuilder();
+
                 for(int i = 0; i < a.size(); i++){
-                    f.append(a.get(i));
-                    f.append("\n\n");
+                    Lain.broadcastMessage(a.get(i)+"\n");
                 }
                 
-      Lain.broadcastMessage(f.toString());
+      
     }
 
 }
