@@ -1,6 +1,8 @@
 package com.carlgo11.lain.player.chat;
 
 import com.carlgo11.lain.Lain;
+import com.carlgo11.lain.WASearch;
+import java.util.ArrayList;
 import java.util.Random;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -27,7 +29,9 @@ public class Phrases implements Listener {
         if (!e.isCancelled()) {
             if (equalsHi(msg)) {
                 lain.broadcastMessage(ChatColor.GREEN + returnGreeting(p));
-            } else {
+            } else if(msg.toLowerCase().startsWith("lain what is")){
+                wa(p, args);
+            }else{
                 heatherCommand(p, args);
             }
         }
@@ -157,4 +161,14 @@ public class Phrases implements Listener {
             }
         }
     }
+    void wa(Player p, String[] args){
+        StringBuilder d = new StringBuilder();
+        for(int i = 3; i < args.length; i++){
+        d.append(args[i]);
+        d.append(" ");
+    }
+        ArrayList<String> a = WASearch.search(d.toString());
+        
+    }
 }
+
