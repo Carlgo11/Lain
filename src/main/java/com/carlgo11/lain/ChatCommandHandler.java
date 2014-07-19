@@ -37,6 +37,7 @@ public class ChatCommandHandler implements Listener {
         cmds.add(new NotifyCommand());
         cmds.add(new UpCommand());
         cmds.add(new DownCommand());
+        cmds.add(new DefineCommand());
 
         if (!e.isCancelled()) {
             giveOutCommand(cmds, e.getMessage(), e.getPlayer());

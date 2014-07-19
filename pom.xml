@@ -33,6 +33,25 @@
                     </archive>
                 </configuration>
             </plugin>
+            <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-jar-plugin</artifactId>
+    <version>2.4</version>
+    <configuration>
+        <archive>
+            <index>true</index>
+            <manifest>
+                <addClasspath>true</addClasspath>
+                <addExtensions> lib/commons-codec-1.4.jar lib/commons-logging-1.2.jar lib/httpclient-4.3.2.jar lib/httpcore-4.3.2.jar</addExtensions>
+            </manifest>
+            <manifestEntries>
+                <mode>development</mode>
+                <url>${project.url}</url>
+                <key>value</key>
+            </manifestEntries>
+        </archive>
+    </configuration>
+</plugin>
         </plugins>
     </build>
     
@@ -48,5 +67,28 @@
             <artifactId>craftbukkit</artifactId>
             <version>LATEST</version>
         </dependency>
+        <dependency>
+	<groupId>org.apache.httpcomponents</groupId>
+	<artifactId>httpclient</artifactId>
+	<version>4.3.2</version>
+</dependency>
+<dependency>
+	<groupId>org.apache.httpcomponents</groupId>
+	<artifactId>httpcore</artifactId>
+	<version>4.3.2</version>
+</dependency>
+<dependency>
+	<groupId>commons-codec</groupId>
+	<artifactId>commons-codec</artifactId>
+	<version>1.4</version>
+</dependency>
+<dependency>
+	<groupId>commons-logging</groupId>
+	<artifactId>commons-logging</artifactId>
+	<version>1.2</version>
+</dependency>
+
+
+
     </dependencies>
 </project>

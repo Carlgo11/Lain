@@ -68,7 +68,6 @@ public class Lain extends JavaPlugin {
         getCommand("broadcast").setExecutor(new BroadcastCommand(this));
         getCommand("motd").setExecutor(new MotdCommand(this));
         getCommand("banall").setExecutor(new BanAllCommand(this));
-
     }
 
     public void sendMessage(final Player p, final String s)
