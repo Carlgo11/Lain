@@ -24,7 +24,6 @@ public class WASearch {
         WAEngine engine = new WAEngine();
 
         engine.setAppID(appid);
-        engine.addFormat("plaintext");
 
         WAQuery query = engine.createQuery();
 
