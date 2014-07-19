@@ -4,6 +4,7 @@ import com.carlgo11.lain.ChatCommands;
 import com.carlgo11.lain.Lain;
 import com.carlgo11.lain.WASearch;
 import java.util.ArrayList;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class DefineCommand implements ChatCommands {
@@ -22,12 +23,12 @@ public class DefineCommand implements ChatCommands {
                 }
                 ArrayList<String> a = WASearch.search(d.toString());
                 
-
                 for(int i = 0; i < a.size(); i++){
-                    Lain.broadcastMessage(a.get(i)+"\n");
+                    if(a.get(i).equals("")){
+                     Bukkit.broadcastMessage("");
                 }
                 
-      
+                }
     }
 
 }

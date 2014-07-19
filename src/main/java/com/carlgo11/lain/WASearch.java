@@ -43,9 +43,6 @@ public class WASearch {
             } else {
                 for (WAPod pod : queryResult.getPods()) {
                     if (!pod.isError()) {
-                        if(!pod.getTitle().equals("Image")){
-                      //  d.add(pod.getTitle());
-                       // d.add("------------");
                         for (WASubpod subpod : pod.getSubpods()) {
                             for (Object element : subpod.getContents()) {
                                 if (element instanceof WAPlainText) {
@@ -53,7 +50,6 @@ public class WASearch {
                                     d.add("");
                                 }
                             }
-                        }
                         }
                     }
                 }
