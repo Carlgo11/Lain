@@ -46,7 +46,11 @@ public class WASearch {
                 }
                 d.add("Did you mean: "+a.toString()+"?");
             } else {
+                int g = 0;
                 for (WAPod pod : queryResult.getPods()) {
+                    if(g>2){
+                        break;
+                    }
                     if (!pod.isError()) {
                         for (WASubpod subpod : pod.getSubpods()) {
                             for (Object element : subpod.getContents()) {
@@ -57,6 +61,7 @@ public class WASearch {
                             }
                         }
                     }
+                    g++;
                 }
             }
         } catch (WAException e) {
