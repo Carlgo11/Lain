@@ -38,7 +38,13 @@ public class WASearch {
                 d.add("  error code: " + queryResult.getErrorCode());
                 d.add("  error message: " + queryResult.getErrorMessage());
             } else if (!queryResult.isSuccess()) {
-                d.add("Did you mean: "+queryResult.getDidYouMeans()+"?");
+                StringBuilder a = new StringBuilder();
+                String[] b = queryResult.getDidYouMeans();
+                for(int i = 0; i < b.length; i++){
+                    a.append(b[i]);
+                    a.append(", ");
+                }
+                d.add("Did you mean: "+a.toString()+"?");
             } else {
                 for (WAPod pod : queryResult.getPods()) {
                     if (!pod.isError()) {
