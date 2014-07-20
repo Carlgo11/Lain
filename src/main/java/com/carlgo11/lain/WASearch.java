@@ -48,7 +48,7 @@ public class WASearch {
             } else {
                 int g = 0;
                 for (WAPod pod : queryResult.getPods()) {
-                    if(g>2){
+                    if(g>1){
                         break;
                     }
                     if (!pod.isError()) {
