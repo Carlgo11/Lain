@@ -51,15 +51,19 @@ public class WASearch {
                     if(g>1){
                         break;
                     }
+                    if(!pod.getTitle().equals("Input interpretation")){
                     if (!pod.isError()) {
+                        int h = 0;
                         for (WASubpod subpod : pod.getSubpods()) {
                             for (Object element : subpod.getContents()) {
                                 if (element instanceof WAPlainText) {
                                     d.add(((WAPlainText) element).getText());
                                     d.add("");
+                                    break;
                                 }
                             }
                         }
+                    }
                     }
                     g++;
                 }
@@ -69,5 +73,4 @@ public class WASearch {
         }
         return d;
     }
-
 }
