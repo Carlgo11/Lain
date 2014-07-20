@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-public class DefineCommand implements ChatCommands {
+public class SearchCommand implements ChatCommands {
 
     public String getCommandName()
     {
-        return "define";
+        return "search";
     }
     
     public void onMessage(Lain Lain, Player p, String msg, String cmd, String[] args)
