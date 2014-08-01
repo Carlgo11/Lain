@@ -59,7 +59,6 @@ public class Mysql {
                 lgr.log(Level.WARNING, ex.getMessage(), ex);
             }
         }
-        return null;
     }
 
     public static String getMOTD(String Whitelist)
