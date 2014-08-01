@@ -26,6 +26,41 @@ public class Mysql {
         Mysql.rankstable = rankstable;
         Mysql.motdtable = motdtable;
     }
+    
+    public static void createTables(){
+        Connection con = null;
+        Statement st = null;
+        ResultSet rs = null;
+
+        try {
+            con = DriverManager.getConnection(Mysql.url + Mysql.database, Mysql.username, Mysql.password);
+            st = con.createStatement();
+            st.execute("CREATE TABLE IF NOT EXISTS "+Mysql.database+"."+Mysql.rankstable+" (id int(11), Player text, Rank text, OP text, Hide text);");
+            st.execute("CREATE TABLE IF NOT EXISTS "+Mysql.database+"."+DotCommands.table+" (command text, aliases text, message text);");
+            st.execute("CREATE TABLE IF NOT EXISTS"+Mysql.database+"."+Mysql.motdtable+" (motd text, `only on whitelist` text);");
+        } catch (SQLException ex) {
+            Logger lgr = Logger.getLogger(Mysql.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (st != null) {
+                    st.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+
+            } catch (SQLException ex) {
+                Logger lgr = Logger.getLogger(Mysql.class.getName());
+                lgr.log(Level.WARNING, ex.getMessage(), ex);
+            }
+        }
+        return null;
+    }
 
     public static String getMOTD(String Whitelist)
     {
