@@ -59,6 +59,7 @@ public class Lain extends JavaPlugin {
         pm.registerEvents(new ServerListPing(this), this);
         pm.registerEvents(new PlayerLogin(this), this);
         pm.registerEvents(new PlayerDamage(), this);
+        pm.registerEvents(new PlayerInteract(), this);
     }
 
     public void commands()
