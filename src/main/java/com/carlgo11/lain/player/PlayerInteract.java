@@ -26,7 +26,11 @@ public class PlayerInteract implements Listener {
             p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 2000, 20));
             p.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 2000, 20));
             p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 2060, 20));
+            if(p.getItemInHand().getAmount() > 1){
             p.getItemInHand().setAmount(p.getItemInHand().getAmount() - 1);
+            }else{
+            p.getItemInHand().setType(Material.AIR);
+            }
             Bukkit.broadcastMessage(ChatColor.GREEN + p.getName() + " is now a cat on drugs");
         }
     }
