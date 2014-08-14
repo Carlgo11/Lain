@@ -22,17 +22,16 @@ public class PlayerInteract implements Listener {
 
         if (p.getItemInHand().getType() == Material.SUGAR) {
             p.getWorld().playSound(p.getLocation(), Sound.CAT_MEOW, 1, 1);
-            p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 2000, 20));
-            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 2000, 20));
-            p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 2000, 20));
-            p.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 2000, 20));
-            p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 2060, 20));
+            p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 1200, 20));
+            p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1200, 20));
+            p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 1200, 20));
+            p.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 1200, 20));
+            p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1260, 20));
             if(p.getItemInHand().getAmount() > 1){
             p.getItemInHand().setAmount(p.getItemInHand().getAmount() - 1);
             }else{
             p.getInventory().setItemInHand(new ItemStack(Material.AIR));
             }
-            Bukkit.broadcastMessage(ChatColor.GREEN + p.getName() + " is now a cat on drugs");
         }
     }
 
