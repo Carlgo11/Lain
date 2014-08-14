@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -29,7 +30,7 @@ public class PlayerInteract implements Listener {
             if(p.getItemInHand().getAmount() > 1){
             p.getItemInHand().setAmount(p.getItemInHand().getAmount() - 1);
             }else{
-            p.getItemInHand().setType(Material.AIR);
+            p.getInventory().setItemInHand(new ItemStack(Material.AIR));
             }
             Bukkit.broadcastMessage(ChatColor.GREEN + p.getName() + " is now a cat on drugs");
         }
