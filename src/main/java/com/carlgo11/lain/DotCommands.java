@@ -99,12 +99,12 @@ public class DotCommands {
             st = con.createStatement();
             if (!containsCommand(command)) {
                 
-                PreparedStatement ps = con.prepareStatement("INSERT INTO `" + DotCommands.table + "` (`command`, `aliases`, `message`) VALUES ('?', '', '?');");
+                PreparedStatement ps = con.prepareStatement("INSERT INTO `" + DotCommands.table + "` (`command`, `aliases`, `message`) VALUES (?, '', ?);");
                 ps.setString(1, command);
                 ps.setString(2, message);
                 ps.executeQuery();
             } else {
-                PreparedStatement ps = con.prepareStatement("UPDATE `" + DotCommands.table + "` SET `command` = '?', `aliases` = '', `message` = '?' WHERE `command` = '?';");
+                PreparedStatement ps = con.prepareStatement("UPDATE `" + DotCommands.table + "` SET `command` = ?, `aliases` = '', `message` = ? WHERE `command` = ?;");
                 ps.setString(1, command);
                 ps.setString(2, message);
                 ps.setString(3, command);
@@ -147,7 +147,7 @@ public class DotCommands {
         try {
             con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
             st = con.createStatement();
-            PreparedStatement ps = con.prepareStatement("UPDATE `?` SET `aliases` = '?', `message` = '?' WHERE `command` = '?';");
+            PreparedStatement ps = con.prepareStatement("UPDATE ? SET `aliases` = ?, `message` = ? WHERE `command` = ?;");
             ps.setString(1, DotCommands.table);
             ps.setString(2, d.toString());
             ps.setString(3, command);
@@ -183,7 +183,7 @@ public class DotCommands {
             con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
             st = con.createStatement();
             if (!containsCommand(command)) {
-                PreparedStatement ps = con.prepareStatement("DELETE FROM `?` WHERE `command` = '?';");
+                PreparedStatement ps = con.prepareStatement("DELETE FROM ? WHERE `command` = ?;");
                 ps.setString(1, DotCommands.table);
                 ps.setString(2, command);
                 ps.execute();
@@ -229,7 +229,7 @@ public class DotCommands {
         try {
             con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
             st = con.createStatement();
-            PreparedStatement ps = con.prepareStatement("UPDATE `?` SET `aliases` '?' WHERE `command` = '?';");
+            PreparedStatement ps = con.prepareStatement("UPDATE ? SET `aliases` = ? WHERE `command` = ?;");
             ps.setString(1, DotCommands.table);
             ps.setString(2, d.toString());
             ps.setString(3, command);
