@@ -44,24 +44,25 @@ public class ChatCommandHandler implements Listener {
         }
     }
 
-    boolean giveOutCommand(List<ChatCommands> cmds, String msg, Player p)
+    void giveOutCommand(List<ChatCommands> cmds, String msg, Player p)
     {
         String[] args = msg.split(" ");
         for (ChatCommands cmd : cmds) {
             if (args[0].equalsIgnoreCase("." + cmd.getCommandName())) {
                 cmd.onMessage(lain, p, msg, args[0], args);
-                return true;
+                return;
             }
         }
         ExternalCommands.Main(msg, p, lain);
-        return false;
     }
 
     public static boolean containsCommand(String command)
     {
-        for (ChatCommands cmd : ChatCommandHandler.cmds) {
-            if (command.equalsIgnoreCase(cmd.getCommandName())) {
-                return true;
+        if (command != null) {
+            for (ChatCommands cmd : ChatCommandHandler.cmds) {
+                if (command.equalsIgnoreCase(cmd.getCommandName())) {
+                    return true;
+                }
             }
         }
         return false;
