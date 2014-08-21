@@ -2,6 +2,7 @@ package com.carlgo11.lain;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -97,9 +98,17 @@ public class DotCommands {
             con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
             st = con.createStatement();
             if (!containsCommand(command)) {
-                st.execute("INSERT INTO `" + DotCommands.table + "` (`command`, `aliases`, `message`) VALUES ('" + command + "', '', '" + message + "');");
+                
+                PreparedStatement ps = con.prepareStatement("INSERT INTO `" + DotCommands.table + "` (`command`, `aliases`, `message`) VALUES ('?', '', '?');");
+                ps.setString(1, command);
+                ps.setString(2, message);
+                        ps.executeQuery();
             } else {
-                st.execute("UPDATE `" + DotCommands.table + "` SET `command` = '" + command + "', `aliases` = '', `message` = '" + message + "' WHERE `command` = '" + command + "';");
+                PreparedStatement ps = con.prepareStatement("UPDATE `" + DotCommands.table + "` SET `command` = '?', `aliases` = '', `message` = '?' WHERE `command` = '?';");
+                ps.setString(1, command);
+                ps.setString(2, message);
+                ps.setString(3, command);
+                ps.execute();
             }
 
         } catch (SQLException ex) {
@@ -138,7 +147,12 @@ public class DotCommands {
         try {
             con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
             st = con.createStatement();
-            st.execute("UPDATE `" + DotCommands.table + "` SET `aliases` = '" + d.toString() + "', `message` = '" + command + "' WHERE `command` = '" + command + "';");
+            PreparedStatement ps = con.prepareStatement("UPDATE `?` SET `aliases` = '?', `message` = '?' WHERE `command` = '?';");
+            ps.setString(1, DotCommands.table);
+            ps.setString(2, d.toString());
+            ps.setString(3, command);
+            ps.setString(4, command);
+            ps.execute();
 
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(DotCommands.class.getName());
@@ -169,7 +183,10 @@ public class DotCommands {
             con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
             st = con.createStatement();
             if (!containsCommand(command)) {
-                st.execute("DELETE FROM `" + DotCommands.table + "` WHERE `command` = '" + command + "';");
+                PreparedStatement ps = con.prepareStatement("DELETE FROM `?` WHERE `command` = '?';");
+                ps.setString(1, DotCommands.table);
+                ps.setString(2, command);
+                ps.execute();
 
             }
 
@@ -212,8 +229,10 @@ public class DotCommands {
         try {
             con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
             st = con.createStatement();
-            st.execute("UPDATE `" + DotCommands.table + "` SET `aliases` '" + d.toString() + "' WHERE `command` = '" + command + "';");
-
+            PreparedStatement ps = con.prepareStatement("UPDATE `?` SET `aliases` '?' WHERE `command` = '?';");
+            ps.setString(1, DotCommands.table);
+            ps.setString(2, d.toString());
+            ps.setString(3, command);
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(DotCommands.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);

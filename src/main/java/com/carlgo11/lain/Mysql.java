@@ -2,6 +2,7 @@ package com.carlgo11.lain;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -202,7 +203,9 @@ public class Mysql {
         try {
             con = DriverManager.getConnection(url + database, Mysql.username, Mysql.password);
             st = con.createStatement();
-            st.execute("UPDATE `" + Mysql.motdtable + "` SET `MOTD` = '" + motd + "' WHERE `only on whitelist` = 'false';");
+            PreparedStatement ps = con.prepareStatement("UPDATE `?` SET `MOTD` = '?' WHERE `only on whitelist` = 'false';");
+            ps.setString(1, Mysql.motdtable);
+            ps.setString(2, motd);
 
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(Mysql.class.getName());
