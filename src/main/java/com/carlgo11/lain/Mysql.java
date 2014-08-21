@@ -203,9 +203,8 @@ public class Mysql {
         try {
             con = DriverManager.getConnection(url + database, Mysql.username, Mysql.password);
             st = con.createStatement();
-            PreparedStatement ps = con.prepareStatement("UPDATE ? SET `MOTD` = ? WHERE `only on whitelist` = 'false';");
-            ps.setString(1, Mysql.motdtable);
-            ps.setString(2, motd);
+            PreparedStatement ps = con.prepareStatement("UPDATE "+Mysql.motdtable+" SET `MOTD` = ? WHERE `only on whitelist` = 'false'");
+            ps.setString(1, motd);
             ps.execute();
 
         } catch (SQLException ex) {
