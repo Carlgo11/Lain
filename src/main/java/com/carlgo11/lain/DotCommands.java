@@ -102,7 +102,7 @@ public class DotCommands {
                 PreparedStatement ps = con.prepareStatement("INSERT INTO `" + DotCommands.table + "` (`command`, `aliases`, `message`) VALUES (?, '', ?);");
                 ps.setString(1, command);
                 ps.setString(2, message);
-                ps.executeQuery();
+                ps.execute();
             } else {
                 PreparedStatement ps = con.prepareStatement("UPDATE `" + DotCommands.table + "` SET `command` = ?, `aliases` = '', `message` = ? WHERE `command` = ?;");
                 ps.setString(1, command);
