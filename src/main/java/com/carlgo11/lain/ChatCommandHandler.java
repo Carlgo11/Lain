@@ -59,7 +59,7 @@ public class ChatCommandHandler implements Listener {
 
     public static boolean containsCommand(String command)
     {
-        for (ChatCommands cmd : cmds) {
+        for (ChatCommands cmd : ChatCommandHandler.cmds) {
             if (command.equalsIgnoreCase(cmd.getCommandName())) {
                 return true;
             }
