@@ -206,6 +206,7 @@ public class Mysql {
             PreparedStatement ps = con.prepareStatement("UPDATE `?` SET `MOTD` = '?' WHERE `only on whitelist` = 'false';");
             ps.setString(1, Mysql.motdtable);
             ps.setString(2, motd);
+            ps.execute();
 
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(Mysql.class.getName());

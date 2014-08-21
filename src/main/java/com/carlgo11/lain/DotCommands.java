@@ -102,7 +102,7 @@ public class DotCommands {
                 PreparedStatement ps = con.prepareStatement("INSERT INTO `" + DotCommands.table + "` (`command`, `aliases`, `message`) VALUES ('?', '', '?');");
                 ps.setString(1, command);
                 ps.setString(2, message);
-                        ps.executeQuery();
+                ps.executeQuery();
             } else {
                 PreparedStatement ps = con.prepareStatement("UPDATE `" + DotCommands.table + "` SET `command` = '?', `aliases` = '', `message` = '?' WHERE `command` = '?';");
                 ps.setString(1, command);
@@ -233,6 +233,7 @@ public class DotCommands {
             ps.setString(1, DotCommands.table);
             ps.setString(2, d.toString());
             ps.setString(3, command);
+            ps.execute();
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(DotCommands.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
