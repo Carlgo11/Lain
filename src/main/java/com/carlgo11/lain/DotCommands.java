@@ -184,6 +184,7 @@ public class DotCommands {
             if (!containsCommand(command)) {
                 PreparedStatement ps = con.prepareStatement("DELETE FROM "+DotCommands.table+" WHERE `command` = ?");
                 ps.setString(1, command);
+                System.out.println(ps.toString());
                 ps.execute();
 
             }
