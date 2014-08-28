@@ -181,13 +181,10 @@ public class DotCommands {
         try {
             con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
             st = con.createStatement();
-            if (!containsCommand(command)) {
                 PreparedStatement ps = con.prepareStatement("DELETE FROM "+DotCommands.table+" WHERE `command` = ?");
                 ps.setString(1, command);
-                System.out.println(ps.toString());
                 ps.execute();
 
-            }
 
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(DotCommands.class.getName());
