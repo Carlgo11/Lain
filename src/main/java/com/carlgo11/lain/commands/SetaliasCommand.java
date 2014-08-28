@@ -29,7 +29,7 @@ public class SetaliasCommand implements CommandExecutor {
         Player p = Bukkit.getPlayer(sender.getName());
 
         DotCommands dc = new DotCommands();
-        if (ChatCommandHandler.containsCommand(args[0], ChatCommandHandler.cmds)) {
+        if (ChatCommandHandler.containsCommand(args[0])) {
             if (args.length == 1) {
                 if (dc.containsAlias(args[0])) {
                     if (sender.hasPermission("lain.cmd.delalias")) {

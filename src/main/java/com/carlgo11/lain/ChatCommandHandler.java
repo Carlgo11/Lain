@@ -52,8 +52,21 @@ public class ChatCommandHandler implements Listener {
         ExternalCommands.Main(msg, p, lain);
     }
 
-    public static boolean containsCommand(String command, List<ChatCommands> cmds)
+    public static boolean containsCommand(String command)
     {
+        List<ChatCommands> cmds;
+        cmds = new ArrayList<ChatCommands>();
+        cmds.add(new GoogleCommand());
+        cmds.add(new GCommand());
+        cmds.add(new OpCommand());
+        cmds.add(new PerformCommand());
+        cmds.add(new VersionCommand());
+        cmds.add(new JonkCommand());
+        cmds.add(new NotifyCommand());
+        cmds.add(new UpCommand());
+        cmds.add(new DownCommand());
+        cmds.add(new SearchCommand());
+        
         if (command != null) {
             for (ChatCommands cmd : cmds) {
                 if (command.equalsIgnoreCase(cmd.getCommandName())) {
