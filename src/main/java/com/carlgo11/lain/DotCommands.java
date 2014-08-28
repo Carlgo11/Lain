@@ -147,10 +147,9 @@ public class DotCommands {
         try {
             con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
             st = con.createStatement();
-            PreparedStatement ps = con.prepareStatement("UPDATE "+DotCommands.table+" SET `aliases` = ?, `message` = ? WHERE `command` = ?;");
+            PreparedStatement ps = con.prepareStatement("UPDATE "+DotCommands.table+" SET `aliases` = ? WHERE `command` = ?;");
             ps.setString(1, d.toString());
             ps.setString(2, command);
-            ps.setString(3, command);
             ps.execute();
 
         } catch (SQLException ex) {
@@ -182,7 +181,6 @@ public class DotCommands {
             con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
             st = con.createStatement();
                 PreparedStatement ps = con.prepareStatement("DELETE FROM "+DotCommands.table+" WHERE `command` = ?");
-                System.out.println(ps.toString());
                 ps.setString(1, command);
                 ps.execute();
 
@@ -209,7 +207,6 @@ public class DotCommands {
 
     public void removeAlias(String alias, String command)
     {
-
         StringBuilder d = new StringBuilder();
         String a = getAliases(alias);
         String[] b = a.split(" ");
