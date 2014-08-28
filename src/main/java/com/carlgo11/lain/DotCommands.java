@@ -301,17 +301,14 @@ public class DotCommands {
 
         try {
             con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
-            st = con.createStatement();
-            rs = st.executeQuery("SELECT command from " + DotCommands.table);
-            while (true) {
+           PreparedStatement ps = con.prepareStatement("SELECT command FROM " + DotCommands.table+ "WHERE `command` = ?");
+           ps.setString(1, command);
+            rs = ps.executeQuery();
                 if (rs.next()) {
-                    if (rs.getString(1).equals(command)) {
                         return true;
-                    }
                 } else {
-                    break;
+                    return false;
                 }
-            }
 
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(DotCommands.class.getName());
@@ -345,8 +342,8 @@ public class DotCommands {
 
         try {
             con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
-            st = con.createStatement();
-            rs = st.executeQuery("SELECT aliases from " + DotCommands.table);
+            PreparedStatement ps = con.prepareStatement("SELECT aliases FROM " + DotCommands.table);
+            rs = ps.executeQuery();
             while (true) {
                 if (rs.next()) {
                     if (rs.getString(1).contains(alias)) {
