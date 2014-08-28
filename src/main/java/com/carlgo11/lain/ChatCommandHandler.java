@@ -52,10 +52,10 @@ public class ChatCommandHandler implements Listener {
         ExternalCommands.Main(msg, p, lain);
     }
 
-    public static boolean containsCommand(String command)
+    public static boolean containsCommand(String command, List<ChatCommands> cmds)
     {
         if (command != null) {
-            for (ChatCommands cmd : ChatCommandHandler.cmds) {
+            for (ChatCommands cmd : cmds) {
                 if (command.equalsIgnoreCase(cmd.getCommandName())) {
                     return true;
                 }

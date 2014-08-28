@@ -20,7 +20,7 @@ public class SetcmdCommand implements CommandExecutor {
             return false;
         }
 
-        if (!ChatCommandHandler.containsCommand(args[0])) {
+        if (!ChatCommandHandler.containsCommand(args[0],ChatCommandHandler.cmds )) {
             try {
                 if (args.length == 1) {
                     if (p.hasPermission("lain.cmd.delcmd")) {
