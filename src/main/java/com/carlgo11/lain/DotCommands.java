@@ -302,9 +302,8 @@ public class DotCommands {
 
         try {
             con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
-           PreparedStatement ps = con.prepareStatement("SELECT command FROM " + DotCommands.table+ "WHERE `command` = ?");
+           PreparedStatement ps = con.prepareStatement("SELECT command FROM " + DotCommands.table+ " WHERE `command` = ?");
            ps.setString(1, command);
-           System.out.println(ps.toString());
             rs = ps.executeQuery();
                 if (rs.next()) {
                         return true;
