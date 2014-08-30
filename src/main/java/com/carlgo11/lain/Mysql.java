@@ -27,8 +27,9 @@ public class Mysql {
         Mysql.rankstable = rankstable;
         Mysql.motdtable = motdtable;
     }
-    
-    public static void createTables(){
+
+    public static void createTables()
+    {
         Connection con = null;
         Statement st = null;
         ResultSet rs = null;
@@ -36,9 +37,9 @@ public class Mysql {
         try {
             con = DriverManager.getConnection(Mysql.url + Mysql.database, Mysql.username, Mysql.password);
             st = con.createStatement();
-            st.execute("CREATE TABLE IF NOT EXISTS "+Mysql.database+"."+Mysql.rankstable+" (id int(11), Player text, Rank text, OP text, Hide text);");
-            st.execute("CREATE TABLE IF NOT EXISTS "+Mysql.database+"."+DotCommands.table+" (command text, aliases text, message text);");
-            st.execute("CREATE TABLE IF NOT EXISTS"+Mysql.database+"."+Mysql.motdtable+" (motd text, `only on whitelist` text);");
+            st.execute("CREATE TABLE IF NOT EXISTS " + Mysql.database + "." + Mysql.rankstable + " (id int(11), Player text, Rank text, OP text, Hide text);");
+            st.execute("CREATE TABLE IF NOT EXISTS " + Mysql.database + "." + DotCommands.table + " (command text, aliases text, message text);");
+            st.execute("CREATE TABLE IF NOT EXISTS" + Mysql.database + "." + Mysql.motdtable + " (motd text, `only on whitelist` text);");
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(Mysql.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
@@ -203,7 +204,7 @@ public class Mysql {
         try {
             con = DriverManager.getConnection(url + database, Mysql.username, Mysql.password);
             st = con.createStatement();
-            PreparedStatement ps = con.prepareStatement("UPDATE "+Mysql.motdtable+" SET `MOTD` = ? WHERE `only on whitelist` = 'false'");
+            PreparedStatement ps = con.prepareStatement("UPDATE " + Mysql.motdtable + " SET `MOTD` = ? WHERE `only on whitelist` = 'false'");
             ps.setString(1, motd);
             ps.execute();
 

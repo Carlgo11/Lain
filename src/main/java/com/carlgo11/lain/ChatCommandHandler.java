@@ -30,7 +30,6 @@ public class ChatCommandHandler implements Listener {
         cmds.add(new PerformCommand());
         cmds.add(new VersionCommand());
         cmds.add(new JonkCommand());
-        cmds.add(new NotifyCommand());
         cmds.add(new UpCommand());
         cmds.add(new DownCommand());
         cmds.add(new SearchCommand());
@@ -62,11 +61,10 @@ public class ChatCommandHandler implements Listener {
         cmds.add(new PerformCommand());
         cmds.add(new VersionCommand());
         cmds.add(new JonkCommand());
-        cmds.add(new NotifyCommand());
         cmds.add(new UpCommand());
         cmds.add(new DownCommand());
         cmds.add(new SearchCommand());
-        
+
         if (command != null) {
             for (ChatCommands cmd : cmds) {
                 if (command.equalsIgnoreCase(cmd.getCommandName())) {

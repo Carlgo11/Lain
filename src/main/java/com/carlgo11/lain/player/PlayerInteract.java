@@ -25,10 +25,10 @@ public class PlayerInteract implements Listener {
             p.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 1200, 20));
             p.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 1200, 20));
             p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1260, 20));
-            if(p.getItemInHand().getAmount() > 1){
-            p.getItemInHand().setAmount(p.getItemInHand().getAmount() - 1);
-            }else{
-            p.getInventory().setItemInHand(new ItemStack(Material.AIR));
+            if (p.getItemInHand().getAmount() > 1) {
+                p.getItemInHand().setAmount(p.getItemInHand().getAmount() - 1);
+            } else {
+                p.getInventory().setItemInHand(new ItemStack(Material.AIR));
             }
         }
     }

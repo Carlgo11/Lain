@@ -13,7 +13,6 @@ import org.bukkit.ChatColor;
 public class WASearch {
 
     // PUT YOUR APPID HERE:
-
     private static String appid = "YQ3UVU-P4X3AER34J";
 
     public static ArrayList<String> search(String args)
@@ -60,10 +59,10 @@ public class WASearch {
                         for (WASubpod subpod : pod.getSubpods()) {
                             for (Object element : subpod.getContents()) {
                                 if (element instanceof WAPlainText) {
-                                    if(pod.getTitle().equals("Input interpretation")){
-                                     d.add(ChatColor.YELLOW+((WAPlainText) element).getText());
-                                    }else{
-                                    d.add(((WAPlainText) element).getText());
+                                    if (pod.getTitle().equals("Input interpretation")) {
+                                        d.add(ChatColor.YELLOW + ((WAPlainText) element).getText());
+                                    } else {
+                                        d.add(((WAPlainText) element).getText());
                                     }
                                     d.add("");
                                     break;

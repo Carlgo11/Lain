@@ -29,9 +29,9 @@ public class Phrases implements Listener {
         if (!e.isCancelled()) {
             if (equalsHi(msg)) {
                 lain.broadcastMessage(ChatColor.GREEN + returnGreeting(p));
-            } else if(msg.toLowerCase().startsWith("lain what is")){
+            } else if (msg.toLowerCase().startsWith("lain what is")) {
                 wa(p, args);
-            }else{
+            } else {
                 heatherCommand(p, args);
             }
         }
@@ -161,14 +161,15 @@ public class Phrases implements Listener {
             }
         }
     }
-    void wa(Player p, String[] args){
+
+    void wa(Player p, String[] args)
+    {
         StringBuilder d = new StringBuilder();
-        for(int i = 3; i < args.length; i++){
-        d.append(args[i]);
-        d.append(" ");
-    }
+        for (int i = 3; i < args.length; i++) {
+            d.append(args[i]);
+            d.append(" ");
+        }
         ArrayList<String> a = WASearch.search(d.toString());
-        
+
     }
 }
-

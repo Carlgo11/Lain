@@ -3,11 +3,6 @@ package com.carlgo11.lain.player.disconnect;
 import com.carlgo11.lain.Lain;
 import com.carlgo11.lain.Messages;
 import com.carlgo11.lain.Mysql;
-import com.carlgo11.lain.Prowl;
-import com.carlgo11.lain.player.chat.commands.PerformCommand;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -45,12 +40,7 @@ public class PlayerDisconnect implements Listener {
             if (!notify) {
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "stop");
             } else {
-                try {
-                    Prowl.send("Server restarted", 0);
-                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "stop");
-                } catch (IOException ex) {
-                    Logger.getLogger(PerformCommand.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "stop");
             }
         }
     }
