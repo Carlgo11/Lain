@@ -2,6 +2,7 @@ package com.carlgo11.lain;
 
 import org.bukkit.ChatColor;
 
+/* TODO: Move to .yml or .json file */
 public class Messages {
 
     public static String prefix = ChatColor.LIGHT_PURPLE + "[Lain] " + ChatColor.RESET;
@@ -24,5 +25,5 @@ public class Messages {
     public static String demoteusage = "Usage: .demote (player)";
     public static String demotemessage = "We've gone over the members of staff and have made the hard decision to demote you. Please stay calm and continue to follow the rules. Do not bring this up with any other players on the server. If you want to dispute this action email help@portalcraft.se and an owner will contact you within  24 hours. //The Owners of The Portalcraft.Se Servers";
     public static String immuneplayer = "That player is immune to that action. Please try with another user instead.";
-    
+
 }
