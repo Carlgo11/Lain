@@ -8,6 +8,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.server.ServerListPingEvent;
 
+/**
+ * Set server MOTD.
+ *
+ * @since 2.0
+ */
 public class ServerListPing implements Listener {
 
     Lain plugin;
@@ -23,11 +28,19 @@ public class ServerListPing implements Listener {
     {
         if (Bukkit.hasWhitelist()) {
             e.setMaxPlayers(0);
-            String msg = ChatColor.translateAlternateColorCodes('&', Mysql.getMOTD("true"));
-            e.setMotd(msg);
+            String plainMessage = Mysql.getMOTD(true);
+            if (plainMessage.contains("&")) {
+                e.setMotd(ChatColor.translateAlternateColorCodes('&', plainMessage));
+            } else {
+                e.setMotd(plainMessage);
+            }
         } else {
-            String msg = ChatColor.translateAlternateColorCodes('&', Mysql.getMOTD("false"));
-            e.setMotd(msg);
+            String plainMessage = Mysql.getMOTD(false);
+            if (plainMessage.contains("&")) {
+                e.setMotd(ChatColor.translateAlternateColorCodes('&', plainMessage));
+            } else {
+                e.setMotd(plainMessage);
+            }
         }
     }
 }

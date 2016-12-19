@@ -1,26 +1,78 @@
 main: com.carlgo11.lain.Lain
-name: Lain2
-version: 2.0
+name: Lain
+version: 2.1
 author: Carlgo11
+description: Lain is a server administration plugin made for The PortalCraft.Se Servers.
+website: https://github.com/carlgo11/Lain
+
 commands:
   lain:
     description: Main command for Lain
-    usage: /lain
+    usage: /<command> (say)
+    permission: lain.command.lain
   setcmd:
     description: add/modify/delelete a lain command.
     usage: /<command> [Command name] (message)
+    permission: lain.command.setcmd
   setalias:
     description: add/delelete an alias for a lain command.
     usage: /<command> [alias name] (command name)
-  tag:
-    description: Change your nickname and nametag
-    usage: /<command> (player) [nickname]
-  broadcast:
-    description: Broadcast a message to the server
-    usage: /<command> (message)
+    permission: lain.command.setalias
   motd:
     description: Changed the servers motd
     usage: /<command> (motd)
+    permission: lain.command.motd
   banall:
     description: Ban all players
     usage: /<command>
+    permission: lain.command.banall
+    
+permissions:
+  lain.command.banall:
+    default: op
+    description: Permission to use /banall
+  lain.command.lain:
+    default: true
+    description: Permission to use /lain
+  lain.command.lain.*:
+    default: op
+    description: Permission to use /lain and all subcommands
+    children:
+      lain.command.lain: true
+      lain.command.lain.say: true
+  lain.command.lain.say:
+    default: op
+    description: Permission to use /lain say
+  lain.command.motd:
+    default: op
+    description: Permission to use /motd
+  lain.command.setalias:
+    default: op
+    description: Permission to use /setalias
+  lain.command.setalias.*:
+    default: op
+    description: Permission to use /setalias and all subcommands
+    children:
+      lain.command.setalias: true
+      lain.command.setalias.delalias: true
+  lain.command.setalias.delalias:
+    default: op
+    description: Permission to use /setalias delalias
+  lain.command.setcmd:
+    default: op
+    description: Permission to use /setcmd
+  lain.command.setcmd.*:
+    default: op
+    description: Permission to use /setcmd and all subcommands
+    children:
+      lain.command.setcmd: true
+      lain.command.setcmd.delcmd: true
+  lain.command.setcmd.delcmd:
+    default: op
+    description: Permission to use /setcmd delcmd
+  lain.dotcommand.jonk:
+    default: true
+    description: Permission to use .jonk
+  lain.dotcommand.version:
+    default: true
+    description: Permission to use .version

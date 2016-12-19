@@ -11,7 +11,6 @@ import java.util.logging.Logger;
 
 public class DotCommands {
 
-    private Lain Lain;
 
     public static String url;
     public static String username;
@@ -19,9 +18,8 @@ public class DotCommands {
     public static String table;
     public static String database;
 
-    public void main(Lain plugin, String curl, String cusername, String cpassword, String ctable, String cdatabase)
+    public void main(String curl, String cusername, String cpassword, String ctable, String cdatabase)
     {
-        this.Lain = plugin;
         DotCommands.url = curl;
         DotCommands.username = cusername;
         DotCommands.password = cpassword;
@@ -45,10 +43,10 @@ public class DotCommands {
                     String[] b = a.split(" ");
 
                     if (rs.getString(1).equalsIgnoreCase(command)) {
-                        return rs.getString(3).toString();
+                        return rs.getString(3);
                     } else if (namegoeshere(command, b)) {
 
-                        return rs.getString(3).toString();
+                        return rs.getString(3);
                     }
                 } else {
                     break;
@@ -281,7 +279,6 @@ public class DotCommands {
                 if (con != null) {
                     con.close();
                 }
-
             } catch (SQLException ex) {
                 Logger lgr = Logger.getLogger(DotCommands.class.getName());
                 lgr.log(Level.WARNING, ex.getMessage(), ex);

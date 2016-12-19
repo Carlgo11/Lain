@@ -1,8 +1,7 @@
 package com.carlgo11.lain.player.join;
 
 import com.carlgo11.lain.Lain;
-import com.carlgo11.lain.Mysql;
-import org.bukkit.Bukkit;
+import com.carlgo11.lain.Staff;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -20,10 +19,8 @@ public class PlayerLogin implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerLogin(PlayerLoginEvent e)
     {
-        if (Bukkit.hasWhitelist()) {
-            if (Mysql.getRank(e.getPlayer().getName()) != null) {
-                e.allow();
-            }
+        if (Staff.isBotAdmin(e.getPlayer().getUniqueId(), plugin)) {
+            e.allow();
         }
     }
 }

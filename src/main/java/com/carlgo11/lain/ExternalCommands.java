@@ -6,6 +6,9 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 
+/**
+ * Handling of 'dotcommands' stored in the MySQL database.
+ */
 public class ExternalCommands {
 
     @EventHandler
@@ -20,17 +23,13 @@ public class ExternalCommands {
                 if (Bukkit.getOfflinePlayer(args[1]).isOnline()) {
                     if (dc.containsCommand(cmd) || dc.containsAlias(cmd)) {
                         broadcast(cmd, args, p, plugin, ChatColor.DARK_AQUA + args[1] + ": " + dc.getMessage(cmd));
-                        Bukkit.getPlayer(args[1]).getWorld().playSound(Bukkit.getPlayer(args[1]).getLocation(), Sound.ORB_PICKUP, 1, 0);
+                        Bukkit.getPlayer(args[1]).getWorld().playSound(Bukkit.getPlayer(args[1]).getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 0);
                     }
-                } else {
-                    if (dc.containsCommand(cmd) || dc.containsAlias(cmd)) {
-                        broadcast(cmd, args, p, plugin, dc.getMessage(cmd));
-                    }
-                }
-            } else {
-                if (dc.containsCommand(cmd) || dc.containsAlias(cmd)) {
+                } else if (dc.containsCommand(cmd) || dc.containsAlias(cmd)) {
                     broadcast(cmd, args, p, plugin, dc.getMessage(cmd));
                 }
+            } else if (dc.containsCommand(cmd) || dc.containsAlias(cmd)) {
+                broadcast(cmd, args, p, plugin, dc.getMessage(cmd));
             }
         }
     }

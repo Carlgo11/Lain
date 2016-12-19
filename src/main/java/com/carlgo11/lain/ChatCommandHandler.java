@@ -1,6 +1,6 @@
 package com.carlgo11.lain;
 
-import com.carlgo11.lain.player.chat.commands.*;
+import com.carlgo11.lain.player.dotcommands.*;
 import java.util.ArrayList;
 import java.util.List;
 import org.bukkit.entity.Player;
@@ -10,20 +10,43 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 public class ChatCommandHandler implements Listener {
 
-    private Lain lain;
+    private final Lain plugin;
 
     public ChatCommandHandler(Lain plug)
     {
-        this.lain = plug;
+        this.plugin = plug;
     }
 
-    public static List<ChatCommands> cmds;
+    public static List<ChatCommands> cmds = new ArrayList<ChatCommands>();
+    public static List<String> disabledcmds = new ArrayList<String>();
 
+    /**
+     * Calls the appropriate command.
+     *
+     * @param e Event
+     * @since 2.0
+     */
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent e)
     {
+        if (!e.isCancelled()) {
+            if (cmds.isEmpty()) {
+                loadInternalCommands();
+            }
 
-        cmds = new ArrayList<ChatCommands>();
+            if (!internalCommandIsDisabled(e.getMessage().split(" ")[0])) {
+                callInternalCommand(e.getMessage(), e.getPlayer());
+            }
+        }
+    }
+
+    /**
+     * Load all the internal commands to {@link #cmds}.
+     *
+     * @since 2.1
+     */
+    private void loadInternalCommands()
+    {
         cmds.add(new GoogleCommand());
         cmds.add(new GCommand());
         cmds.add(new OpCommand());
@@ -32,46 +55,48 @@ public class ChatCommandHandler implements Listener {
         cmds.add(new JonkCommand());
         cmds.add(new UpCommand());
         cmds.add(new DownCommand());
-        cmds.add(new SearchCommand());
-
-        if (!e.isCancelled()) {
-            giveOutCommand(cmds, e.getMessage(), e.getPlayer());
-        }
     }
 
-    void giveOutCommand(List<ChatCommands> cmds, String msg, Player p)
+    /**
+     * Call an internal command.
+     *
+     * @param message Entire chat message.
+     * @param player Player calling the command.
+     * @since 2.0
+     */
+    private void callInternalCommand(String message, Player player)
     {
-        String[] args = msg.split(" ");
-        for (ChatCommands cmd : cmds) {
+        String[] args = message.split(" ");
+        for (ChatCommands cmd : ChatCommandHandler.cmds) {
             if (args[0].equalsIgnoreCase("." + cmd.getCommandName())) {
-                cmd.onMessage(lain, p, msg, args[0], args);
+                cmd.onMessage(plugin, player, message, args[0], args);
                 return;
             }
         }
-        ExternalCommands.Main(msg, p, lain);
+        ExternalCommands.Main(message, player, plugin);
     }
 
-    public static boolean containsCommand(String command)
+    /**
+     * Return whether or not an internal command exists.
+     *
+     * @param command Command to compare.
+     * @return Returns true if the command exists. Returns false otherwise.
+     * @since 2.0
+     */
+    public static boolean internalCommandExists(String command)
     {
-        List<ChatCommands> cmds;
-        cmds = new ArrayList<ChatCommands>();
-        cmds.add(new GoogleCommand());
-        cmds.add(new GCommand());
-        cmds.add(new OpCommand());
-        cmds.add(new PerformCommand());
-        cmds.add(new VersionCommand());
-        cmds.add(new JonkCommand());
-        cmds.add(new UpCommand());
-        cmds.add(new DownCommand());
-        cmds.add(new SearchCommand());
-
         if (command != null) {
-            for (ChatCommands cmd : cmds) {
+            for (ChatCommands cmd : ChatCommandHandler.cmds) {
                 if (command.equalsIgnoreCase(cmd.getCommandName())) {
                     return true;
                 }
             }
         }
         return false;
+    }
+
+    public boolean internalCommandIsDisabled(String command)
+    {
+        return disabledcmds.contains(command.toLowerCase());
     }
 }

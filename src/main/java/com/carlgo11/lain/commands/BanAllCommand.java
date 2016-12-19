@@ -17,7 +17,7 @@ public class BanAllCommand implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
-        if (sender.hasPermission("lain.banall")) {
+        if (sender.hasPermission("lain.command.banall")) {
 
             StringBuilder d = new StringBuilder();
             for (int i = 0; i < args.length; i++) {

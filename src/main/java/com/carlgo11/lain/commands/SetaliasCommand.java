@@ -23,16 +23,20 @@ public class SetaliasCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
-        if (args.length == 0) {
-            return false;
+        if (sender.hasPermission("lain.command.setlias")) {
+            if (args.length == 0) {
+                return false;
+            }
+        } else {
+            plugin.badperms(sender);
         }
         Player p = Bukkit.getPlayer(sender.getName());
 
         DotCommands dc = new DotCommands();
-        if (ChatCommandHandler.containsCommand(args[0])) {
+        if (ChatCommandHandler.internalCommandExists(args[0])) {
             if (args.length == 1) {
                 if (dc.containsAlias(args[0])) {
-                    if (sender.hasPermission("lain.cmd.delalias")) {
+                    if (sender.hasPermission("lain.command.setlias.delalias")) {
                         dc.removeAlias(args[0], "");
                         plugin.broadcastMessage(ChatColor.YELLOW + sender.getName() + " " + ChatColor.GREEN + "Deleted the alias '." + args[0] + "'!");
                     } else {
@@ -43,7 +47,7 @@ public class SetaliasCommand implements CommandExecutor {
                 }
 
             } else if (args.length == 2) {
-                if (sender.hasPermission("lain.cmd.addalias")) {
+                if (sender.hasPermission("lain.command.setalias")) {
                     if (!dc.containsAlias(args[0])) {
                         if (dc.containsCommand(args[1])) {
                             try {

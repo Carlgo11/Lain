@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+/**
+ * Spam checking.
+ * @since 2.0
+ */
 public class SpamChecker {
 
     public ArrayList<String> lastmsg = new ArrayList<String>();

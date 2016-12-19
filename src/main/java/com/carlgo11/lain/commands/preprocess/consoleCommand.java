@@ -1,6 +1,7 @@
 package com.carlgo11.lain.commands.preprocess;
 
 import com.carlgo11.lain.Lain;
+import com.carlgo11.lain.Staff;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -25,8 +26,8 @@ public class consoleCommand implements Listener {
 
         if (!e.isCancelled()) {
             if (args[0].equalsIgnoreCase("/~")) {
-                if (Lain.isAdmin(player, Lain)) {
-                    Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), msg.toString().replaceFirst("/~ ", ""));
+                if (Staff.isBotAdmin(player.getUniqueId(), Lain)) {
+                    Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), msg.replaceFirst("/~ ", ""));
                     e.setCancelled(true);
                 } else {
                     Lain.badperms(player);

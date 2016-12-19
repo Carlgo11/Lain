@@ -1,8 +1,6 @@
 package com.carlgo11.lain.player.chat;
 
 import com.carlgo11.lain.Lain;
-import com.carlgo11.lain.WASearch;
-import java.util.ArrayList;
 import java.util.Random;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -11,6 +9,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+/**
+ * Phrases in the message line to react to.
+ * @since 2.0
+ */
 public class Phrases implements Listener {
 
     private Lain lain;
@@ -30,14 +32,20 @@ public class Phrases implements Listener {
             if (equalsHi(msg)) {
                 lain.broadcastMessage(ChatColor.GREEN + returnGreeting(p));
             } else if (msg.toLowerCase().startsWith("lain what is")) {
-                wa(p, args);
+                //wa(p, args);
             } else {
                 heatherCommand(p, args);
             }
         }
     }
 
-    boolean equalsHi(String msg)
+    /**
+     * Greetings to react to.
+     * @param msg Message.
+     * @return returns response message.
+     * @since 2.0
+     */
+    public boolean equalsHi(String msg)
     {
         boolean laintrue = false;
         boolean greetingtrue = false;
@@ -77,7 +85,13 @@ public class Phrases implements Listener {
         return a;
     }
 
-    String returnGreeting(Player player)
+    /**
+     * Responses for greetings.
+     * @param player Player sending the greeting.
+     * @return Response.
+     * @since 2.0
+     */
+    public String returnGreeting(Player player)
     {
         int ra = random();
         String name = player.getName();
@@ -134,7 +148,13 @@ public class Phrases implements Listener {
         return outp;
     }
 
-    void heatherCommand(Player p, String[] args)
+    /**
+     * Command for Heather to make the current time daytime.
+     * @param player Player
+     * @param message Message.
+     * @since 2.0
+     */
+    public void heatherCommand(Player player, String[] message)
     {
         String a = "Make it day Lain";
         String[] b = a.split(" ");
@@ -143,17 +163,17 @@ public class Phrases implements Listener {
         String[] f = d.split(" ");
         int g = 0;
         for (int i = 0; i < 4; i++) {
-            if (args.length >= 4) {
-                if (args[i].equalsIgnoreCase(b[i])) {
+            if (message.length >= 4) {
+                if (message[i].equalsIgnoreCase(b[i])) {
                     c++;
-                } else if (args[i].equalsIgnoreCase(f[i])) {
+                } else if (message[i].equalsIgnoreCase(f[i])) {
                     g++;
                 }
             }
         }
 
         if (c == 4 || g == 4) {
-            if (p.getUniqueId().toString().equals("0c8198e0-77b6-4c7a-8319-5f3246c8dd31")) {
+            if (player.getUniqueId().toString().equals("0c8198e0-77b6-4c7a-8319-5f3246c8dd31")) {
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "day day all");
                 lain.broadcastMessage(ChatColor.GREEN + "Okay! " + ChatColor.RED + "<3");
             } else {
@@ -162,14 +182,14 @@ public class Phrases implements Listener {
         }
     }
 
-    void wa(Player p, String[] args)
-    {
-        StringBuilder d = new StringBuilder();
-        for (int i = 3; i < args.length; i++) {
-            d.append(args[i]);
-            d.append(" ");
-        }
-        ArrayList<String> a = WASearch.search(d.toString());
-
-    }
+//    void wa(Player p, String[] args)
+//    {
+//        StringBuilder d = new StringBuilder();
+//        for (int i = 3; i < args.length; i++) {
+//            d.append(args[i]);
+//            d.append(" ");
+//        }
+//        ArrayList<String> a = WASearch.search(d.toString());
+//
+//    }
 }

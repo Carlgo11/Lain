@@ -18,19 +18,21 @@ public class LainCommand implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
-        if (args.length == 0) {
-            sender.sendMessage("Why do you use this command? use /stop instead! :D");
-        } else {
-            if (args[0].equalsIgnoreCase("say")) {
+        if (sender.hasPermission("lain.command.lain")) {
+            if (args.length == 0) {
+                sender.sendMessage("Why do you use this command? use /stop instead! :D");
+            } else if (args[0].equalsIgnoreCase("say")) {
                 say(sender, cmd, commandLabel, args);
             }
+        } else {
+            lain.badperms(sender);
         }
         return true;
     }
 
     public void say(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
-        if (sender.hasPermission("lain.cmd.lain.say")) {
+        if (sender.hasPermission("lain.command.lain.say")) {
             if (args.length == 1) {
                 lain.sendMessage(sender, Messages.usagelainsay);
             } else {

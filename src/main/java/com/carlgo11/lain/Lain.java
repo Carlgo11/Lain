@@ -8,39 +8,49 @@ import com.carlgo11.lain.player.*;
 import com.carlgo11.lain.player.disconnect.*;
 import com.carlgo11.lain.player.join.*;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.w3c.dom.Document;
 
+/**
+ * Main class of the 'Lain' plugin. Common functions can be found here as well
+ * as plugin-essential functions.
+ */
 public class Lain extends JavaPlugin {
 
     long delay = 20;
     public static boolean debugm = false;
     public static ArrayList<String> commands = new ArrayList<String>();
 
+    /**
+     * Called upon server-start. Loads plugin-essential resources upon server
+     * start.
+     */
+    @Override
     public void onEnable()
     {
+        loadConfig();
         registerListeners(getServer().getPluginManager());
         commands();
         DotCommands dc = new DotCommands();
-        dc.main(this, getConfig().getString("mysql.url"), getConfig().getString("mysql.username"), getConfig().getString("mysql.password"), getConfig().getString("mysql.ext-table"), getConfig().getString("mysql.database"));
+        dc.main(getConfig().getString("mysql.url"), getConfig().getString("mysql.username"), getConfig().getString("mysql.password"), getConfig().getString("mysql.ext-table"), getConfig().getString("mysql.database"));
         Mysql.updateStrings(getConfig().getString("mysql.url"), getConfig().getString("mysql.username"), getConfig().getString("mysql.password"), getConfig().getString("mysql.database"), getConfig().getString("mysql.rank-table"), getConfig().getString("mysql.motd-table"));
         Mysql.createTables();
         this.getLogger().log(Level.INFO, "{0} {1} is enabled!", new Object[]{getDescription().getName(), getDescription().getVersion()});
     }
 
+    /**
+     * Called upon server-shutdown.
+     */
+    @Override
     public void onDisable()
     {
         this.getLogger().log(Level.INFO, "{0} {1} is disabled!", new Object[]{getDescription().getName(), getDescription().getVersion()});
@@ -48,7 +58,6 @@ public class Lain extends JavaPlugin {
 
     void registerListeners(PluginManager pm)
     {
-        pm.registerEvents(new Checkfiles(this), this);
         pm.registerEvents(new ChatCommandHandler(this), this);
         pm.registerEvents(new PlayerJoin(this), this);
         pm.registerEvents(new SpecialEffects(this), this);
@@ -58,48 +67,71 @@ public class Lain extends JavaPlugin {
         pm.registerEvents(new ServerListPing(this), this);
         pm.registerEvents(new PlayerLogin(this), this);
         pm.registerEvents(new PlayerDamage(), this);
-        pm.registerEvents(new PlayerInteract(), this);
     }
 
+    /**
+     * Calls classes used for commands.
+     *
+     * @since 2.0
+     */
     public void commands()
     {
         getCommand("lain").setExecutor(new LainCommand(this));
         getCommand("setcmd").setExecutor(new SetcmdCommand(this));
         getCommand("setalias").setExecutor(new SetaliasCommand(this));
-        getCommand("broadcast").setExecutor(new BroadcastCommand(this));
         getCommand("motd").setExecutor(new MotdCommand(this));
         getCommand("banall").setExecutor(new BanAllCommand(this));
     }
 
-    public void sendMessage(final Player p, final String s)
+    /**
+     * Send a message to a player.
+     *
+     * @param player Player to send message to.
+     * @param message Message to send to the player.
+     * @since 2.0
+     */
+    public void sendMessage(final Player player, final String message)
     {
-        String s2s = s;
+        String s2s = message;
         final String s2m = ChatColor.translateAlternateColorCodes('&', s2s);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
             public void run()
             {
-                p.sendMessage(Messages.prefix + s2m);
+                player.sendMessage(Messages.prefix + s2m);
             }
         }, delay);
     }
 
-    public void sendMessage(final CommandSender p, final String s)
+    /**
+     * Send a message to a player.
+     *
+     * @param player Player to send message to.
+     * @param message Message to send to the player.
+     * @since 2.0
+     */
+    public void sendMessage(final CommandSender player, final String message)
     {
-        String s2s = s;
+        String s2s = message;
         final String s2m = ChatColor.translateAlternateColorCodes('&', s2s);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
             public void run()
             {
-                p.sendMessage(Messages.prefix + s2m);
+                player.sendMessage(Messages.prefix + s2m);
             }
         }, delay);
     }
 
-    public void broadcastMessage(final String s)
+    /**
+     * Broadcast a message to the entire server.
+     *
+     * @param message Message to broadcast.
+     * @since 2.0
+     */
+    public void broadcastMessage(final String message)
     {
-        String s2s = s;
+        String s2s = message;
         final String s2m = ChatColor.translateAlternateColorCodes('&', s2s);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
@@ -110,170 +142,104 @@ public class Lain extends JavaPlugin {
         }, delay);
     }
 
-    public void error(String s)
+    /**
+     * Send an error to the server log/console.
+     *
+     * @param message Error message.
+     * @since 2.0
+     */
+    public void error(String message)
     {
-        this.getLogger().log(Level.WARNING, Messages.error + "{0}", s);
+        this.getLogger().log(Level.WARNING, Messages.error + "{0}", message);
     }
 
-    public void error(final Player p, final String s)
+    /**
+     * Send an error message to a player.
+     *
+     * @param player Player to send the message to.
+     * @param message Message to send the player.
+     * @since 2.0
+     */
+    public void error(final Player player, final String message)
     {
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
             public void run()
             {
-                p.sendMessage(Messages.prefix + ChatColor.RED + Messages.error + ChatColor.RED + s);
+                player.sendMessage(Messages.prefix + ChatColor.RED + Messages.error + ChatColor.RED + message);
             }
         }, delay);
     }
 
-    public void error(final CommandSender p, final String s)
+    /**
+     * Send an error message to a player using CommandSender instead of player.
+     *
+     * @param player Player to send the message to.
+     * @param message Message to send the player.
+     * @since 2.0
+     */
+    public void error(final CommandSender player, final String message)
     {
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
             public void run()
             {
-                p.sendMessage(Messages.prefix + ChatColor.RED + Messages.error + ChatColor.RED + s);
+                player.sendMessage(Messages.prefix + ChatColor.RED + Messages.error + ChatColor.RED + message);
             }
         }, delay);
     }
 
-    public void badperms(final Player p)
+    /**
+     * Send a "permission denied" error message to a player.
+     *
+     * @param player Player to send the error message to.
+     * @since 2.0
+     */
+    public void badperms(final Player player)
     {
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
             public void run()
             {
-                p.sendMessage(Messages.prefix + Messages.badPerms);
+                player.sendMessage(Messages.prefix + Messages.badPerms);
             }
         }, delay);
     }
 
-    public void badperms(final CommandSender p)
+    /**
+     * Send a "permission denied" error message to a player using CommandSender
+     * instead of player..
+     *
+     * @param player Player to send the error message to.
+     * @since 2.0
+     */
+    public void badperms(final CommandSender player)
     {
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
             @Override
             public void run()
             {
-                p.sendMessage(Messages.prefix + Messages.badPerms);
+                player.sendMessage(Messages.prefix + Messages.badPerms);
             }
         }, delay);
     }
 
-    public void toCMDLog(Player p, String s)
+    /**
+     * Load config.yml
+     *
+     * @since 2.1
+     */
+    public void loadConfig()
     {
-        try {
-            FileWriter outfile = new FileWriter("cmdbackup.txt", true);
-            PrintWriter outi = new PrintWriter(outfile);
-            outi.println(p.getName() + "");
-            outi.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        File config = new File(getDataFolder(), "config.yml");
+        if (!config.exists()) {
+            saveDefaultConfig();
+            getConfig().options().copyHeader(true);
+
+            this.getLogger().log(Level.SEVERE, "No config.yml detected, config.yml created.");
         }
-    }
-
-    static public void logchatp(String tme, String p, String s)
-    {
-        String s2 = ChatColor.stripColor(s);
-        try {
-            FileWriter outfile = new FileWriter("log/chat.txt", true);
-            PrintWriter outi = new PrintWriter(outfile);
-            outi.println(tme + " " + p + ": " + s2);
-            outi.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    static public void logchat(String tme, String s)
-    {
-        String s2 = ChatColor.stripColor(s);
-        try {
-            FileWriter outfile = new FileWriter("log/chat.txt", true);
-            PrintWriter outi = new PrintWriter(outfile);
-            outi.println(tme + " " + ": " + s2);
-            outi.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void readcommandstxt()
-    {
-        try {
-            boolean p = new File(getDataFolder() + "/backup").mkdirs();
-            File file = new File(getDataFolder() + "/names.txt");
-            boolean newFile = file.createNewFile();
-
-            if (p) {
-                getLogger().info("Created a backup folder");
-            }
-
-            if (newFile) {
-                getLogger().info("Created a file called names.txt");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void checkOp(final Player p)
-    {
-        if (p.isOp()) {
-            p.setOp(false);
-            Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
-                @Override
-                public void run()
-                {
-                    p.setOp(true);
-                }
-            }, 20L);
-        }
-    }
-
-    public boolean isStaff(String p)
-    {
-        String rank = Mysql.getRank(p);
-        if (rank != null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public static boolean isAdmin(Player p, Lain Lain)
-    {
-        boolean outp = false;
-        if (Lain.getConfig().getList("admins").contains(p.getUniqueId().toString())) {
-            outp = true;
-        } else {
-            outp = false;
-        }
-        return outp;
-    }
-
-    public void checkForUpdates()
-    {
-        try {
-            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-            Document document = documentBuilder.parse(new URL("http://ci.carlgo11.com/rssLatest").openStream());
-            String v = document.getElementsByTagName("title").item(1).getTextContent();
-            String[] a = v.split(" ");
-            String xv = a[1].toString().replace("#", "");
-            String version = Lain.class.getPackage().getImplementationVersion();
-            if (!version.equals("")) {
-                if (Integer.parseInt(xv) > Integer.parseInt(version)) {
-                    broadcastMessage(ChatColor.GREEN + "New update found! Server restart scheduled. (Current version: 2." + version + " New version: 2." + xv + ")");
-                    if (Bukkit.getOnlinePlayers().length == 0) {
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "stop");
-                    } else {
-                        System.out.println(Bukkit.getOnlinePlayers().length);
-                        PlayerDisconnect.reboot = true;
-                    }
-                }
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        if (getConfig().contains("disabled-dotcommands") && !getConfig().getList("disabled-dotcommands").isEmpty()) {
+            ChatCommandHandler.disabledcmds = (List<String>) getConfig().getList("disabled-dotcommands");
         }
     }
 }

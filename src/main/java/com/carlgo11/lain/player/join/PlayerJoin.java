@@ -1,7 +1,7 @@
 package com.carlgo11.lain.player.join;
 
 import com.carlgo11.lain.Lain;
-import com.carlgo11.lain.Mysql;
+import com.carlgo11.lain.Staff;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -22,11 +22,11 @@ public class PlayerJoin implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event)
     {
         Player p = event.getPlayer();
-        String rank = Mysql.getRank(p.getName());
+        String rank = Staff.getRank(p.getName());
         if (rank != null) {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "manuadd " + p.getName() + " " + rank);
         }
-        if (Mysql.isOp(p.getName())) {
+        if (Staff.isOp(p.getUniqueId())) {
             event.getPlayer().setOp(true);
             Bukkit.broadcastMessage(ChatColor.YELLOW + event.getPlayer().getName() + " now has op!");
         }
