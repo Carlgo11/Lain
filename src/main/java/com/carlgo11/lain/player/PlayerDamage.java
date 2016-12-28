@@ -1,5 +1,8 @@
 package com.carlgo11.lain.player;
 
+import com.carlgo11.lain.Lain;
+import java.util.UUID;
+import java.util.logging.Level;
 import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
@@ -9,6 +12,14 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 public class PlayerDamage implements Listener {
 
+    Lain plugin;
+
+    public PlayerDamage(Lain plug)
+    {
+        super();
+        this.plugin = plug;
+    }
+
     @EventHandler
     public void onPlayerDamageByEntity(EntityDamageByEntityEvent e)
     {
@@ -16,8 +27,9 @@ public class PlayerDamage implements Listener {
             if (e.getEntity() instanceof Player) {
                 Player attacker = (Player) e.getDamager();
                 Player player = (Player) e.getEntity();
-                if (player.getUniqueId().toString().equals("634ee008-e2a1-4b6f-bce0-78e6f38b67b5") || player.getUniqueId().toString().equals("2307d8fc-dbbf-4598-a17c-c00de089381d")) {
-                    if (!attacker.getUniqueId().toString().equals("c990d756-1d22-4c1b-9e0d-8dc34f856027")) {
+                UUID uuid = player.getUniqueId();
+                if (plugin.getConfig().getList("immortal-users").contains(uuid)) {
+                    if (!attacker.hasPermission("lain.immortal.ignore")) {
                         e.setCancelled(true);
                         if ((attacker.getHealth() - e.getDamage() * 2) >= 0) {
                             attacker.setHealth(attacker.getHealth() - e.getDamage() * 2);
@@ -31,11 +43,11 @@ public class PlayerDamage implements Listener {
         }
 
         if (e.getDamager() instanceof Arrow) {
-            if (e.getEntity() instanceof Player) {
-                Player player = (Player) e.getEntity();
-                if (player.getUniqueId().toString().equals("634ee008-e2a1-4b6f-bce0-78e6f38b67b5") || player.getUniqueId().toString().equals("2307d8fc-dbbf-4598-a17c-c00de089381d")) {
-                    e.setCancelled(true);
-                }
+            UUID uuid = e.getEntity().getUniqueId();
+            Arrow arrow = (Arrow) e.getDamager();
+            if (arrow.getShooter() instanceof Player && e.getEntity() instanceof Player) {
+                if (plugin.getConfig().getList("immortal-users").contains(uuid));
+                e.setCancelled(true);
             }
         }
     }

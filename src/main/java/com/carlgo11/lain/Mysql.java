@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,8 +22,9 @@ public class Mysql {
     public static String database;
     public static String rankstable;
     public static String motdtable;
+    public static String options;
 
-    public static void updateStrings(String url, String username, String password, String database, String rankstable, String motdtable)
+    public static void updateStrings(String url, String options, String username, String password, String database, String rankstable, String motdtable)
     {
         Mysql.url = url;
         Mysql.username = username;
@@ -32,6 +32,7 @@ public class Mysql {
         Mysql.database = database;
         Mysql.rankstable = rankstable;
         Mysql.motdtable = motdtable;
+        Mysql.options = "?" + options;
     }
 
     public static void createTables()
@@ -41,7 +42,7 @@ public class Mysql {
         ResultSet rs = null;
 
         try {
-            con = DriverManager.getConnection(Mysql.url + Mysql.database, Mysql.username, Mysql.password);
+            con = DriverManager.getConnection(Mysql.url + Mysql.database + Mysql.options, Mysql.username, Mysql.password);
             st = con.createStatement();
             st.execute("CREATE TABLE IF NOT EXISTS " + Mysql.database + "." + Mysql.rankstable + " (id int(11), Player text, Rank text, OP text, Hide text);");
             st.execute("CREATE TABLE IF NOT EXISTS " + Mysql.database + "." + DotCommands.table + " (command text, aliases text, message text);");
@@ -83,13 +84,13 @@ public class Mysql {
         ResultSet rs = null;
 
         try {
-            con = DriverManager.getConnection(Mysql.url + Mysql.database, Mysql.username, Mysql.password);
+            con = DriverManager.getConnection(Mysql.url + Mysql.database + Mysql.options, Mysql.username, Mysql.password);
             st = con.createStatement();
             rs = st.executeQuery("SELECT * from " + Mysql.motdtable);
             while (true) {
                 if (rs.next()) {
                     if (rs.getString(2).equalsIgnoreCase(String.valueOf(Whitelist))) {
-                        return rs.getString(1).toString();
+                        return rs.getString(1);
                     }
                 } else {
                     break;
@@ -131,7 +132,7 @@ public class Mysql {
         Statement st = null;
 
         try {
-            con = DriverManager.getConnection(url + database, Mysql.username, Mysql.password);
+            con = DriverManager.getConnection(Mysql.url + Mysql.database + Mysql.options, Mysql.username, Mysql.password);
             st = con.createStatement();
             PreparedStatement ps = con.prepareStatement("UPDATE " + Mysql.motdtable + " SET `MOTD` = ? WHERE `only on whitelist` = 'false'");
             ps.setString(1, motd);

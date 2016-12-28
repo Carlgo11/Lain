@@ -2,15 +2,16 @@ package com.carlgo11.lain.player.disconnect;
 
 import com.carlgo11.lain.Lain;
 import com.carlgo11.lain.Messages;
-import org.bukkit.Bukkit;
+import com.carlgo11.lain.Staff;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.event.*;
+import org.bukkit.event.Listener;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerDisconnect implements Listener {
 
-    private Lain plugin;
+    private final Lain plugin;
 
     public PlayerDisconnect(Lain plug)
     {
@@ -23,18 +24,12 @@ public class PlayerDisconnect implements Listener {
     @EventHandler
     public void onPlayerDisconnect(PlayerQuitEvent e)
     {
-        Player p = e.getPlayer();
+        Player player = e.getPlayer();
 
-        if (p.isOp()) {
-            p.setOp(false);
-            plugin.broadcastMessage(ChatColor.YELLOW + p.getName() + Messages.nolongerop);
-        }
-
-        if (plugin.getServer().getOnlinePlayers().size() == 1 && reboot) {
-            if (!notify) {
-                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "stop");
-            } else {
-                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "stop");
+        if (player.isOp()) {
+            if (Staff.isOp(player.getUniqueId())) {
+                player.setOp(false);
+                plugin.broadcastMessage(ChatColor.YELLOW + player.getName() + Messages.nolongerop);
             }
         }
     }

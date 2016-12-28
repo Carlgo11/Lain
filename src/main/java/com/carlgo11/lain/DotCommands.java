@@ -11,7 +11,6 @@ import java.util.logging.Logger;
 
 public class DotCommands {
 
-
     public static String url;
     public static String username;
     public static String password;
@@ -34,7 +33,7 @@ public class DotCommands {
         ResultSet rs = null;
 
         try {
-            con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
+            con = DriverManager.getConnection(DotCommands.url + DotCommands.database + Mysql.options, DotCommands.username, DotCommands.password);
             st = con.createStatement();
             rs = st.executeQuery("SELECT * from " + DotCommands.table);
             while (true) {
@@ -93,7 +92,7 @@ public class DotCommands {
         Statement st = null;
 
         try {
-            con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
+            con = DriverManager.getConnection(DotCommands.url + DotCommands.database + Mysql.options, DotCommands.username, DotCommands.password);
             st = con.createStatement();
             if (!containsCommand(command)) {
 
@@ -143,7 +142,7 @@ public class DotCommands {
         }
         d.append(alias);
         try {
-            con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
+            con = DriverManager.getConnection(DotCommands.url + DotCommands.database + Mysql.options, DotCommands.username, DotCommands.password);
             st = con.createStatement();
             PreparedStatement ps = con.prepareStatement("UPDATE " + DotCommands.table + " SET `aliases` = ? WHERE `command` = ?;");
             ps.setString(1, d.toString());
@@ -207,9 +206,9 @@ public class DotCommands {
         StringBuilder d = new StringBuilder();
         String a = getAliases(alias);
         String[] b = a.split(" ");
-        for (int i = 0; i < b.length; i++) {
-            if (!b[i].equalsIgnoreCase(alias)) {
-                d.append(b[i]);
+        for (String b1 : b) {
+            if (!b1.equalsIgnoreCase(alias)) {
+                d.append(b1);
                 d.append(" ");
             }
         }
@@ -218,7 +217,7 @@ public class DotCommands {
         Statement st = null;
 
         try {
-            con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
+            con = DriverManager.getConnection(DotCommands.url + DotCommands.database + Mysql.options, DotCommands.username, DotCommands.password);
             st = con.createStatement();
             PreparedStatement ps = con.prepareStatement("UPDATE " + DotCommands.table + " SET `aliases` = ? WHERE `command` = ?");
             ps.setString(1, d.toString());
@@ -251,7 +250,7 @@ public class DotCommands {
         ResultSet rs = null;
 
         try {
-            con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
+            con = DriverManager.getConnection(DotCommands.url + DotCommands.database + Mysql.options, DotCommands.username, DotCommands.password);
             st = con.createStatement();
             rs = st.executeQuery("SELECT * from " + DotCommands.table);
             while (true) {
@@ -294,7 +293,7 @@ public class DotCommands {
         ResultSet rs = null;
 
         try {
-            con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
+            con = DriverManager.getConnection(DotCommands.url + DotCommands.database + Mysql.options, DotCommands.username, DotCommands.password);
             PreparedStatement ps = con.prepareStatement("SELECT command FROM " + DotCommands.table + " WHERE `command` = ?");
             ps.setString(1, command);
             rs = ps.executeQuery();
@@ -335,7 +334,7 @@ public class DotCommands {
         ResultSet rs = null;
 
         try {
-            con = DriverManager.getConnection(DotCommands.url + DotCommands.database, DotCommands.username, DotCommands.password);
+            con = DriverManager.getConnection(DotCommands.url + DotCommands.database + Mysql.options, DotCommands.username, DotCommands.password);
             PreparedStatement ps = con.prepareStatement("SELECT aliases FROM " + DotCommands.table);
             rs = ps.executeQuery();
             while (true) {

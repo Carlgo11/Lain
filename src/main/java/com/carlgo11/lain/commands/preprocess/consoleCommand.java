@@ -5,19 +5,20 @@ import com.carlgo11.lain.Staff;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
 public class consoleCommand implements Listener {
 
-    private Lain Lain;
+    private final Lain Lain;
 
     public consoleCommand(Lain plug)
     {
         this.Lain = plug;
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOW)
     public void onCommand(PlayerCommandPreprocessEvent e)
     {
         Player player = e.getPlayer();

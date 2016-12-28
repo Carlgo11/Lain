@@ -76,3 +76,6 @@ permissions:
   lain.dotcommand.version:
     default: true
     description: Permission to use .version
+  lain.immortal.ignore:
+    default: false
+    description: Permission to be able to hurt users who are immortal.

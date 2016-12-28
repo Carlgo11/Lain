@@ -10,8 +10,6 @@ import com.carlgo11.lain.player.join.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -42,7 +40,7 @@ public class Lain extends JavaPlugin {
         commands();
         DotCommands dc = new DotCommands();
         dc.main(getConfig().getString("mysql.url"), getConfig().getString("mysql.username"), getConfig().getString("mysql.password"), getConfig().getString("mysql.ext-table"), getConfig().getString("mysql.database"));
-        Mysql.updateStrings(getConfig().getString("mysql.url"), getConfig().getString("mysql.username"), getConfig().getString("mysql.password"), getConfig().getString("mysql.database"), getConfig().getString("mysql.rank-table"), getConfig().getString("mysql.motd-table"));
+        Mysql.updateStrings(getConfig().getString("mysql.url"), getConfig().getString("mysql.options"), getConfig().getString("mysql.username"), getConfig().getString("mysql.password"), getConfig().getString("mysql.database"), getConfig().getString("mysql.rank-table"), getConfig().getString("mysql.motd-table"));
         Mysql.createTables();
         this.getLogger().log(Level.INFO, "{0} {1} is enabled!", new Object[]{getDescription().getName(), getDescription().getVersion()});
     }
@@ -60,13 +58,12 @@ public class Lain extends JavaPlugin {
     {
         pm.registerEvents(new ChatCommandHandler(this), this);
         pm.registerEvents(new PlayerJoin(this), this);
-        pm.registerEvents(new SpecialEffects(this), this);
         pm.registerEvents(new PlayerDisconnect(this), this);
         pm.registerEvents(new consoleCommand(this), this);
         pm.registerEvents(new Phrases(this), this);
         pm.registerEvents(new ServerListPing(this), this);
         pm.registerEvents(new PlayerLogin(this), this);
-        pm.registerEvents(new PlayerDamage(), this);
+        pm.registerEvents(new PlayerDamage(this), this);
     }
 
     /**

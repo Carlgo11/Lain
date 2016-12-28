@@ -7,9 +7,14 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 
+/**
+ * Always allow bot admins to join the server. Even if they're banned.
+ *
+ * @since 2.0
+ */
 public class PlayerLogin implements Listener {
 
-    private Lain plugin;
+    private final Lain plugin;
 
     public PlayerLogin(Lain plug)
     {

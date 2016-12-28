@@ -12,7 +12,7 @@ import org.bukkit.event.EventHandler;
 public class ExternalCommands {
 
     @EventHandler
-    static public void Main(String msg, Player p, Lain plugin)
+    public static void Main(String msg, Player p, Lain plugin)
     {
         final String[] args = msg.split(" ");
         String cmd = args[0].toLowerCase().replaceFirst(".", "");
@@ -34,22 +34,17 @@ public class ExternalCommands {
         }
     }
 
-    static void broadcast(String cmd, String[] args, Player p, Lain plugin, String message)
+    private static void broadcast(String cmd, String[] args, Player p, Lain plugin, String message)
     {
         String[] msg = message.split(" ");
         StringBuilder d = new StringBuilder();
-        for (int i = 0; i < msg.length; i++) {
-            String m = msg[i];
-            if (msg[i].contains("<player>")) {
+        for (String m : msg) {
+            if (m.contains("<player>")) {
                 m = m.replaceAll("<player>", p.getName());
             }
-            if (msg[i].contains("<build>")) {
-                m = m.replaceAll("<build>", ExternalCommands.class.getPackage().getImplementationVersion());
-            }
-            if (msg[i].contains("\n")) {
+            if (m.contains("\n")) {
                 m = m.replaceAll("\n", System.getProperty("line.separator"));
             }
-
             d.append(m);
             d.append(" ");
         }

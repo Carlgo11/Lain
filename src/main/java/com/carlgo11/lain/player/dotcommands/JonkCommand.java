@@ -22,17 +22,24 @@ public class JonkCommand implements ChatCommands {
 
     public void onMessage(Lain Lain, Player p, String msg, String cmd, String[] args)
     {
+        if(loadFiles(Lain)){
         if (p.hasPermission("lain.dotcommand.jonk")) {
-            Lain.broadcastMessage(ChatColor.GREEN + "\"" + quote() + "\" - " + ChatColor.GRAY + name());
+            Lain.broadcastMessage(ChatColor.GREEN + "\"" + getQuote(Lain) + "\" - " + ChatColor.GRAY + getName(Lain));
         } else {
             Lain.badperms(p);
         }
+        }
     }
 
-    String quote()
+    private boolean loadFiles(Lain Lain)
+    {
+        return !(Lain.getConfig().getString("jonkquotes.quotefile") != null || Lain.getConfig().getString("jonkquotes.quotefile").isEmpty());
+    }
+
+    private String getQuote(Lain Lain)
     {
         try {
-            File file = new File("jonquotes.txt");
+            File file = new File(Lain.getDataFolder() + System.lineSeparator() + Lain.getConfig().getString("jonkquotes.quotefile"));
             if (!file.exists()) {
                 file.createNewFile();
             }
@@ -52,11 +59,10 @@ public class JonkCommand implements ChatCommands {
         return a.get(r - 1);
     }
 
-    String name()
+    private String getName(Lain Lain)
     {
-
         try {
-            File file = new File("jonnames.txt");
+            File file = new File(Lain.getDataFolder() + System.lineSeparator() + Lain.getConfig().getString("jonkquotes.namefile"));
             if (!file.exists()) {
                 file.createNewFile();
             }

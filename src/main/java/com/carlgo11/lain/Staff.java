@@ -28,7 +28,7 @@ public class Staff {
      */
     public static boolean isBotAdmin(UUID player, Lain lain)
     {
-        boolean outp = lain.getConfig().getList("admins").contains(player.toString());
+        boolean outp = lain.getConfig().getList("bot-admins").contains(player.toString());
         return outp;
     }
 
@@ -45,7 +45,7 @@ public class Staff {
      */
     public static boolean isBotAdmin(Player player, Lain lain)
     {
-        boolean outp = lain.getConfig().getList("admins").contains(player.getUniqueId().toString());
+        boolean outp = lain.getConfig().getList("bot-admins").contains(player.getUniqueId().toString());
         return outp;
     }
 
@@ -77,7 +77,7 @@ public class Staff {
         Statement st = null;
         ResultSet rs = null;
         try {
-            con = DriverManager.getConnection(Mysql.url + Mysql.database, Mysql.username, Mysql.password);
+            con = DriverManager.getConnection(Mysql.url + Mysql.database + Mysql.options, Mysql.username, Mysql.password);
             st = con.createStatement();
             rs = st.executeQuery("SELECT * from " + Mysql.rankstable);
             while (true) {
@@ -114,23 +114,23 @@ public class Staff {
     /**
      * Get whether or not the the player should have OP.
      *
-     * @param Player Player's UUID
+     * @param player Player's UUID
      * @return Returns true if the user should have OP. Otherwise it returns
      * false.
      * @since 2.0
      */
-    public static boolean isOp(UUID Player)
+    public static boolean isOp(UUID player)
     {
         Connection con = null;
         Statement st = null;
         ResultSet rs = null;
         try {
-            con = DriverManager.getConnection(Mysql.url + Mysql.database, Mysql.username, Mysql.password);
+            con = DriverManager.getConnection(Mysql.url + Mysql.database + Mysql.options, Mysql.username, Mysql.password);
             st = con.createStatement();
             rs = st.executeQuery("SELECT * from " + Mysql.rankstable);
             while (true) {
                 if (rs.next()) {
-                    if (rs.getString(2).equalsIgnoreCase(Player.toString())) {
+                    if (rs.getString(2).equalsIgnoreCase(player.toString())) {
                         if (rs.getString(4).equals("true")) {
                             return true;
                         }

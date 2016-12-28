@@ -7,7 +7,7 @@ bot-admins:
 - "2307d8fc-dbbf-4598-a17c-c00de089381d"
 
 # Users who can't be killed by other entities.
-# Users listed here will also have x2 as many hearts.
+# Users listed here will also have twice as many hearts.
 immortal-users:
 - "634ee008-e2a1-4b6f-bce0-78e6f38b67b5"
 - "01964c49-2a88-47c3-8781-90aa6d693f08"
@@ -23,6 +23,11 @@ mysql:
   password: ""
   url: "jdbc:mysql://localhost:3306/"
   database: ""
+  options: "useSSL=true&verifyServerCertificate=false"
   motd-table: "motd"
   rank-table: "ranks"
   ext-table: "commands"
+
+general-settings:
+ # The max amount of players that should be online when the plugin tries to reboot the server.
+ max-players-reboot: 0
