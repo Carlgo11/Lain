@@ -1,4 +1,4 @@
-Lain [![Build Status](https://travis-ci.com/Carlgo11/Lain.svg?token=Tw7eVCsKpqcpypWXyyY7&branch=master)](https://travis-ci.com/Carlgo11/Lain)
+Lain [![Build Status](https://travis-ci.org/Carlgo11/Lain.svg?branch=master)](https://travis-ci.org/Carlgo11/Lain)
 ====
 
 ### Minecraft server bot
