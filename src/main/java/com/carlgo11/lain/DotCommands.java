@@ -35,7 +35,7 @@ public class DotCommands {
         try {
             con = DriverManager.getConnection(DotCommands.url + DotCommands.database + Mysql.options, DotCommands.username, DotCommands.password);
             st = con.createStatement();
-            rs = st.executeQuery("SELECT * from " + DotCommands.table);
+            rs = st.executeQuery("SELECT command, aliases, message from `" + DotCommands.table + "`");
             while (true) {
                 if (rs.next()) {
                     String a = rs.getString(2);
@@ -78,8 +78,8 @@ public class DotCommands {
 
     boolean namegoeshere(String alias, String[] b)
     {
-        for (int i = 0; i < b.length; i++) {
-            if (b[i].equalsIgnoreCase(alias)) {
+        for (String b1 : b) {
+            if (b1.equalsIgnoreCase(alias)) {
                 return true;
             }
         }
@@ -136,8 +136,8 @@ public class DotCommands {
         String a = this.getAliases(command);
         String[] b = a.split(" ");
         StringBuilder d = new StringBuilder();
-        for (int i = 0; i < b.length; i++) {
-            d.append(b[i]);
+        for (String b1 : b) {
+            d.append(b1);
             d.append(" ");
         }
         d.append(alias);
@@ -252,7 +252,7 @@ public class DotCommands {
         try {
             con = DriverManager.getConnection(DotCommands.url + DotCommands.database + Mysql.options, DotCommands.username, DotCommands.password);
             st = con.createStatement();
-            rs = st.executeQuery("SELECT * from " + DotCommands.table);
+            rs = st.executeQuery("SELECT command, aliases from " + DotCommands.table);
             while (true) {
                 if (rs.next()) {
                     if (rs.getString(1).contains(command)) {
@@ -297,11 +297,7 @@ public class DotCommands {
             PreparedStatement ps = con.prepareStatement("SELECT command FROM " + DotCommands.table + " WHERE `command` = ?");
             ps.setString(1, command);
             rs = ps.executeQuery();
-            if (rs.next()) {
-                return true;
-            } else {
-                return false;
-            }
+            return rs.next();
 
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(DotCommands.class.getName());

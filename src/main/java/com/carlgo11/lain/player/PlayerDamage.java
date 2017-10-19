@@ -2,7 +2,6 @@ package com.carlgo11.lain.player;
 
 import com.carlgo11.lain.Lain;
 import java.util.UUID;
-import java.util.logging.Level;
 import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;

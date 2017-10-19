@@ -25,7 +25,6 @@ public class PlayerDisconnect implements Listener {
     public void onPlayerDisconnect(PlayerQuitEvent e)
     {
         Player player = e.getPlayer();
-
         if (player.isOp()) {
             if (Staff.isOp(player.getUniqueId())) {
                 player.setOp(false);

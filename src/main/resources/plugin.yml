@@ -1,6 +1,6 @@
 main: com.carlgo11.lain.Lain
 name: Lain
-version: 2.1
+version: ${project.version}
 author: Carlgo11
 description: Lain is a server administration plugin made for The PortalCraft.Se Servers.
 website: https://github.com/carlgo11/Lain

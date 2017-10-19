@@ -15,7 +15,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
  */
 public class Phrases implements Listener {
 
-    private Lain lain;
+    private final Lain lain;
 
     public Phrases(Lain plug)
     {
@@ -59,17 +59,13 @@ public class Phrases implements Listener {
                 greetingtrue = true;
             }
         }
-        for (int i = 0; i < args.length; i++) {
-            if (args[i].equalsIgnoreCase("hi") || args[i].equalsIgnoreCase("hey") || args[i].equalsIgnoreCase("hai") || args[i].equalsIgnoreCase("greetings") || args[i].equalsIgnoreCase("good day") || args[i].equalsIgnoreCase("goodday") || args[i].equalsIgnoreCase("sup") || args[i].equalsIgnoreCase("what's up") || args[i].equalsIgnoreCase("whats up") || args[i].equalsIgnoreCase("waddup") || args[i].equalsIgnoreCase("hello")) {
+        for (String arg : args) {
+            if (arg.equalsIgnoreCase("hi") || arg.equalsIgnoreCase("hey") || arg.equalsIgnoreCase("hai") || arg.equalsIgnoreCase("greetings") || arg.equalsIgnoreCase("good day") || arg.equalsIgnoreCase("goodday") || arg.equalsIgnoreCase("sup") || arg.equalsIgnoreCase("what's up") || arg.equalsIgnoreCase("whats up") || arg.equalsIgnoreCase("waddup") || arg.equalsIgnoreCase("hello")) {
                 greetingtrue = true;
                 break;
             }
         }
-        if (laintrue && greetingtrue) {
-            return true;
-        } else {
-            return false;
-        }
+        return laintrue && greetingtrue;
 
     }
 

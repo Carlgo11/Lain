@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 
 public class LainCommand implements CommandExecutor {
 
-    private Lain lain;
+    private final Lain lain;
 
     public LainCommand(Lain plug)
     {
@@ -20,7 +20,7 @@ public class LainCommand implements CommandExecutor {
     {
         if (sender.hasPermission("lain.command.lain")) {
             if (args.length == 0) {
-                sender.sendMessage("Why do you use this command? use /stop instead! :D");
+                sender.sendMessage("Why do you use this command? try /stop instead! :D");
             } else if (args[0].equalsIgnoreCase("say")) {
                 say(sender, cmd, commandLabel, args);
             }

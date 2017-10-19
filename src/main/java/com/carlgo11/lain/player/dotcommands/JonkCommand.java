@@ -22,18 +22,18 @@ public class JonkCommand implements ChatCommands {
 
     public void onMessage(Lain Lain, Player p, String msg, String cmd, String[] args)
     {
-        if(loadFiles(Lain)){
-        if (p.hasPermission("lain.dotcommand.jonk")) {
-            Lain.broadcastMessage(ChatColor.GREEN + "\"" + getQuote(Lain) + "\" - " + ChatColor.GRAY + getName(Lain));
-        } else {
-            Lain.badperms(p);
-        }
+        if (loadFiles(Lain)) {
+            if (p.hasPermission("lain.dotcommand.jonk")) {
+                Lain.broadcastMessage(ChatColor.GREEN + "\"" + getQuote(Lain) + "\" - " + ChatColor.GRAY + getName(Lain));
+            } else {
+                Lain.badperms(p);
+            }
         }
     }
 
     private boolean loadFiles(Lain Lain)
     {
-        return !(Lain.getConfig().getString("jonkquotes.quotefile") != null || Lain.getConfig().getString("jonkquotes.quotefile").isEmpty());
+        return !(Lain.getConfig().getString("jonkquotes.quotesfile") != null || Lain.getConfig().getString("jonkquotes.quotefile").isEmpty());
     }
 
     private String getQuote(Lain Lain)
@@ -85,25 +85,25 @@ public class JonkCommand implements ChatCommands {
     private int getInt(int i)
     {
         int qwe = 0;
-        int a = 0;
+        int ab;
         if (i < 3 || qwe == 0) {
             Random n = new Random();
             int num = 0;
             for (int count = 1; count <= 2; count++) {
                 num = 1 + n.nextInt(i);
             }
-            a = num;
+            ab = num;
         } else {
             Random n = new Random();
             int num = 0;
             for (int count = 1; count <= 2; count++) {
                 num = n.nextInt(i);
             }
-            a = num;
-            if (qwe == a) {
+            ab = num;
+            if (qwe == ab) {
                 getInt(i);
             }
         }
-        return a;
+        return ab;
     }
 }

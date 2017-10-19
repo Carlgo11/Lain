@@ -2,7 +2,6 @@ package com.carlgo11.lain.ping;
 
 import com.carlgo11.lain.Lain;
 import com.carlgo11.lain.Mysql;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -26,21 +25,11 @@ public class ServerListPing implements Listener {
     @EventHandler
     public void onServerListPing(ServerListPingEvent e)
     {
-        if (Bukkit.hasWhitelist()) {
-            e.setMaxPlayers(0);
-            String plainMessage = Mysql.getMOTD(true);
-            if (plainMessage.contains("&")) {
-                e.setMotd(ChatColor.translateAlternateColorCodes('&', plainMessage));
-            } else {
-                e.setMotd(plainMessage);
-            }
+        String plainMessage = Mysql.getMOTD();
+        if (plainMessage.contains("&")) {
+            e.setMotd(ChatColor.translateAlternateColorCodes('&', plainMessage));
         } else {
-            String plainMessage = Mysql.getMOTD(false);
-            if (plainMessage.contains("&")) {
-                e.setMotd(ChatColor.translateAlternateColorCodes('&', plainMessage));
-            } else {
-                e.setMotd(plainMessage);
-            }
+            e.setMotd(plainMessage);
         }
     }
 }

@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 
 public class MotdCommand implements CommandExecutor {
 
-    private Lain plugin;
+    private final Lain plugin;
 
     public MotdCommand(Lain plug)
     {
@@ -22,8 +22,8 @@ public class MotdCommand implements CommandExecutor {
         if (sender.hasPermission("Lain.command.motd")) {
             if (args.length >= 1) {
                 StringBuilder d = new StringBuilder();
-                for (int i = 0; i < args.length; i++) {
-                    d.append(args[i]);
+                for (String arg : args) {
+                    d.append(arg);
                     d.append(" ");
                 }
                 Mysql.setMOTD(d.toString());

@@ -2,13 +2,14 @@ package com.carlgo11.lain.commands;
 
 import com.carlgo11.lain.Lain;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 public class BanAllCommand implements CommandExecutor {
 
-    private Lain lain;
+    private final Lain lain;
 
     public BanAllCommand(Lain plug)
     {
@@ -20,12 +21,12 @@ public class BanAllCommand implements CommandExecutor {
         if (sender.hasPermission("lain.command.banall")) {
 
             StringBuilder d = new StringBuilder();
-            for (int i = 0; i < args.length; i++) {
-                d.append(args[i]);
+            for (String arg : args) {
+                d.append(arg);
                 d.append(" ");
             }
-            for (int i = 0; i < Bukkit.getOfflinePlayers().length; i++) {
-                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "ban " + Bukkit.getOfflinePlayers()[i].getName() + " " + d.toString());
+            for (OfflinePlayer offlinePlayer : Bukkit.getOfflinePlayers()) {
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "ban " + offlinePlayer.getName() + " " + d.toString());
             }
 
         } else {

@@ -15,7 +15,15 @@ public class VersionCommand implements ChatCommands {
     public void onMessage(Lain Lain, Player p, String msg, String cmd, String[] args)
     {
         if (p.hasPermission("lain.dotcommand.version")) {
-            Lain.broadcastMessage(ChatColor.YELLOW + "Lain v" + Lain.getDescription().getVersion() + " developed by " + "Carlgo11");
+            String authors = "";
+            if (Lain.getDescription().getAuthors().size() > 0) {
+                for (String author : Lain.getDescription().getAuthors()) {
+                    authors = authors + " " + author;
+                }
+            } else {
+                authors = " " + Lain.getDescription().getAuthors().get(0);
+            }
+            Lain.broadcastMessage(ChatColor.YELLOW + "Lain v" + Lain.getDescription().getVersion() + " developed by" + authors);
         } else {
             Lain.badperms(p);
         }

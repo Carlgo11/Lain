@@ -44,12 +44,12 @@ public class PerformCommand implements ChatCommands {
                 performLain(msg, p, args, cmd);
                 plugin.sendMessage(p, "done");
             } else if (args[1].equalsIgnoreCase("server")) {
-                performSystem(msg, p, args, cmd);
+                performServer(msg, p, args, cmd);
                 plugin.sendMessage(p, "done");
             } else if (args[1].equalsIgnoreCase("shell")) {
                 StringBuilder shell = new StringBuilder();
                 for (int i = 2; i < args.length; i++) {
-                    shell.append(args[i].toString());
+                    shell.append(args[i]);
                     shell.append(" ");
                 }
                 String input = shell.toString();
@@ -103,14 +103,16 @@ public class PerformCommand implements ChatCommands {
         }
     }
 
-    void performSystem(String msg, Player p, String[] args, String cmd)
+    void performServer(String msg, Player p, String[] args, String cmd)
     {
         if (args[2].equalsIgnoreCase("shutdown")) {
             Bukkit.shutdown();
         } else if (args[2].equalsIgnoreCase("deop")) {
             for (Player pl : Bukkit.getOnlinePlayers()) {
+                if(pl.isOp()){
                 pl.setOp(false);
                 plugin.broadcastMessage("" + Messages.deoped + pl.getName());
+                }
             }
         } else if (args[2].equalsIgnoreCase("reboot")) {
             if (args.length == 4) {
@@ -119,7 +121,6 @@ public class PerformCommand implements ChatCommands {
                     PlayerDisconnect.reboot = true;
                     PlayerDisconnect.notify = true;
                     plugin.sendMessage(p, ChatColor.YELLOW + "You will be notified when the server reboots.");
-
                 } else {
                     plugin.broadcastMessage("" + ChatColor.GREEN + plugin.getConfig().getString("broadcast-maintenance-awaiting"));
                     PlayerDisconnect.reboot = true;

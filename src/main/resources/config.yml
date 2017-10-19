@@ -23,7 +23,7 @@ mysql:
   password: ""
   url: "jdbc:mysql://localhost:3306/"
   database: ""
-  options: "useSSL=true&verifyServerCertificate=false"
+  options: "useSSL=true&verifyServerCertificate=true"
   motd-table: "motd"
   rank-table: "ranks"
   ext-table: "commands"
@@ -31,3 +31,7 @@ mysql:
 general-settings:
  # The max amount of players that should be online when the plugin tries to reboot the server.
  max-players-reboot: 0
+
+jonk:
+  quotesfile: "jonkquotes.txt"
+  namefile: "jonknames.txt"

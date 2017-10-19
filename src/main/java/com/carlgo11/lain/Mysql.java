@@ -74,10 +74,9 @@ public class Mysql {
      * Get the server MOTD message.
      *
      * @since 2.0
-     * @param Whitelist Returns whitelist-specific MOTD if true.
      * @return The server's MOTD message.
      */
-    public static String getMOTD(boolean Whitelist)
+    public static String getMOTD()
     {
         Connection con = null;
         Statement st = null;
@@ -86,17 +85,14 @@ public class Mysql {
         try {
             con = DriverManager.getConnection(Mysql.url + Mysql.database + Mysql.options, Mysql.username, Mysql.password);
             st = con.createStatement();
-            rs = st.executeQuery("SELECT * from " + Mysql.motdtable);
+            rs = st.executeQuery("SELECT * FROM " + Mysql.motdtable);
             while (true) {
                 if (rs.next()) {
-                    if (rs.getString(2).equalsIgnoreCase(String.valueOf(Whitelist))) {
-                        return rs.getString(1);
-                    }
+                    return rs.getString(1);
                 } else {
                     break;
                 }
             }
-
         } catch (SQLException ex) {
             Logger lgr = Logger.getLogger(Mysql.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
@@ -134,7 +130,7 @@ public class Mysql {
         try {
             con = DriverManager.getConnection(Mysql.url + Mysql.database + Mysql.options, Mysql.username, Mysql.password);
             st = con.createStatement();
-            PreparedStatement ps = con.prepareStatement("UPDATE " + Mysql.motdtable + " SET `MOTD` = ? WHERE `only on whitelist` = 'false'");
+            PreparedStatement ps = con.prepareStatement("UPDATE " + Mysql.motdtable + " SET `MOTD` = ?");
             ps.setString(1, motd);
             ps.execute();
 
