@@ -2,10 +2,11 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.carlgo11</groupId>
   <artifactId>Lain</artifactId>
-  <version>2.1.1</version>
   <packaging>jar</packaging>
 
   <name>Lain</name>
+  <version>2.1.1</version>
+  <description>Bukkit/Spigot server bot</description>
   <url>http://maven.apache.org</url>
 
   <repositories>
